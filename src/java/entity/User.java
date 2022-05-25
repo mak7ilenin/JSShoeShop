@@ -32,21 +32,20 @@ public class User implements Serializable {
     }
 
     @Override
-    public String toString() {
-        return "User{" + "id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", phone=" + phone + ", money=" + money + ", login=" + login + ", password=" + password + ", salt=" + salt + ", role=" + role + '}';
-    }
-
-    @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 71 * hash + Objects.hashCode(this.id);
-        hash = 71 * hash + Objects.hashCode(this.phone);
-        hash = 71 * hash + Objects.hashCode(this.login);
-        hash = 71 * hash + Objects.hashCode(this.password);
-        hash = 71 * hash + Objects.hashCode(this.salt);
+        int hash = 5;
+        hash = 23 * hash + Objects.hashCode(this.id);
+        hash = 23 * hash + Objects.hashCode(this.firstName);
+        hash = 23 * hash + Objects.hashCode(this.lastName);
+        hash = 23 * hash + Objects.hashCode(this.phone);
+        hash = 23 * hash + Objects.hashCode(this.money);
+        hash = 23 * hash + Objects.hashCode(this.login);
+        hash = 23 * hash + Objects.hashCode(this.password);
+        hash = 23 * hash + Objects.hashCode(this.salt);
+        hash = 23 * hash + Objects.hashCode(this.role);
         return hash;
     }
-    
+
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {
@@ -59,13 +58,28 @@ public class User implements Serializable {
             return false;
         }
         final User other = (User) obj;
+        if (!Objects.equals(this.firstName, other.firstName)) {
+            return false;
+        }
+        if (!Objects.equals(this.lastName, other.lastName)) {
+            return false;
+        }
         if (!Objects.equals(this.phone, other.phone)) {
+            return false;
+        }
+        if (!Objects.equals(this.money, other.money)) {
             return false;
         }
         if (!Objects.equals(this.login, other.login)) {
             return false;
         }
+        if (!Objects.equals(this.password, other.password)) {
+            return false;
+        }
         if (!Objects.equals(this.salt, other.salt)) {
+            return false;
+        }
+        if (!Objects.equals(this.role, other.role)) {
             return false;
         }
         if (!Objects.equals(this.id, other.id)) {
@@ -74,7 +88,10 @@ public class User implements Serializable {
         return true;
     }
 
-
+    @Override
+    public String toString() {
+        return "User{" + "id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", phone=" + phone + ", money=" + money + ", login=" + login + ", password=" + password + ", salt=" + salt + ", role=" + role + '}';
+    }
 
     public Long getId() {
         return id;
@@ -108,6 +125,14 @@ public class User implements Serializable {
         this.phone = phone;
     }
 
+    public String getMoney() {
+        return money;
+    }
+
+    public void setMoney(String money) {
+        this.money = money;
+    }
+
     public String getLogin() {
         return login;
     }
@@ -132,14 +157,6 @@ public class User implements Serializable {
         this.salt = salt;
     }
 
-    public String getMoney() {
-        return money;
-    }
-
-    public void setMoney(String money) {
-        this.money = money;
-    }
-
     public String getRole() {
         return role;
     }
@@ -147,4 +164,5 @@ public class User implements Serializable {
     public void setRole(String role) {
         this.role = role;
     }
+
 }
