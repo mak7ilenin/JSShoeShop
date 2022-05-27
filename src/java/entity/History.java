@@ -19,13 +19,13 @@ public class History implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @OneToOne(cascade = CascadeType.REMOVE)
+    @OneToOne(cascade = CascadeType.DETACH)
     private User user;
-    @OneToOne(cascade = CascadeType.REMOVE)
+    @OneToOne(cascade = CascadeType.DETACH)
     private Model model;
     @Temporal(TemporalType.TIMESTAMP)
     private Date buy;
-    private double gain;
+    private String gain;
 
     public Long getId() {
         return id;
@@ -59,11 +59,11 @@ public class History implements Serializable{
         this.buy = buy;
     }
 
-    public double getGain() {
+    public String getGain() {
         return gain;
     }
 
-    public void setGain(double gain) {
+    public void setGain(String gain) {
         this.gain = gain;
     }
 
@@ -74,7 +74,7 @@ public class History implements Serializable{
         hash = 43 * hash + Objects.hashCode(this.user);
         hash = 43 * hash + Objects.hashCode(this.model);
         hash = 43 * hash + Objects.hashCode(this.buy);
-        hash = 43 * hash + (int) (Double.doubleToLongBits(this.gain) ^ (Double.doubleToLongBits(this.gain) >>> 32));
+        hash = 43 * hash + Objects.hashCode(this.gain);;
         return hash;
     }
 

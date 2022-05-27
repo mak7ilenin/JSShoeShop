@@ -22,7 +22,7 @@ public class Model implements Serializable{
     private String modelName;
     private String modelSize;
     private int amount;
-    private double price;
+    private String price;
     private String modelFirm;
 
     @Override
@@ -32,7 +32,7 @@ public class Model implements Serializable{
         hash = 73 * hash + Objects.hashCode(this.modelName);
         hash = 73 * hash + Objects.hashCode(this.modelSize);
         hash = 73 * hash + this.amount;
-        hash = 73 * hash + (int) (Double.doubleToLongBits(this.price) ^ (Double.doubleToLongBits(this.price) >>> 32));
+        hash = 73 * hash + Objects.hashCode(this.price);
         hash = 73 * hash + Objects.hashCode(this.modelFirm);
         return hash;
     }
@@ -52,7 +52,7 @@ public class Model implements Serializable{
         if (this.amount != other.amount) {
             return false;
         }
-        if (Double.doubleToLongBits(this.price) != Double.doubleToLongBits(other.price)) {
+        if (!Objects.equals(this.price, other.price)) {
             return false;
         }
         if (!Objects.equals(this.modelName, other.modelName)) {
@@ -94,11 +94,11 @@ public class Model implements Serializable{
         this.modelSize = modelSize;
     }
 
-    public double getPrice() {
+    public String getPrice() {
         return price;
     }
 
-    public void setPrice(double price) {
+    public void setPrice(String price) {
         this.price = price;
     }
 

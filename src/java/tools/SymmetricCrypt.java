@@ -14,7 +14,6 @@ import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
-import java.security.SecureRandom;
 import java.util.Base64;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -24,15 +23,17 @@ import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.KeyGenerator;
 import javax.crypto.NoSuchPaddingException;
 import javax.crypto.SecretKey;
-import javax.crypto.spec.IvParameterSpec;
 
-
+/**
+ *
+ * @author Melnikov
+ */
 public class SymmetricCrypt  implements Serializable{
     
     private byte[] enc;
     private static SecretKey key;
     private Cipher cipher;
-    private final String pathToFileSecret = "jsshoeshopsecret";
+    private final String pathToFileSecret = "webpasswordmanagersecret";
 
     public SymmetricCrypt() {
         init();

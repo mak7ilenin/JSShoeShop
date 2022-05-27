@@ -13,7 +13,7 @@ header {
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
 
-a {
+a:not(.psw a) {
     text-decoration: none; 
     color: black;
     background-image: linear-gradient(currentColor, currentColor);
@@ -93,6 +93,9 @@ footer {
 
 
 form {
+    width: 40%;
+    margin: 0px auto;
+    margin-top: 175px;
     border: 3px solid #f1f1f1;
 }
   
@@ -142,4 +145,8 @@ img.avatar {
 span.psw {
     float: right;
     padding-top: 16px;
+}
+
+span.psw a {
+    color: blue;
 }

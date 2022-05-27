@@ -15,7 +15,10 @@ import java.util.logging.Logger;
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.PBEKeySpec;
 
-
+/**
+ *
+ * @author Melnikov
+ */
 public class PasswordProtected {
     public String getProtectedPassword(String password, String salt){
         KeySpec spec = new PBEKeySpec(password.toCharArray(),salt.getBytes(),65536,128);

@@ -27,7 +27,7 @@ import tools.PasswordProtected;
  *
  * @author pupil
  */
-@WebServlet(name = "LoginServlet", urlPatterns = {
+@WebServlet(name = "LoginServlet", loadOnStartup = 1, urlPatterns = {
     "/login",
     "/logout",
     "/registration",
@@ -44,15 +44,15 @@ public class LoginServlet extends HttpServlet {
         user.setLastName("Dzjubenko");
         user.setPhone("53005207");
         user.setMoney("500");
-        user.setRole("ADMINISTRATOR");
+        user.setLogin("admin");
         PasswordProtected passwordProtected = new PasswordProtected();
         String salt = passwordProtected.getSalt();
         user.setSalt(salt);
-        String password = passwordProtected.getProtectedPassword("12345", salt);
-        user.setPassword(password);
+        String adminPassword = passwordProtected.getProtectedPassword("12345", salt);
+        user.setPassword(adminPassword);
+        user.setRole("ADMINISTRATOR");
         userFacade.create(user);
     }
-
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");

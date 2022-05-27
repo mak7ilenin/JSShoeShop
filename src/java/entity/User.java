@@ -15,7 +15,6 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Entity
 @XmlRootElement
 public class User implements Serializable {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -35,14 +34,10 @@ public class User implements Serializable {
     public int hashCode() {
         int hash = 5;
         hash = 23 * hash + Objects.hashCode(this.id);
-        hash = 23 * hash + Objects.hashCode(this.firstName);
-        hash = 23 * hash + Objects.hashCode(this.lastName);
         hash = 23 * hash + Objects.hashCode(this.phone);
-        hash = 23 * hash + Objects.hashCode(this.money);
         hash = 23 * hash + Objects.hashCode(this.login);
         hash = 23 * hash + Objects.hashCode(this.password);
         hash = 23 * hash + Objects.hashCode(this.salt);
-        hash = 23 * hash + Objects.hashCode(this.role);
         return hash;
     }
 
@@ -58,28 +53,13 @@ public class User implements Serializable {
             return false;
         }
         final User other = (User) obj;
-        if (!Objects.equals(this.firstName, other.firstName)) {
-            return false;
-        }
-        if (!Objects.equals(this.lastName, other.lastName)) {
-            return false;
-        }
         if (!Objects.equals(this.phone, other.phone)) {
-            return false;
-        }
-        if (!Objects.equals(this.money, other.money)) {
             return false;
         }
         if (!Objects.equals(this.login, other.login)) {
             return false;
         }
-        if (!Objects.equals(this.password, other.password)) {
-            return false;
-        }
         if (!Objects.equals(this.salt, other.salt)) {
-            return false;
-        }
-        if (!Objects.equals(this.role, other.role)) {
             return false;
         }
         if (!Objects.equals(this.id, other.id)) {
