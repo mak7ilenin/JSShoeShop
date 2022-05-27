@@ -10,13 +10,16 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import javax.ejb.EJB;
 import javax.json.Json;
+import javax.json.JsonObject;
 import javax.json.JsonObjectBuilder;
+import javax.json.JsonReader;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import jsontools.UserJsonBuilder;
 import session.UserFacade;
 import tools.PasswordProtected;
 
@@ -59,7 +62,39 @@ public class LoginServlet extends HttpServlet {
         String path = request.getServletPath();
         switch (path) {
             case "/login":
-                ;
+                JsonReader jsonReader = Json.createReader(request.getReader());
+                JsonObject jsonObject = jsonReader.readObject();
+                String login = jsonObject.getString("login","");
+                String password = jsonObject.getString("password","");
+                User authUser = userFacade.findByLogin(login);
+                if(authUser == null){
+                    job.add("info", "Нет такого пользователя")
+                       .add("auth",false);
+                    try (PrintWriter out = response.getWriter()) {
+                        out.println(job.build().toString());
+                    }
+                    break;
+                }
+                PasswordProtected pp = new PasswordProtected();
+                password = pp.getProtectedPassword(password, authUser.getSalt());
+                if(!password.equals(authUser.getPassword())){
+                    job.add("info", "Неверный пароль")
+                       .add("auth",false);
+                    try (PrintWriter out = response.getWriter()) {
+                        out.println(job.build().toString());
+                    }
+                    break;
+                }
+                session = request.getSession(true);
+                session.setAttribute("authUser", authUser);
+                job.add("info", "Вы вошли как "+authUser.getLogin())
+                   .add("auth",true)
+                   .add("user", new UserJsonBuilder().getUserJsonObject(authUser));
+                
+                try (PrintWriter out = response.getWriter()) {
+                    out.println(job.build().toString());
+                }
+                break;
             case "/logout":
                 ;
             case "/registration":

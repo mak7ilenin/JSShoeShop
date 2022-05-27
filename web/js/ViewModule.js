@@ -1,4 +1,4 @@
-import {loginModule} from '';
+import {loginModule} from './LoginModule.js';
 
 class ViewModule {
     showLoginForm () {

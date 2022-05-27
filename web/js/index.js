@@ -1,3 +1,5 @@
+import {loginModule} from './LoginModule.js';
+export {checkMenu};
 var debug = true;
 function isDebug(message){
     if(debug) console.log(message);
@@ -78,4 +80,4 @@ function checkMenu() {
             editUser.style.display = "none";
         }
     }
-}
+}checkMenu();

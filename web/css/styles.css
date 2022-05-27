@@ -42,8 +42,8 @@ a:hover:not(.logo-container a) {
 header ul:not(.log-bar){
     width: 60%;
     display: flex;
-    justify-content: scpace-evenly;
-    margin-top: 65px;
+    justify-content: space-evenly;
+    margin-top: 45px;
 }
 
 header ul li {
@@ -51,7 +51,6 @@ header ul li {
     list-style: none;
     font-size: 22px;
     text-align: center;
-    display: none;
 }
 
 .log-bar {
