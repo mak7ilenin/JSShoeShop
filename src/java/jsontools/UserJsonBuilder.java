@@ -26,6 +26,7 @@ public class UserJsonBuilder {
         job.add("firstname", user.getFirstName());
         job.add("lastname", user.getLastName());
         job.add("login", user.getLogin());
+        job.add("role", user.getRole());
         return job.build();
     }
 }

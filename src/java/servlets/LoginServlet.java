@@ -8,6 +8,7 @@ package servlets;
 import entity.User;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.math.BigDecimal;
 import javax.ejb.EJB;
 import javax.json.Json;
 import javax.json.JsonObject;
@@ -64,12 +65,12 @@ public class LoginServlet extends HttpServlet {
             case "/login":
                 JsonReader jsonReader = Json.createReader(request.getReader());
                 JsonObject jsonObject = jsonReader.readObject();
-                String login = jsonObject.getString("login","");
+                String login = jsonObject.getString("username","");
                 String password = jsonObject.getString("password","");
                 User authUser = userFacade.findByLogin(login);
                 if(authUser == null){
                     job.add("info", "Нет такого пользователя")
-                       .add("auth",false);
+                       .add("auth", false);
                     try (PrintWriter out = response.getWriter()) {
                         out.println(job.build().toString());
                     }
@@ -79,7 +80,7 @@ public class LoginServlet extends HttpServlet {
                 password = pp.getProtectedPassword(password, authUser.getSalt());
                 if(!password.equals(authUser.getPassword())){
                     job.add("info", "Неверный пароль")
-                       .add("auth",false);
+                       .add("auth", false);
                     try (PrintWriter out = response.getWriter()) {
                         out.println(job.build().toString());
                     }
@@ -87,7 +88,7 @@ public class LoginServlet extends HttpServlet {
                 }
                 session = request.getSession(true);
                 session.setAttribute("authUser", authUser);
-                job.add("info", "Вы вошли как "+authUser.getLogin())
+                job.add("info", "Приветствуем вас, " + authUser.getFirstName() + "!")
                    .add("auth",true)
                    .add("user", new UserJsonBuilder().getUserJsonObject(authUser));
                 

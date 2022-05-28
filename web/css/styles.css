@@ -59,7 +59,7 @@ header ul li {
     top: 25px;
 }
 
-#logout {
+#logOut {
     display: none;
 }
 
@@ -92,7 +92,7 @@ footer {
 /* content */
 
 
-form {
+.form-container {
     width: 40%;
     margin: 0px auto;
     margin-top: 175px;
@@ -122,12 +122,6 @@ button:hover {
     opacity: 0.8;
 }
 
-.cancelbtn {
-    width: auto;
-    padding: 10px 18px;
-    background-color: #f44336;
-}
-
 .imgcontainer {
     text-align: center;
     margin: 24px 0 12px 0;
@@ -140,13 +134,4 @@ img.avatar {
 
 .container {
     padding: 16px;
-}
-
-span.psw {
-    float: right;
-    padding-top: 16px;
-}
-
-span.psw a {
-    color: blue;
 }

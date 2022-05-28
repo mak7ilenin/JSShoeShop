@@ -1,10 +1,6 @@
 import {loginModule} from './LoginModule.js';
 import {viewModule} from './ViewModule.js';
 export {checkMenu};
-var debug = true;
-function isDebug(message){
-    if(debug) console.log(message);
-}
 
 const buyModel = document.getElementById('buy-model');
 buyModel.style.display = "none";
@@ -17,14 +13,15 @@ editModel.style.display = "none";
 const editUser = document.getElementById('edit-user');
 editUser.style.display = "none";
 
-const btnLogin = document.getElementById("login");
+const btnLogin = document.getElementById("logIn");
 btnLogin.addEventListener('click', (e) => {
     e.preventDefault();
     viewModule.showLoginForm();
-})
+});
 function checkMenu() {
     let role = null;
-    if(sessionStorage.getItem('role') === null) {
+    if(sessionStorage.getItem('user') === null) {
+        console.log("dfsfsd");
         if(!buyModel.style.display === "none") {
             buyModel.style.display = "none";
         }
@@ -87,11 +84,11 @@ function checkMenu() {
         if(!createUser.style.display === "none") {
             createUser.style.display = "unset";
         }
-        if(!editModel.style.display == "none") {
+        if(!editModel. style.display == "none") {
             editModel.style.display = "none";
         }
         if(!editUser.style.display == "none") {
             editUser.style.display = "none";
         }
     }
-}checkMenu();
+}
