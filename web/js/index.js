@@ -7,7 +7,7 @@ const createModel = document.getElementById('create-model');
 const createUser = document.getElementById('create-user');
 const editModel = document.getElementById('edit-model');
 const editUser = document.getElementById('edit-user');
-hideMenu()
+hideMenu();
 function hideMenu() {
     buyModel.style.display = "none";
     createModel.style.display = "none";
@@ -15,15 +15,12 @@ function hideMenu() {
     editModel.style.display = "none";
     editUser.style.display = "none";
 }
-
 const info = document.getElementById('info');
 const btnLogin = document.getElementById('logIn');
 const btnLogout = document.getElementById('logOut');
 btnLogin.addEventListener('click', (e) => {
     e.preventDefault();
     viewModule.showLoginForm();
-    btnLogout.style.display = "unset";
-    btnLogin.style.display = "none";
 });
 btnLogout.addEventListener('click', (e) => {
     e.preventDefault();

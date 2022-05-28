@@ -92,18 +92,18 @@ footer {
 }
 
 
-/* content */
+/* login */
 
 
-.form-container {
+.login-container {
     width: 40%;
     margin: 0px auto;
-    margin-top: 175px;
+    margin-top: 135px;
     border: 3px solid #f1f1f1;
     transition: ease all 0.3s;
 }
 
-.form-container:hover {
+.login-container:hover {
     box-shadow: 1px 8px 10px 0 lightgray;
 }
 
@@ -116,7 +116,7 @@ label {
     font-size: 20px;
 }
   
-input[type=text], input[type=password] {
+#username, #password {
     width: 70%;
     padding: 12px 20px;
     margin: 8px auto;
@@ -126,7 +126,7 @@ input[type=text], input[type=password] {
     font-size: 20px;
 }
 
-button {
+#login {
     width: 70%;
     font-family: 'Courier New', Courier, monospace;
     font-weight: 700;
@@ -139,13 +139,34 @@ button {
     justify-content: center;
     border: none;
     cursor: pointer;
+    border-radius: 40px;
     transition: all 0.4s;
 }
 
-button:hover {
-    border-radius: 40px;
+#login:hover {
     background-color: rgb(30, 165, 255);
+    transform: scale(1.05);
     transition: all 0.2s;
+}
+
+#registration {
+    width: 68%;
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: 700;
+    font-size: 24px;
+    background-color: #cccccc;
+    padding: 14px 20px;
+    margin: 20px auto;
+    display: flex;
+    justify-content: center;
+    border: none;
+    cursor: pointer;
+    transition: all 0.4s;
+}
+
+#registration:hover {
+    transform: scale(1.05);
+    background-color: rgb(223, 223, 223);
 }
 
 .imgcontainer {
@@ -168,7 +189,73 @@ img.avatar {
 }
 
 input[type=checkbox] {
-    margin-top: 5px;
+    margin-top: 7px;
     margin-right: 7px;
     transform: scale(1.4);
+}
+
+
+/* registration */
+
+.registration-container {
+    width: 45%;
+    margin: 0px auto;
+    margin-top: 135px;
+    padding: 20px;
+    /* border: 3px solid #f1f1f1; */
+    transition: ease all 0.3s;
+}
+
+.registration-container:hover {
+    box-shadow: 1px 8px 10px 0 lightgray;
+}
+
+h2 {
+    font-size: 26px;
+    margin-bottom: 45px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    text-align: center;
+}
+
+.input-container {
+    display: flex;
+    width: 100%;
+    margin-bottom: 15px;
+}
+
+.input-container img {
+    width: 30px;
+    height: 30px;
+}
+
+.input-field {
+    width: 75%;
+    margin: 0px auto;
+    padding: 15px;
+    outline: none;
+}
+
+.input-field[type=text],[type=password] {
+    font-size: 20px;
+}
+
+.input-field:focus {
+    border: 2px solid dodgerblue;
+}
+
+#register {
+    width: 80%;
+    margin: 0px auto;
+    display: flex;
+    justify-content: center;
+    background-color: dodgerblue;
+    color: white;
+    padding: 15px 20px;
+    border: none;
+    cursor: pointer;
+    opacity: 0.9;
+}
+
+#register:hover {
+    opacity: 1;
 }

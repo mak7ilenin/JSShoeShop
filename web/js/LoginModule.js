@@ -56,6 +56,11 @@ class LoginModule {
                 }
             });
     }
+    // registration() {
+    //     let promiseRegistration = fetch('registration', {
+    //         method:
+    //     });
+    // }
 }
 const loginModule = new LoginModule();
 export {loginModule};
