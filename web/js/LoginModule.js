@@ -1,4 +1,11 @@
-import {checkMenu} from './index.js';
+import {checkRole} from './index.js';
+
+const buyModel = document.getElementById('buy-model');
+const createModel = document.getElementById('create-model');
+const createUser = document.getElementById('create-user');
+const editModel = document.getElementById('edit-model');
+const editUser = document.getElementById('edit-user');
+
 class LoginModule {
     sendCredentials() {
         const username = document.getElementById('username').value;
@@ -19,14 +26,35 @@ class LoginModule {
         });
         promise.then(response => response.json())
                 .then(response => {
+                    document.getElementById('info').innerHTML = response.info;
                     sessionStorage.setItem('user', JSON.stringify(response.user));
                     document.getElementById('content').innerHTML = "";
-                    checkMenu();
+                    checkRole();
                 })
                 .catch(error => {
-                    document.getElementById('info').innerHTML = "Ошибка сервера: " + error;
+                    info.innerHTML = "Ошибка сервера: " + error;
+                    info.style.display = "unset";
                     document.getElementById('content').innerHTML = "";
                 });
+    }
+    logout() {
+        let promiseLogout = fetch('logout', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json;charset:utf8'
+            },
+            credentials: 'include'
+        });
+        promiseLogout.then(response => response.json())
+            .then(response => {
+                document.getElementById("info").innerHTML = response.info;
+                if(!response.auth) {
+                    if(sessionStorage.getItem('user')) {
+                        sessionStorage.removeItem('user');
+                    }
+                    checkRole();
+                }
+            });
     }
 }
 const loginModule = new LoginModule();

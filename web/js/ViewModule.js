@@ -1,6 +1,7 @@
 import {loginModule} from './LoginModule.js';
 class ViewModule {
-    showLoginForm () {
+    showLoginForm() {
+        document.getElementById('info').innerHTML = "";
         const content = document.getElementById('content');
         content.innerHTML = 
             `<div class="form-container">
@@ -10,13 +11,13 @@ class ViewModule {
                 
                 <div class="container">
                     <label for="uname"><b>Username</b></label>
-                    <input type="text" id="username" placeholder="Enter Username" name="uname" required>
+                    <input type="text" id="username" placeholder="Enter Username" name="uname" required> <br>
                     
-                    <label for="psw"><b>Password</b></label>
+                    <label><b>Password</b></label>
                     <input type="password" id="password" placeholder="Enter Password" name="psw" required>
                     
                     <button id="login" type="submit">Login</button>
-                    <label>
+                    <label class="remember">
                         <input type="checkbox" checked="checked" name="remember"> Remember me
                     </label>
                 </div>

@@ -42,15 +42,15 @@ a:hover:not(.logo-container a) {
 header ul:not(.log-bar){
     width: 60%;
     display: flex;
-    justify-content: space-evenly;
+    justify-content: flex-start;
     margin-top: 45px;
 }
 
 header ul li {
-    width: 100%;
     list-style: none;
     font-size: 22px;
     text-align: center;
+    margin-left: 25px;
 }
 
 .log-bar {
@@ -64,8 +64,11 @@ header ul li {
 }
 
 #info {
-    display: none;
+    position: relative;
+    top: 110px;
     text-align: center;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-weight: bold;
     font-size: 22px;
 }
 
@@ -97,29 +100,52 @@ footer {
     margin: 0px auto;
     margin-top: 175px;
     border: 3px solid #f1f1f1;
+    transition: ease all 0.3s;
+}
+
+.form-container:hover {
+    box-shadow: 1px 8px 10px 0 lightgray;
+}
+
+label {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 20px;
 }
   
 input[type=text], input[type=password] {
-    width: 100%;
+    width: 70%;
     padding: 12px 20px;
-    margin: 8px 0;
-    display: inline-block;
+    margin: 8px auto;
+    display: flex;
     border: 1px solid #ccc;
     box-sizing: border-box;
+    font-size: 20px;
 }
 
 button {
+    width: 70%;
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: 700;
+    font-size: 24px;
     background-color: #04AA6D;
     color: white;
     padding: 14px 20px;
-    margin: 8px 0;
+    margin: 20px auto;
+    display: flex;
+    justify-content: center;
     border: none;
     cursor: pointer;
-    width: 100%;
+    transition: all 0.4s;
 }
 
 button:hover {
-    opacity: 0.8;
+    border-radius: 40px;
+    background-color: rgb(30, 165, 255);
+    transition: all 0.2s;
 }
 
 .imgcontainer {
@@ -134,4 +160,15 @@ img.avatar {
 
 .container {
     padding: 16px;
+}
+
+.remember {
+    display: flex;
+    justify-content: flex-end;
+}
+
+input[type=checkbox] {
+    margin-top: 5px;
+    margin-right: 7px;
+    transform: scale(1.4);
 }

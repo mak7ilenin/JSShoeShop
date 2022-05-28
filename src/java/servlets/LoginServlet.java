@@ -97,7 +97,11 @@ public class LoginServlet extends HttpServlet {
                 }
                 break;
             case "/logout":
-                ;
+                session = request.getSession(false);
+                if(session != null) {
+                    session.invalidate();
+                }
+                break;
             case "/registration":
                 ;
         }
