@@ -1,4 +1,5 @@
 import {checkRole} from './index.js';
+import {viewModule} from './ViewModule.js';
 
 const buyModel = document.getElementById('buy-model');
 const createModel = document.getElementById('create-model');
@@ -33,7 +34,6 @@ class LoginModule {
                 })
                 .catch(error => {
                     info.innerHTML = "Ошибка сервера: " + error;
-                    info.style.display = "unset";
                     document.getElementById('content').innerHTML = "";
                 });
     }
@@ -56,11 +56,47 @@ class LoginModule {
                 }
             });
     }
-    // registration() {
-    //     let promiseRegistration = fetch('registration', {
-    //         method:
-    //     });
-    // }
+    registration() {
+        const firstName = document.getElementById('first-name');
+        const lastName = document.getElementById('last-name');
+        const username = document.getElementById('username');
+        const password = document.getElementById('password');
+        const phone = document.getElementById('phone');
+        const money = document.getElementById('money');
+        const newUser = {
+            "firstName": firstName,
+            "lastName": lastName,
+            "username": username,
+            "password": password,
+            "phone": phone,
+            "money": money,
+        }
+        let promiseRegistration = fetch('registration', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json;charset:utf8'
+            },
+            credentials: 'include',
+            body: JSON.stringify(newUser)
+        });
+        promiseRegistration.then(response => response.json())
+            .then(response => {
+                console.log("fdsfds");
+                document.getElementById('info').innerHTML = response.info;
+                sessionStorage.setItem('newUser', JSON.stringify(response.newUser));
+                viewModule.showLoginForm();
+            })
+            .catch(error => {
+                // if(firstName == null || lastName == null || username == null || password == null || phone == null) {
+                //     info.innerHTML = "Заполните все поля!";
+                // }
+                // if(money == null) {
+                //     info.innerHTML = "Введите сумму больше нуля!";
+                // }
+                info.innerHTML = error;
+                document.getElementById('content').innerHTML = "";
+            });
+    }
 }
 const loginModule = new LoginModule();
 export {loginModule};

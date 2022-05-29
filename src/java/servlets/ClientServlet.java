@@ -19,89 +19,88 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import jsontools.UserJsonBuilder;
 import session.UserFacade;
 import tools.PasswordProtected;
 
 /**
  *
- * @author pupil
+ * @author makso
  */
-@WebServlet(name = "LoginServlet", loadOnStartup = 1, urlPatterns = {
-    "/login",
-    "/logout"
+@WebServlet(name = "ClientServlet", loadOnStartup = 2 , urlPatterns = {
+    "/registration"
 })
-public class LoginServlet extends HttpServlet {
+public class ClientServlet extends HttpServlet {
     @EJB private UserFacade userFacade;
 
-    @Override
-    public void init() throws ServletException {
-        super.init();
-        if(userFacade.count()>0) return;
-        User user = new User();
-        user.setFirstName("Maksim");
-        user.setLastName("Dzjubenko");
-        user.setPhone("53005207");
-        user.setMoney(500);
-        user.setLogin("admin");
-        PasswordProtected passwordProtected = new PasswordProtected();
-        String salt = passwordProtected.getSalt();
-        user.setSalt(salt);
-        String adminPassword = passwordProtected.getProtectedPassword("12345", salt);
-        user.setPassword(adminPassword);
-        user.setRole("ADMINISTRATOR");
-        userFacade.create(user);
-    }
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         request.setCharacterEncoding("UTF-8");
-        HttpSession session = null;
         JsonObjectBuilder job = Json.createObjectBuilder();
         String path = request.getServletPath();
         switch (path) {
-            case "/login":
+            case "/registration":
                 JsonReader jsonReader = Json.createReader(request.getReader());
                 JsonObject jsonObject = jsonReader.readObject();
+                String firstName = jsonObject.getString("firstName","");
+                String lastName = jsonObject.getString("lastName","");
                 String username = jsonObject.getString("username","");
                 String password = jsonObject.getString("password","");
-                User authUser = userFacade.findByLogin(username);
-                if(authUser == null){
-                    job.add("info", "Нет такого пользователя")
-                       .add("auth", false);
-                    try (PrintWriter out = response.getWriter()) {
+                String phone = jsonObject.getString("phone","");
+                long money = Long.parseLong(jsonObject.getString("money",""));
+                if(firstName.isEmpty() 
+                        || lastName.isEmpty() 
+                        || username.isEmpty() 
+                        || password.isEmpty() 
+                        || phone.isEmpty()) 
+                {
+                    job.add("info", "Заполните все поля!")
+                       .add("firstName", firstName)
+                       .add("lastName", lastName)
+                       .add("username", username)
+                       .add("password", password)
+                       .add("phone", phone)
+                       .add("money", money);
+                    try(PrintWriter out = response.getWriter()) {
                         out.println(job.build().toString());
                     }
                     break;
                 }
-                PasswordProtected pp = new PasswordProtected();
-                password = pp.getProtectedPassword(password, authUser.getSalt());
-                if(!password.equals(authUser.getPassword())){
-                    job.add("info", "Неверный пароль")
-                       .add("auth", false);
-                    try (PrintWriter out = response.getWriter()) {
+                if(money == 0) {
+                    job.add("info", "Введите  сумму больше нуля!")
+                    .add("firstName", firstName)
+                       .add("lastName", lastName)
+                       .add("username", username)
+                       .add("password", password)
+                       .add("phone", phone)
+                       .add("money", money);
+                    try(PrintWriter out = response.getWriter()) {
                         out.println(job.build().toString());
                     }
                     break;
                 }
-                session = request.getSession(true);
-                session.setAttribute("authUser", authUser);
-                job.add("info", "Приветствуем вас, " + authUser.getFirstName() + "!")
-                   .add("auth",true)
-                   .add("user", new UserJsonBuilder().getUserJsonObject(authUser));
-                
-                try (PrintWriter out = response.getWriter()) {
+                User newUser = new User();
+                newUser.setFirstName(firstName);
+                newUser.setLastName(lastName);
+                newUser.setLogin(username);
+                newUser.setPhone(phone);
+                newUser.setMoney(money);
+                PasswordProtected passwordProtected = new PasswordProtected();
+                String salt = passwordProtected.getSalt();
+                newUser.setSalt(salt);
+                String userPassword = passwordProtected.getProtectedPassword(password, salt);
+                newUser.setPassword(userPassword);
+                newUser.setRole("USER");
+                userFacade.create(newUser);
+                job.add("info", "Аккаунт" + username + "успешно создан!")
+                        .add("status", true);
+                try(PrintWriter out = response.getWriter()) {
                     out.println(job.build().toString());
-                }
-                break;
-            case "/logout":
-                session = request.getSession(false);
-                if(session != null) {
-                    session.invalidate();
                 }
                 break;
         }
     }
+
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.

@@ -22,18 +22,23 @@ public class Model implements Serializable{
     private String modelName;
     private String modelSize;
     private int amount;
-    private String price;
+    private long price;
     private String modelFirm;
 
     @Override
+    public String toString() {
+        return "Model{" + "id=" + id + ", modelName=" + modelName + ", modelSize=" + modelSize + ", amount=" + amount + ", price=" + price + ", modelFirm=" + modelFirm + '}';
+    }
+    
+    @Override
     public int hashCode() {
         int hash = 5;
-        hash = 73 * hash + Objects.hashCode(this.id);
-        hash = 73 * hash + Objects.hashCode(this.modelName);
-        hash = 73 * hash + Objects.hashCode(this.modelSize);
-        hash = 73 * hash + this.amount;
-        hash = 73 * hash + Objects.hashCode(this.price);
-        hash = 73 * hash + Objects.hashCode(this.modelFirm);
+        hash = 11 * hash + Objects.hashCode(this.id);
+        hash = 11 * hash + Objects.hashCode(this.modelName);
+        hash = 11 * hash + Objects.hashCode(this.modelSize);
+        hash = 11 * hash + this.amount;
+        hash = 11 * hash + (int) (this.price ^ (this.price >>> 32));
+        hash = 11 * hash + Objects.hashCode(this.modelFirm);
         return hash;
     }
 
@@ -52,7 +57,7 @@ public class Model implements Serializable{
         if (this.amount != other.amount) {
             return false;
         }
-        if (!Objects.equals(this.price, other.price)) {
+        if (this.price != other.price) {
             return false;
         }
         if (!Objects.equals(this.modelName, other.modelName)) {
@@ -94,11 +99,19 @@ public class Model implements Serializable{
         this.modelSize = modelSize;
     }
 
-    public String getPrice() {
+    public int getAmount() {
+        return amount;
+    }
+
+    public void setAmount(int amount) {
+        this.amount = amount;
+    }
+
+    public long getPrice() {
         return price;
     }
 
-    public void setPrice(String price) {
+    public void setPrice(long price) {
         this.price = price;
     }
 
@@ -109,17 +122,6 @@ public class Model implements Serializable{
     public void setModelFirm(String modelFirm) {
         this.modelFirm = modelFirm;
     }
-
-    public int getAmount() {
-        return amount;
-    }
-
-    public void setAmount(int amount) {
-        this.amount = amount;
-    }
-
-    @Override
-    public String toString() {
-        return "Model{" + "id=" + id + ", modelName=" + modelName + ", modelSize=" + modelSize + ", amount=" + amount + ", price=" + price + ", modelFirm=" + modelFirm + '}';
-    }
+    
+    
 }

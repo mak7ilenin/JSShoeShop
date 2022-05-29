@@ -5,7 +5,8 @@ html {
 header {
     width: 100%;
     height: 110px;
-    background-color:rgb(150, 228, 228);
+    background-color:rgb(133, 241, 241);
+    box-shadow: 0px 7px 10px 0 lightgray;
     display: flex;
     position: fixed;
     top: 0;
@@ -88,7 +89,7 @@ footer {
     justify-content: center;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     font-size: 24px;
-    background-color: rgb(150, 228, 228);
+    background-color: rgb(133, 241, 241);
 }
 
 
@@ -116,7 +117,7 @@ label {
     font-size: 20px;
 }
   
-#username, #password {
+.container #username, .container #password {
     width: 70%;
     padding: 12px 20px;
     margin: 8px auto;
@@ -126,7 +127,7 @@ label {
     font-size: 20px;
 }
 
-#login {
+.container #login {
     width: 70%;
     font-family: 'Courier New', Courier, monospace;
     font-weight: 700;
@@ -143,13 +144,13 @@ label {
     transition: all 0.4s;
 }
 
-#login:hover {
+.container #login:hover {
     background-color: rgb(30, 165, 255);
     transform: scale(1.05);
     transition: all 0.2s;
 }
 
-#registration {
+.container #registration {
     width: 68%;
     font-family: 'Courier New', Courier, monospace;
     font-weight: 700;
@@ -164,7 +165,7 @@ label {
     transition: all 0.4s;
 }
 
-#registration:hover {
+.container #registration:hover {
     transform: scale(1.05);
     background-color: rgb(223, 223, 223);
 }
@@ -197,24 +198,67 @@ input[type=checkbox] {
 
 /* registration */
 
+
 .registration-container {
     width: 45%;
     margin: 0px auto;
     margin-top: 135px;
     padding: 20px;
-    /* border: 3px solid #f1f1f1; */
-    transition: ease all 0.3s;
+    border: 3px solid #f1f1f1;
+    transition: ease all .3s;
 }
 
 .registration-container:hover {
-    box-shadow: 1px 8px 10px 0 lightgray;
+    box-shadow: 0 0 60px 6px lightgray;
 }
 
-h2 {
-    font-size: 26px;
-    margin-bottom: 45px;
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
+.registration-heading {
+    height: 100px;
+    margin-bottom: 15px;
+    border-radius: 10px;
+    border-right: 1px solid black;
+    border-bottom: 1px solid black;
+    background: rgb(176, 142, 255);
+    background: radial-gradient(circle, rgb(61, 158, 255) 55%, rgb(255, 254, 171) 100%);
     text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: ease all .3s;
+}
+
+.registration-container:hover > .registration-heading {
+    box-shadow: 0 0 20px 5px rgb(184, 184, 184);
+}
+
+.registration-heading h2 {
+    color: rgb(179, 255, 0);
+    text-shadow:
+        -1px -1px 1px white,  
+        1px -1px 1px white,
+        -1px 1px 1px black,
+        1px 1px 1px black;
+    position: relative;
+    font-family: "Avenir Next", sans-serif;
+    font-weight: 900;
+    font-size: 44px;
+    text-transform: uppercase;
+    font-style: italic;
+    letter-spacing: 0.05em;
+    display: flex;
+    justify-content: center;
+}
+
+.registration-heading h2:before {
+    position: absolute;
+    left: 0;
+    top: 0;
+    content: attr(filter-content);
+    filter: url(#motion-blur-filter);
+}
+
+.registration-heading svg {
+    display: none;
 }
 
 .input-container {
@@ -223,29 +267,30 @@ h2 {
     margin-bottom: 15px;
 }
 
-.input-container img {
-    width: 30px;
-    height: 30px;
-}
-
-.input-field {
-    width: 75%;
+.input-container .input-field {
+    width: 85.1%;
     margin: 0px auto;
     padding: 15px;
+    margin-left: 22px;
     outline: none;
 }
 
-.input-field[type=text],[type=password] {
+.input-container .input-field {
     font-size: 20px;
 }
 
 .input-field:focus {
-    border: 2px solid dodgerblue;
+    border: 2px solid rgb(72, 163, 255);
 }
 
 #register {
-    width: 80%;
-    margin: 0px auto;
+    width: 98%;
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: 700;
+    font-size: 20px;
+    letter-spacing: 1px;
+    margin: 0 auto;
+    margin-top: 25px;
     display: flex;
     justify-content: center;
     background-color: dodgerblue;
@@ -254,8 +299,20 @@ h2 {
     border: none;
     cursor: pointer;
     opacity: 0.9;
+    transition: ease all .3s;
 }
 
 #register:hover {
     opacity: 1;
+    transform: scale(1.02);
+    box-shadow: 0px 0px 30px 3px rgb(95, 175, 255);
+    font-size: 24px;
+}
+
+.input-container .input-img {
+    width: 45px;
+    height: 45px;
+    margin-top: 2px;
+    padding: 3px;
+    box-shadow: 0px 0px 10px 3px lightgray;
 }
