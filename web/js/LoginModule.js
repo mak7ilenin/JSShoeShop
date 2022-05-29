@@ -41,7 +41,7 @@ class LoginModule {
         let promiseLogout = fetch('logout', {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json;charset:utf8'
+                'Content-Type': 'application/html;charset:utf8'
             },
             credentials: 'include'
         });
@@ -57,45 +57,28 @@ class LoginModule {
             });
     }
     registration() {
-        const firstName = document.getElementById('first-name');
-        const lastName = document.getElementById('last-name');
-        const username = document.getElementById('username');
-        const password = document.getElementById('password');
-        const phone = document.getElementById('phone');
-        const money = document.getElementById('money');
-        const newUser = {
-            "firstName": firstName,
-            "lastName": lastName,
-            "username": username,
-            "password": password,
-            "phone": phone,
-            "money": money,
-        }
-        let promiseRegistration = fetch('registration', {
+        var newUserForm = new FormData(document.getElementById('newUserForm'));
+        console.log("Created FormData, " + [...newUserForm.keys()].length + " keys in data");
+        const promiseRegistration = fetch('registration', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json;charset:utf8'
             },
-            credentials: 'include',
-            body: JSON.stringify(newUser)
+            body: newUserForm
         });
         promiseRegistration.then(response => response.json())
-            .then(response => {
-                console.log("fdsfds");
-                document.getElementById('info').innerHTML = response.info;
-                sessionStorage.setItem('newUser', JSON.stringify(response.newUser));
-                viewModule.showLoginForm();
-            })
-            .catch(error => {
-                // if(firstName == null || lastName == null || username == null || password == null || phone == null) {
-                //     info.innerHTML = "Заполните все поля!";
-                // }
-                // if(money == null) {
-                //     info.innerHTML = "Введите сумму больше нуля!";
-                // }
-                info.innerHTML = error;
-                document.getElementById('content').innerHTML = "";
-            });
+                .then(response => {
+                    if(response.status) {
+                        document.getElementById('info').innerHTML = response.info;
+                        viewModule.showLoginForm();
+                    }else {
+                        document.getElementById('info').innerHTML = response.info;
+                    }
+                })
+                .catch(error => {
+                    document.getElementById('info').innerHTML = error;
+                    // document.getElementById('content').innerHTML = "";
+                });
     }
 }
 const loginModule = new LoginModule();

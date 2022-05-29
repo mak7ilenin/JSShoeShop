@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package servlets;
 
 import entity.User;
@@ -18,7 +13,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import session.UserFacade;
 import tools.PasswordProtected;
 
@@ -26,7 +20,7 @@ import tools.PasswordProtected;
  *
  * @author makso
  */
-@WebServlet(name = "ClientServlet", loadOnStartup = 2 , urlPatterns = {
+@WebServlet(name = "ClientServlet", loadOnStartup = 1 , urlPatterns = {
     "/registration"
 })
 public class ClientServlet extends HttpServlet {
@@ -40,20 +34,15 @@ public class ClientServlet extends HttpServlet {
         String path = request.getServletPath();
         switch (path) {
             case "/registration":
-                JsonReader jsonReader = Json.createReader(request.getReader());
-                JsonObject jsonObject = jsonReader.readObject();
-                String firstName = jsonObject.getString("firstName","");
-                String lastName = jsonObject.getString("lastName","");
-                String username = jsonObject.getString("username","");
-                String password = jsonObject.getString("password","");
-                String phone = jsonObject.getString("phone","");
-                long money = Long.parseLong(jsonObject.getString("money",""));
-                if(firstName.isEmpty() 
-                        || lastName.isEmpty() 
-                        || username.isEmpty() 
-                        || password.isEmpty() 
-                        || phone.isEmpty()) 
-                {
+                String firstName = request.getParameter("firstName");
+                String lastName = request.getParameter("lastName");
+                String username = request.getParameter("username");
+                String password = request.getParameter("password");
+                String phone = request.getParameter("phone");
+                long money = Long.parseLong(request.getParameter("money"));
+                if(firstName.isEmpty() || lastName.isEmpty() 
+                        || username.isEmpty() || password.isEmpty() || phone.isEmpty()
+                ){
                     job.add("info", "Заполните все поля!")
                        .add("firstName", firstName)
                        .add("lastName", lastName)
@@ -61,19 +50,21 @@ public class ClientServlet extends HttpServlet {
                        .add("password", password)
                        .add("phone", phone)
                        .add("money", money);
+                    job.add("status", false);
                     try(PrintWriter out = response.getWriter()) {
                         out.println(job.build().toString());
                     }
                     break;
                 }
                 if(money == 0) {
-                    job.add("info", "Введите  сумму больше нуля!")
+                    job.add("info", "Введите сумму больше нуля!")
                     .add("firstName", firstName)
                        .add("lastName", lastName)
                        .add("username", username)
                        .add("password", password)
                        .add("phone", phone)
                        .add("money", money);
+                    job.add("status", false);
                     try(PrintWriter out = response.getWriter()) {
                         out.println(job.build().toString());
                     }
