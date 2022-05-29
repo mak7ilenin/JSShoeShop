@@ -40,7 +40,7 @@ class ViewModule {
         document.getElementById('info').innerHTML = "";
         const content = document.getElementById('content');
         content.innerHTML = 
-            `<form id="newUserForm" class="registration-container">
+            `<div class="registration-container">
                 <div class="registration-heading">
                     <svg xmlns="http://www.w3.org/2000/svg">
                         <filter id="motion-blur-filter" filterUnits="userSpaceOnUse">
@@ -84,8 +84,8 @@ class ViewModule {
                     <input class="input-field" id="money" type="text" placeholder="$" name="money" required>
                 </div>
             
-                <input id="register" type="submit" value="Зарегистрироваться">
-            </form>`;
+                <button type="submit" id="register">Зарегистрироваться</button>
+            </div>`;
         const register = document.getElementById('register');
         register.addEventListener('click', (e) => {
             e.preventDefault();

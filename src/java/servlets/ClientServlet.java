@@ -34,12 +34,14 @@ public class ClientServlet extends HttpServlet {
         String path = request.getServletPath();
         switch (path) {
             case "/registration":
-                String firstName = request.getParameter("firstName");
-                String lastName = request.getParameter("lastName");
-                String username = request.getParameter("username");
-                String password = request.getParameter("password");
-                String phone = request.getParameter("phone");
-                long money = Long.parseLong(request.getParameter("money"));
+                JsonReader jsonReader = Json.createReader(request.getReader());
+                JsonObject jsonObject = jsonReader.readObject();
+                String firstName = jsonObject.getString("firstName","");
+                String lastName = jsonObject.getString("lastName","");
+                String username = jsonObject.getString("username","");
+                String password = jsonObject.getString("password","");
+                String phone = jsonObject.getString("phone","");
+                long money = Long.parseLong(jsonObject.getString("money",""));
                 if(firstName.isEmpty() || lastName.isEmpty() 
                         || username.isEmpty() || password.isEmpty() || phone.isEmpty()
                 ){

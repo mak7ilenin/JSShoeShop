@@ -57,27 +57,43 @@ class LoginModule {
             });
     }
     registration() {
-        var newUserForm = new FormData(document.getElementById('newUserForm'));
-        console.log("Created FormData, " + [...newUserForm.keys()].length + " keys in data");
-        const promiseRegistration = fetch('registration', {
+        const firstName = document.getElementById('first-name').value;
+        const lastName = document.getElementById('last-name').value;
+        const username = document.getElementById('username').value;
+        const password = document.getElementById('password').value;
+        const phone = document.getElementById('phone').value;
+        const money = document.getElementById('money').value;
+        const newUser = {
+            "firstName": firstName,
+            "lastName": lastName,
+            "username": username,
+            "password": password,
+            "phone": phone,
+            "money": money,
+        }
+        let promiseRegistration = fetch('registration', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json;charset:utf8'
             },
-            body: newUserForm
+            credentials: 'include',
+            body: JSON.stringify(newUser)
         });
         promiseRegistration.then(response => response.json())
                 .then(response => {
-                    if(response.status) {
-                        document.getElementById('info').innerHTML = response.info;
-                        viewModule.showLoginForm();
-                    }else {
-                        document.getElementById('info').innerHTML = response.info;
-                    }
+                    document.getElementById('info').innerHTML = response.info;
+                    sessionStorage.setItem('newUser', JSON.stringify(response.newUser));
+                    viewModule.showLoginForm();
                 })
                 .catch(error => {
-                    document.getElementById('info').innerHTML = error;
-                    // document.getElementById('content').innerHTML = "";
+                    // if(firstName == null || lastName == null || username == null || password == null || phone == null) {
+                    //     info.innerHTML = "Заполните все поля!";
+                    // }
+                    // if(money == null) {
+                    //     info.innerHTML = "Введите сумму больше нуля!";
+                    // }
+                    info.innerHTML = error;
+                    document.getElementById('content').innerHTML = "";
                 });
     }
 }
