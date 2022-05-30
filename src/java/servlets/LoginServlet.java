@@ -3,6 +3,8 @@ package servlets;
 import entity.User;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.math.BigDecimal;
+import java.text.DecimalFormat;
 import javax.ejb.EJB;
 import javax.json.Json;
 import javax.json.JsonObject;
@@ -28,7 +30,7 @@ import tools.PasswordProtected;
 })
 public class LoginServlet extends HttpServlet {
     @EJB private UserFacade userFacade;
-
+    
     @Override
     public void init() throws ServletException {
         super.init();
@@ -37,7 +39,7 @@ public class LoginServlet extends HttpServlet {
         user.setFirstName("Maksim");
         user.setLastName("Dzjubenko");
         user.setPhone("53005207");
-        user.setMoney(500);
+        user.setMoney(248.46);
         user.setLogin("admin");
         PasswordProtected passwordProtected = new PasswordProtected();
         String salt = passwordProtected.getSalt();
@@ -62,17 +64,17 @@ public class LoginServlet extends HttpServlet {
                 String password = jsonObject.getString("password","");
                 User authUser = userFacade.findByLogin(username);
                 if(authUser == null){
-                    job.add("info", "Нет такого пользователя")
+                    job.add("info", "Нет такого пользователя!")
                        .add("auth", false);
-                    try (PrintWriter out = response.getWriter()) {
-                        out.println(job.build().toString());
-                    }
-                    break;
+                try (PrintWriter out = response.getWriter()) {
+                    out.println(job.build().toString());
+                }
+                break;
                 }
                 PasswordProtected pp = new PasswordProtected();
                 password = pp.getProtectedPassword(password, authUser.getSalt());
                 if(!password.equals(authUser.getPassword())){
-                    job.add("info", "Неверный пароль")
+                    job.add("info", "Неверный пароль!")
                        .add("auth", false);
                     try (PrintWriter out = response.getWriter()) {
                         out.println(job.build().toString());
@@ -135,5 +137,4 @@ public class LoginServlet extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
-
 }

@@ -1,6 +1,7 @@
 package entity;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.Objects;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -15,30 +16,29 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Entity
 @XmlRootElement
 public class Model implements Serializable{
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String modelName;
     private String modelSize;
     private int amount;
-    private long price;
+    private double price;
     private String modelFirm;
 
     @Override
     public String toString() {
         return "Model{" + "id=" + id + ", modelName=" + modelName + ", modelSize=" + modelSize + ", amount=" + amount + ", price=" + price + ", modelFirm=" + modelFirm + '}';
     }
-    
+
     @Override
     public int hashCode() {
-        int hash = 5;
-        hash = 11 * hash + Objects.hashCode(this.id);
-        hash = 11 * hash + Objects.hashCode(this.modelName);
-        hash = 11 * hash + Objects.hashCode(this.modelSize);
-        hash = 11 * hash + this.amount;
-        hash = 11 * hash + (int) (this.price ^ (this.price >>> 32));
-        hash = 11 * hash + Objects.hashCode(this.modelFirm);
+        int hash = 7;
+        hash = 73 * hash + Objects.hashCode(this.id);
+        hash = 73 * hash + Objects.hashCode(this.modelName);
+        hash = 73 * hash + Objects.hashCode(this.modelSize);
+        hash = 73 * hash + this.amount;
+        hash = 73 * hash + (int) (Double.doubleToLongBits(this.price) ^ (Double.doubleToLongBits(this.price) >>> 32));
+        hash = 73 * hash + Objects.hashCode(this.modelFirm);
         return hash;
     }
 
@@ -57,7 +57,7 @@ public class Model implements Serializable{
         if (this.amount != other.amount) {
             return false;
         }
-        if (this.price != other.price) {
+        if (Double.doubleToLongBits(this.price) != Double.doubleToLongBits(other.price)) {
             return false;
         }
         if (!Objects.equals(this.modelName, other.modelName)) {
@@ -74,7 +74,7 @@ public class Model implements Serializable{
         }
         return true;
     }
-    
+
     public Long getId() {
         return id;
     }
@@ -107,11 +107,11 @@ public class Model implements Serializable{
         this.amount = amount;
     }
 
-    public long getPrice() {
+    public double getPrice() {
         return price;
     }
 
-    public void setPrice(long price) {
+    public void setPrice(double price) {
         this.price = price;
     }
 
@@ -122,6 +122,6 @@ public class Model implements Serializable{
     public void setModelFirm(String modelFirm) {
         this.modelFirm = modelFirm;
     }
-    
+
     
 }

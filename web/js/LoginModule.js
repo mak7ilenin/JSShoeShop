@@ -26,15 +26,14 @@ class LoginModule {
             body: JSON.stringify(credential)
         });
         promise.then(response => response.json())
-                .then(response => {
+        .then(response => {
                     document.getElementById('info').innerHTML = response.info;
                     sessionStorage.setItem('user', JSON.stringify(response.user));
                     document.getElementById('content').innerHTML = "";
                     checkRole();
                 })
                 .catch(error => {
-                    info.innerHTML = "Ошибка сервера: " + error;
-                    document.getElementById('content').innerHTML = "";
+                    document.getElementById('info').innerHTML = response.info;
                 });
     }
     logout() {
@@ -81,19 +80,20 @@ class LoginModule {
         });
         promiseRegistration.then(response => response.json())
                 .then(response => {
+                    if(response.money === 0) {
+                        document.getElementById('info').innerHTML = "Введите сумму больше нуля!";
+                        return;
+                    }
                     document.getElementById('info').innerHTML = response.info;
                     sessionStorage.setItem('newUser', JSON.stringify(response.newUser));
                     viewModule.showLoginForm();
                 })
                 .catch(error => {
-                    // if(firstName == null || lastName == null || username == null || password == null || phone == null) {
-                    //     info.innerHTML = "Заполните все поля!";
-                    // }
-                    // if(money == null) {
-                    //     info.innerHTML = "Введите сумму больше нуля!";
-                    // }
-                    info.innerHTML = error;
-                    document.getElementById('content').innerHTML = "";
+                    if(firstName === "" || lastName === "" || username === "" || password === "" || phone === "" || money === "") {
+                        document.getElementById('info').innerHTML = "Заполните все поля!";
+                        return;
+                    }
+                    document.getElementById('info').innerHTML = error;
                 });
     }
 }

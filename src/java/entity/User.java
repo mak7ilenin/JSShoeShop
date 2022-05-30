@@ -1,6 +1,7 @@
 package entity;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.Objects;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -21,7 +22,7 @@ public class User implements Serializable {
     private String firstName;
     private String lastName;
     private String phone;
-    private long money;
+    private double money;
     private String login;
     private String password;
     private String salt;
@@ -34,19 +35,19 @@ public class User implements Serializable {
     public String toString() {
         return "User{" + "id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", phone=" + phone + ", money=" + money + ", login=" + login + ", password=" + password + ", salt=" + salt + ", role=" + role + '}';
     }
-    
+
     @Override
     public int hashCode() {
-        int hash = 5;
-        hash = 97 * hash + Objects.hashCode(this.id);
-        hash = 97 * hash + Objects.hashCode(this.firstName);
-        hash = 97 * hash + Objects.hashCode(this.lastName);
-        hash = 97 * hash + Objects.hashCode(this.phone);
-        hash = 97 * hash + (int) (this.money ^ (this.money >>> 32));
-        hash = 97 * hash + Objects.hashCode(this.login);
-        hash = 97 * hash + Objects.hashCode(this.password);
-        hash = 97 * hash + Objects.hashCode(this.salt);
-        hash = 97 * hash + Objects.hashCode(this.role);
+        int hash = 7;
+        hash = 53 * hash + Objects.hashCode(this.id);
+        hash = 53 * hash + Objects.hashCode(this.firstName);
+        hash = 53 * hash + Objects.hashCode(this.lastName);
+        hash = 53 * hash + Objects.hashCode(this.phone);
+        hash = 53 * hash + (int) (Double.doubleToLongBits(this.money) ^ (Double.doubleToLongBits(this.money) >>> 32));
+        hash = 53 * hash + Objects.hashCode(this.login);
+        hash = 53 * hash + Objects.hashCode(this.password);
+        hash = 53 * hash + Objects.hashCode(this.salt);
+        hash = 53 * hash + Objects.hashCode(this.role);
         return hash;
     }
 
@@ -62,7 +63,7 @@ public class User implements Serializable {
             return false;
         }
         final User other = (User) obj;
-        if (this.money != other.money) {
+        if (Double.doubleToLongBits(this.money) != Double.doubleToLongBits(other.money)) {
             return false;
         }
         if (!Objects.equals(this.firstName, other.firstName)) {
@@ -91,9 +92,8 @@ public class User implements Serializable {
         }
         return true;
     }
-    
-    
 
+    
     public Long getId() {
         return id;
     }
@@ -126,11 +126,11 @@ public class User implements Serializable {
         this.phone = phone;
     }
 
-    public long getMoney() {
+    public double getMoney() {
         return money;
     }
 
-    public void setMoney(long money) {
+    public void setMoney(double money) {
         this.money = money;
     }
 
@@ -165,6 +165,7 @@ public class User implements Serializable {
     public void setRole(String role) {
         this.role = role;
     }
+
     
-    
+  
 }

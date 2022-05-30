@@ -106,3 +106,7 @@ function checkRole() {
         return;
     }
 }
+createModel.addEventListener('click', (e) => {
+    e.preventDefault();
+    viewModule.showCreateModel();
+});

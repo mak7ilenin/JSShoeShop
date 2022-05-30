@@ -1,4 +1,5 @@
 import {loginModule} from './LoginModule.js';
+import {shoeModule} from './ShoeModule.js';
 class ViewModule {
     showLoginForm() {
         document.getElementById('info').innerHTML = "";
@@ -90,6 +91,40 @@ class ViewModule {
         register.addEventListener('click', (e) => {
             e.preventDefault();
             loginModule.registration();
+        });
+    }
+    showCreateModel() {
+        const content = document.getElementById('content');
+        content.innerHTML = 
+        `<div class="shoe-container">
+            <div class="top-content">
+                <span class="container-title">Добавление обуви</span>
+            </div>
+            <div class="mid-content">
+                <div class="wrap-input100 validate-input" data-validate="Enter name">
+                    <input class="input100" type="text" id="model-name" name="modelName" placeholder="Model name">
+                </div>
+                <div class="wrap-input100 validate-input" data-validate="Enter firm">
+                    <input class="input100" type="text" id="model-firm" name="modelFirm" placeholder="Model firm">
+                </div>
+                <div class="wrap-input100 validate-input" data-validate="Enter size">
+                    <input class="input100" type="text" id="model-size" name="modelSize" placeholder="Model size">
+                </div>
+                <div class="wrap-input100 validate-input" data-validate="Enter price">
+                    <input class="input100" type="text" id="model-price" name="price" placeholder="Price">
+                </div>
+                <div class="wrap-input100 validate-input" data-validate="Enter amount">
+                    <input class="input100" type="number" id="model-amount" min="1" max="50" name="amount" placeholder="Amount">
+                </div>
+                <div class="container-login100-form-btn">
+                    <button class="login100-form-btn" id="add-model">Добавить</button>
+                </div>
+            </div>
+        </div>`;
+        const addModel = document.getElementById('add-model');
+        addModel.addEventListener('click', (e) => {
+            e.preventDefault();
+            shoeModule.createModel();
         });
     }
 }

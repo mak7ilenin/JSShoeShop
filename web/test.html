@@ -5,6 +5,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/styles.css">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+
     <title>Shoeger</title>
 </head>
 <body>
@@ -30,51 +35,30 @@
     </header>
     <p id="info" class="text-info">&nbsp;</p>
     <main id="content">
-        <div class="registration-container">
-            <div class="registration-heading">
-                <svg xmlns="http://www.w3.org/2000/svg">
-                    <filter id="motion-blur-filter" filterUnits="userSpaceOnUse">
-                        <feGaussianBlur stdDeviation="100 0"></feGaussianBlur>
-                    </filter>
-                </svg>
-                <h2 filter-content="S">РЕГИСТРАЦИЯ</h2>
+        <div class="shoe-container">
+            <div class="top-content">
+                <span class="container-title">Добавление обуви</span>
             </div>
-            <div class="input-container">
-                <img src="Images/first_name.png" class="input-img"></img>
-                <input class="input-field" type="text" placeholder="First name" name="fname">
+            <div class="mid-content">
+                <div class="wrap-input100 validate-input" data-validate="Enter name">
+                    <input class="input100" type="text" id="model-name" name="modelName" placeholder="Model name">
+                </div>
+                <div class="wrap-input100 validate-input" data-validate="Enter firm">
+                    <input class="input100" type="text" id="model-firm" name="modelFirm" placeholder="Model firm">
+                </div>
+                <div class="wrap-input100 validate-input" data-validate="Enter size">
+                    <input class="input100" type="text" id="model-size" name="modelSize" placeholder="Model size">
+                </div>
+                <div class="wrap-input100 validate-input" data-validate="Enter price">
+                    <input class="input100" type="text" id="model-price" name="price" placeholder="Price">
+                </div>
+                <div class="wrap-input100 validate-input" data-validate="Enter amount">
+                    <input class="input100" type="number" id="model-amount" min="1" max="50" name="amount" placeholder="Amount">
+                </div>
+                <div class="container-login100-form-btn">
+                    <button class="login100-form-btn">Добавить</button>
+                </div>
             </div>
-
-            <div class="input-container">
-                <img src="Images/last_name.png" class="input-img"></img>
-                <input class="input-field" type="text" placeholder="Last name" name="lname">
-            </div>
-
-            <div class="input-container">
-                <img src="Images/username.png" class="input-img"></img>
-                <input class="input-field" type="text" placeholder="Username" name="uname">
-            </div>
-                
-            <div class="input-container">
-                <img src="Images/password.png" class="input-img"></img>
-                <input class="input-field" type="password" placeholder="Password" name="psw">
-            </div>
-            
-            <div class="input-container">
-                <img src="Images/email.png" class="input-img"></img>
-                <input class="input-field" type="text" placeholder="Email" name="email">
-            </div>
-        
-            <div class="input-container">
-                <img src="Images/phone.png" class="input-img"></img>
-                <input class="input-field" type="text" placeholder="Phone" name="phone">
-            </div>
-        
-            <div class="input-container">
-                <img src="Images/money.png" class="input-img"></img>
-                <input class="input-field" type="text" placeholder="$" name="money">
-            </div>
-        
-            <button type="submit" id="register">Register</button>
         </div>
     </main>
     <footer>Dzjubenko 2022</footer>

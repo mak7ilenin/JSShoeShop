@@ -3,6 +3,7 @@ package servlets;
 import entity.User;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.math.BigDecimal;
 import javax.ejb.EJB;
 import javax.json.Json;
 import javax.json.JsonObject;
@@ -25,7 +26,7 @@ import tools.PasswordProtected;
 })
 public class ClientServlet extends HttpServlet {
     @EJB private UserFacade userFacade;
-
+    
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -41,7 +42,7 @@ public class ClientServlet extends HttpServlet {
                 String username = jsonObject.getString("username","");
                 String password = jsonObject.getString("password","");
                 String phone = jsonObject.getString("phone","");
-                long money = Long.parseLong(jsonObject.getString("money",""));
+                double money = Double.parseDouble(jsonObject.getString("money",""));
                 if(firstName.isEmpty() || lastName.isEmpty() 
                         || username.isEmpty() || password.isEmpty() || phone.isEmpty()
                 ){
@@ -58,7 +59,7 @@ public class ClientServlet extends HttpServlet {
                     }
                     break;
                 }
-                if(money == 0) {
+                if(money == 0.0) {
                     job.add("info", "Введите сумму больше нуля!")
                     .add("firstName", firstName)
                        .add("lastName", lastName)
