@@ -329,7 +329,7 @@ input[type=checkbox] {
     border: 1px solid lightgray;
     border-radius: 10px;
     overflow: hidden;
-    padding: 55px 55px 37px 55px;
+    padding: 30px 55px 37px 55px;
     background: #9152f8;
     background: -webkit-linear-gradient(top, #7579ff, #b224ef);
     background: -o-linear-gradient(top, #7579ff, #b224ef);
@@ -428,4 +428,48 @@ button {
     outline: none;
     border: none;
     background: transparent;
+}
+
+
+/* edit model */
+
+
+.shoe-container {
+    padding: 15px 55px 37px 55px;
+}
+
+.model-edit-title {
+    font-family: 'Poppins', sans-serif;
+    font-size: 48px;
+    margin-bottom: 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+}
+
+.mid-content label {
+    font-family: 'Poppins', sans-serif;
+    font-weight: bold;
+    font-size: 30px;
+    color: white;
+}
+
+.mid-content select {
+    width: 100%;
+    padding: 10px;
+    margin: 10px auto;
+    margin-bottom: 25px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 26px;
+    border: 2px dashed white;
+    background: rgb(75,198,255);
+    background: linear-gradient(90deg, rgba(75,198,255,1) 0%, rgb(222, 166, 255) 50%, rgba(75,198,255,1) 100%);
+}
+
+.mid-content select option {
+    font-family: 'Poppins', sans-serif;
+    font-style: italic;
+    font-size: 20px;
+    background-color: rgb(231, 190, 240);
 }

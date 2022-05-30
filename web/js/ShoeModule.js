@@ -32,6 +32,9 @@ class ShoeModule {
                 document.getElementById('info').innerHTML = error.info;
             });
     }
+    editModel() {
+        
+    }
 }
 const shoeModule = new ShoeModule();
 export{shoeModule};

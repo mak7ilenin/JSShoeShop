@@ -110,3 +110,15 @@ createModel.addEventListener('click', (e) => {
     e.preventDefault();
     viewModule.showCreateModel();
 });
+editModel.addEventListener('click', (e) => {
+    e.preventDefault();
+    viewModule.showEditModel();
+    supressInput();
+});
+function supressInput() {
+    const modelName = document.getElementById('model-name');
+    const modelFirm = document.getElementById('model-firm');
+    const modelSize = document.getElementById('model-size');
+    const modelPrice = document.getElementById('model-price');
+    const modelAmount = document.getElementById('model-amount');
+}

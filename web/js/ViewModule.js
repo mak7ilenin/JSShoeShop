@@ -77,12 +77,12 @@ class ViewModule {
             
                 <div class="input-container">
                     <img src="Images/phone.png" class="input-img"></img>
-                    <input class="input-field" id="phone" type="text" placeholder="Phone" name="phone" required>
+                    <input class="input-field" id="phone" pattern=".{8,}" type="number" placeholder="Phone" name="phone" required>
                 </div>
             
                 <div class="input-container">
                     <img src="Images/money.png" class="input-img"></img>
-                    <input class="input-field" id="money" type="text" placeholder="$" name="money" required>
+                    <input class="input-field" id="money" type="number" placeholder="$" name="money" required>
                 </div>
             
                 <button type="submit" id="register">Зарегистрироваться</button>
@@ -108,10 +108,10 @@ class ViewModule {
                     <input class="input100" type="text" id="model-firm" name="modelFirm" placeholder="Model firm">
                 </div>
                 <div class="wrap-input100 validate-input" data-validate="Enter size">
-                    <input class="input100" type="text" id="model-size" name="modelSize" placeholder="Model size">
+                    <input class="input100" type="number" maxlength="2" id="model-size" name="modelSize" placeholder="Model size">
                 </div>
                 <div class="wrap-input100 validate-input" data-validate="Enter price">
-                    <input class="input100" type="text" id="model-price" name="price" placeholder="Price">
+                    <input class="input100" type="number" pattern="[^,\x22]" id="model-price" name="price" placeholder="Price">
                 </div>
                 <div class="wrap-input100 validate-input" data-validate="Enter amount">
                     <input class="input100" type="number" id="model-amount" min="1" max="50" name="amount" placeholder="Amount">
@@ -126,6 +126,39 @@ class ViewModule {
             e.preventDefault();
             shoeModule.createModel();
         });
+    }
+    showEditModel() {
+        const content = document.getElementById('content');
+        content.innerHTML = 
+        `<div class="shoe-container">
+            <div class="top-content">
+                <span class="model-edit-title">Изменение обуви</span>
+            </div>
+            <div class="mid-content">
+                <label for="list models">Список моделей:</label>
+                <select name="list models" id="list-models">
+
+                </select>
+                <div class="wrap-input100 validate-input" data-validate="Enter name">
+                    <input class="input100" type="text" id="model-name" onkeyup="this.value = this.value.replace(/[^\d]/g,'');" name="modelName" placeholder="Model name">
+                </div>
+                <div class="wrap-input100 validate-input" data-validate="Enter firm">
+                    <input class="input100" type="text" id="model-firm" onkeyup="this.value = this.value.replace(/[^\d]/g,'');" name="modelFirm" placeholder="Model firm">
+                </div>
+                <div class="wrap-input100 validate-input" data-validate="Enter size">
+                    <input class="input100" type="number" maxlength="2" id="model-size" onkeyup="this.value = this.value.replace(/[^\d]/g,'');" name="modelSize" placeholder="Model size">
+                </div>
+                <div class="wrap-input100 validate-input" data-validate="Enter price">
+                    <input class="input100" type="number" pattern=".{.2}" id="model-price" onkeyup="this.value = this.value.replace(/[^\d]/g,'');" name="price" placeholder="Price">
+                </div>
+                <div class="wrap-input100 validate-input" data-validate="Enter amount">
+                    <input class="input100" type="number" id="model-amount" min="1" max="50" onkeyup="this.value = this.value.replace(/[^\d]/g,'');" name="amount" placeholder="Amount">
+                </div>
+                <div class="container-login100-form-btn">
+                    <button class="login100-form-btn" type=""submit id="edit-model">Изменить</button>
+                </div>
+            </div>
+        </div>`;
     }
 }
 const viewModule = new ViewModule();
