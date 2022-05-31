@@ -1,4 +1,5 @@
 import {loginModule} from './LoginModule.js';
+import { shoeModule } from './ShoeModule.js';
 import {viewModule} from './ViewModule.js';
 export {checkRole};
 
@@ -113,12 +114,5 @@ createModel.addEventListener('click', (e) => {
 editModel.addEventListener('click', (e) => {
     e.preventDefault();
     viewModule.showEditModel();
-    supressInput();
+    shoeModule.getListModels();
 });
-function supressInput() {
-    const modelName = document.getElementById('model-name');
-    const modelFirm = document.getElementById('model-firm');
-    const modelSize = document.getElementById('model-size');
-    const modelPrice = document.getElementById('model-price');
-    const modelAmount = document.getElementById('model-amount');
-}

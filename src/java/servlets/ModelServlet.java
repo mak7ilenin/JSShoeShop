@@ -10,7 +10,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
-import java.text.DecimalFormat;
+import java.util.List;
 import javax.ejb.EJB;
 import javax.json.Json;
 import javax.json.JsonObject;
@@ -21,6 +21,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import jsontools.ModelJsonBuilder;
 import session.ModelFacade;
 
 /**
@@ -28,7 +29,9 @@ import session.ModelFacade;
  * @author makso
  */
 @WebServlet(name = "ModelServlet", urlPatterns = {
-    "/createModel"
+    "/createModel",
+    "/getListModels",
+    "/editModel"
 })
 public class ModelServlet extends HttpServlet {
     @EJB private ModelFacade modelFacade;
@@ -60,6 +63,17 @@ public class ModelServlet extends HttpServlet {
                 modelFacade.create(newModel);
                 job.add("info", "Модель " + modelName + " успешно добавлена!")
                         .add("status", true);
+                try(PrintWriter out = response.getWriter()) {
+                    out.println(job.build().toString());
+                }
+                break;
+            case "/getListModels":
+                List<Model> models = modelFacade.findAll();
+                ModelJsonBuilder mjb = new ModelJsonBuilder();
+                if(!models.isEmpty()) {
+                    job.add("status", true)
+                        .add("options", mjb.getModelsJsonArray(models));
+                }
                 try(PrintWriter out = response.getWriter()) {
                     out.println(job.build().toString());
                 }

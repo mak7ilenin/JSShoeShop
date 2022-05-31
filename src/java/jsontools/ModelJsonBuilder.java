@@ -18,7 +18,7 @@ import javax.json.JsonObjectBuilder;
  * @author makso
  */
 public class ModelJsonBuilder {
-    public JsonArray getUsersJsonArray(List<Model> listModels){
+    public JsonArray getModelsJsonArray(List<Model> listModels){
         JsonArrayBuilder jab = Json.createArrayBuilder();
         for(int i=0;i<listModels.size();i++){
             jab.add(getModelJsonObject(listModels.get(i)));

@@ -96,7 +96,7 @@ class ViewModule {
     showCreateModel() {
         const content = document.getElementById('content');
         content.innerHTML = 
-        `<div class="shoe-container">
+        `<div class="shoe-add-container">
             <div class="top-content">
                 <span class="container-title">Добавление обуви</span>
             </div>
@@ -130,7 +130,7 @@ class ViewModule {
     showEditModel() {
         const content = document.getElementById('content');
         content.innerHTML = 
-        `<div class="shoe-container">
+        `<div class="shoe-edit-container">
             <div class="top-content">
                 <span class="model-edit-title">Изменение обуви</span>
             </div>
@@ -140,25 +140,30 @@ class ViewModule {
 
                 </select>
                 <div class="wrap-input100 validate-input" data-validate="Enter name">
-                    <input class="input100" type="text" id="model-name" onkeyup="this.value = this.value.replace(/[^\d]/g,'');" name="modelName" placeholder="Model name">
+                    <input class="input100" type="text" id="model-name" name="modelName" placeholder="Model name">
                 </div>
                 <div class="wrap-input100 validate-input" data-validate="Enter firm">
-                    <input class="input100" type="text" id="model-firm" onkeyup="this.value = this.value.replace(/[^\d]/g,'');" name="modelFirm" placeholder="Model firm">
+                    <input class="input100" type="text" id="model-firm" name="modelFirm" placeholder="Model firm">
                 </div>
                 <div class="wrap-input100 validate-input" data-validate="Enter size">
-                    <input class="input100" type="number" maxlength="2" id="model-size" onkeyup="this.value = this.value.replace(/[^\d]/g,'');" name="modelSize" placeholder="Model size">
+                    <input class="input100" type="number" maxlength="2" id="model-size" name="modelSize" placeholder="Model size">
                 </div>
                 <div class="wrap-input100 validate-input" data-validate="Enter price">
-                    <input class="input100" type="number" pattern=".{.2}" id="model-price" onkeyup="this.value = this.value.replace(/[^\d]/g,'');" name="price" placeholder="Price">
+                    <input class="input100" type="number" pattern=".{.2}" id="model-price" name="price" placeholder="Price">
                 </div>
                 <div class="wrap-input100 validate-input" data-validate="Enter amount">
-                    <input class="input100" type="number" id="model-amount" min="1" max="50" onkeyup="this.value = this.value.replace(/[^\d]/g,'');" name="amount" placeholder="Amount">
+                    <input class="input100" type="number" id="model-amount" min="1" max="50" name="amount" placeholder="Amount">
                 </div>
                 <div class="container-login100-form-btn">
                     <button class="login100-form-btn" type=""submit id="edit-model">Изменить</button>
                 </div>
             </div>
         </div>`;
+        const editModel = document.getElementById('edit-model');
+        editModel.addEventListener('click', (e) => {
+            e.preventDefault();
+            shoeModule.getListModels();
+        });
     }
 }
 const viewModule = new ViewModule();

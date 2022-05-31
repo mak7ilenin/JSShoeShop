@@ -35,7 +35,7 @@
     </header>
     <p id="info" class="text-info">&nbsp;</p>
     <main id="content">
-        <div class="shoe-container">
+        <div class="shoe-edit-container">
             <div class="top-content">
                 <span class="model-edit-title">Изменение обуви</span>
             </div>
@@ -51,16 +51,16 @@
                     <input class="input100" type="text" id="model-firm" name="modelFirm" placeholder="Model firm">
                 </div>
                 <div class="wrap-input100 validate-input" data-validate="Enter size">
-                    <input class="input100" type="text" id="model-size" name="modelSize" placeholder="Model size">
+                    <input class="input100" type="number" maxlength="2" id="model-size" name="modelSize" placeholder="Model size">
                 </div>
                 <div class="wrap-input100 validate-input" data-validate="Enter price">
-                    <input class="input100" type="text" id="model-price" name="price" placeholder="Price">
+                    <input class="input100" type="number" pattern=".{.2}" id="model-price" name="price" placeholder="Price">
                 </div>
                 <div class="wrap-input100 validate-input" data-validate="Enter amount">
                     <input class="input100" type="number" id="model-amount" min="1" max="50" name="amount" placeholder="Amount">
                 </div>
                 <div class="container-login100-form-btn">
-                    <button class="login100-form-btn" id="edit-model">Изменить</button>
+                    <button class="login100-form-btn" type=""submit id="edit-model">Изменить</button>
                 </div>
             </div>
         </div>
