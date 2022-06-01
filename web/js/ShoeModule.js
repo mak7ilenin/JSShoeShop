@@ -69,6 +69,44 @@ class ShoeModule {
                     document.getElementById('info').innerHTML = "insertListModels" + error.info;
                 });
     }
+    insertModelInfo() {
+        const modelId = document.getElementById('list-models').value;
+        const model = {
+            "id": modelId
+        }
+        let promiseGetModel = fetch('getModel', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json;charset:utf8'
+            },
+            credentials: 'include',
+            body: JSON.stringify(model)
+        });
+        promiseGetModel.then(response => response.json())
+                .then(response => {
+                    if(response.status) {
+                        document.getElementById('model-name').value = response.model.modelName;
+                        document.getElementById('model-firm').value = response.model.modelFirm;
+                        document.getElementById('model-size').value = response.model.modelSize;
+                        document.getElementById('model-price').value = response.model.modelPrice;
+                        document.getElementById('model-amount').value = response.model.modelAmount;
+                        // let select = document.getElementById('list-models');
+                        // console.log(response.option.id);
+                        // for (let i = 0; i < response.options.length; i++) {
+                        //     let option = document.getElementByValue(i);
+                        //     option.addEventListener('click', (e) => {
+                        //         e.preventDefault();
+                        //     });
+                        // }
+                    }else {
+                        document.getElementById('info').innerHTML = response.info;                 
+                    }
+                })
+                .catch(error => {
+                    document.getElementById('info').innerHTML = "insertModelInfo " + error.info;
+                });
+
+    }
     editModel() {
         const modelName = document.getElementById('model-name');
         const modelFirm = document.getElementById('model-firm');

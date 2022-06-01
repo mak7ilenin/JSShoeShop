@@ -31,6 +31,7 @@ import session.ModelFacade;
 @WebServlet(name = "ModelServlet", urlPatterns = {
     "/createModel",
     "/getListModels",
+    "/getModel",
     "/editModel"
 })
 public class ModelServlet extends HttpServlet {
@@ -78,6 +79,19 @@ public class ModelServlet extends HttpServlet {
                     out.println(job.build().toString());
                 }
                 break;
+            case "getModel":
+                jsonReader = Json.createReader(request.getReader());
+                jsonObject = jsonReader.readObject();
+                String modelId = jsonObject.getString("id", "");
+                Model editingModel = modelFacade.find(Long.parseLong(modelId));
+                mjb = new ModelJsonBuilder();
+                job.add("status", true)
+                    .add("info", "Вы редактируете: " + editingModel.getModelFirm() + editingModel.getModelName())
+                    .add("model", mjb.getModelJsonObject(editingModel));
+                try(PrintWriter out = response.getWriter()) {
+                    out.println(job.build().toString());
+                }
+                break;
         }
     }
 
@@ -121,3 +135,4 @@ public class ModelServlet extends HttpServlet {
     }// </editor-fold>
 
 }
+;

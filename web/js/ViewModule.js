@@ -2,7 +2,7 @@ import {loginModule} from './LoginModule.js';
 import {shoeModule} from './ShoeModule.js';
 class ViewModule {
     showLoginForm() {
-        document.getElementById('info').innerHTML = "";
+        document.getElementById('info').innerHTML = '';
         const content = document.getElementById('content');
         content.innerHTML = 
             `<div class="login-container">
@@ -38,7 +38,7 @@ class ViewModule {
         });
     };
     showRegistrationForm() {
-        document.getElementById('info').innerHTML = "";
+        document.getElementById('info').innerHTML = '';
         const content = document.getElementById('content');
         content.innerHTML = 
             `<div class="registration-container">
@@ -94,6 +94,7 @@ class ViewModule {
         });
     }
     showCreateModel() {
+        document.getElementById('info').innerHTML = '';
         const content = document.getElementById('content');
         content.innerHTML = 
         `<div class="shoe-add-container">
@@ -126,8 +127,24 @@ class ViewModule {
             e.preventDefault();
             shoeModule.createModel();
         });
+        const input = document.getElementsByClassName('input100');
+        for (let i = 0; i < input.length; i++) {
+            input[i].addEventListener('focusin', (e) => {
+                e.preventDefault();
+                input[i].style.borderBottom = '2px solid white';
+                input[i].style.marginBottom = '60px';
+                input[i].style.fontSize = '20px';
+                
+                input[i].addEventListener('focusout', (e) => {
+                    e.preventDefault();
+                    input[i].style.borderBottom = '2px solid rgba(255,255,255,0.24)';
+                    input[i].style.marginBottom = '30px';
+                });
+            });
+        }
     }
     showEditModel() {
+        document.getElementById('info').innerHTML = '';
         const content = document.getElementById('content');
         content.innerHTML = 
         `<div class="shoe-edit-container">
@@ -164,6 +181,29 @@ class ViewModule {
             e.preventDefault();
             shoeModule.getListModels();
         });
+        const input = document.getElementsByClassName('input100');
+        for (let i = 0; i < input.length; i++) {
+            input[i].addEventListener('focusin', (e) => {
+                e.preventDefault();
+                input[i].style.borderBottom = '2px solid white';
+                input[i].style.marginBottom = '60px';
+                input[i].style.fontSize = '20px';
+                
+                input[i].addEventListener('focusout', (e) => {
+                    e.preventDefault();
+                    input[i].style.borderBottom = '2px solid rgba(255,255,255,0.24)';
+                    input[i].style.marginBottom = '30px';
+                    input[i].style.fontSize = '16px';
+                });
+            });
+        }
+        const chooseModel = document.getElementsByTagName('select');
+        for (let i = 0; i < chooseModel.length; i++) {
+            chooseModel[i].addEventListener('change', (e) => {
+                e.preventDefault();
+                shoeModule.insertModelInfo();
+            });
+        }
     }
 }
 const viewModule = new ViewModule();
