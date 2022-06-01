@@ -79,7 +79,7 @@ public class ModelServlet extends HttpServlet {
                     out.println(job.build().toString());
                 }
                 break;
-            case "getModel":
+            case "/getModel":
                 jsonReader = Json.createReader(request.getReader());
                 jsonObject = jsonReader.readObject();
                 String modelId = jsonObject.getString("id", "");
