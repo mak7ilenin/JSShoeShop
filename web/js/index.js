@@ -111,6 +111,21 @@ createModel.addEventListener('click', (e) => {
     e.preventDefault();
     viewModule.showCreateModel();
 });
+const input = document.getElementsByClassName('input100');
+for (let i = 0; i < input.length; i++) {
+    input[i].addEventListener('focusin', (e) => {
+        e.preventDefault();
+        input[i].style.borderBottom = '2px solid white';
+        input[i].style.marginBottom = '60px';
+        input[i].style.fontSize = '20px';
+        
+        input[i].addEventListener('focusout', (e) => {
+            e.preventDefault();
+            input[i].style.borderBottom = '0px';
+            input[i].style.marginBottom = '30px';
+        });
+    });
+}
 editModel.addEventListener('click', (e) => {
     e.preventDefault();
     viewModule.showEditModel();

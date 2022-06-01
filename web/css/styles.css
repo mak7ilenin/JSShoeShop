@@ -339,6 +339,7 @@ input[type=checkbox] {
 
 .mid-content {
     width: 100%;
+    padding: 0;
 }
 
 .container-title {
@@ -357,13 +358,6 @@ input[type=checkbox] {
     position: relative;
 }
 
-.wrap-input100 {
-    width: 100%;
-    position: relative;
-    border-bottom: 2px solid rgba(255,255,255,0.24);
-    margin-bottom: 30px;
-}
-
 .input100::placeholder {
     color: rgb(255, 255, 255);
 }
@@ -378,11 +372,14 @@ input[type=checkbox] {
     height: 45px;
     background: transparent;
     padding: 0 5px 0 15px;
+    border-bottom: 2px solid rgba(255,255,255,0.24);
+    margin-bottom: 30px;
 }
 
 input {
     outline: none;
     border: none;
+    transition: ease all .2s;
 }
 
 button, input {
@@ -457,7 +454,7 @@ button {
 .model-edit-title {
     font-family: 'Poppins', sans-serif;
     font-size: 48px;
-    margin-bottom: 25px;
+    /* margin-bottom: 25px; */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -466,7 +463,8 @@ button {
 
 .mid-content label {
     font-family: 'Poppins', sans-serif;
-    font-weight: bold;
+    font-weight: medium;
+    font-style: italic;
     font-size: 30px;
     color: white;
 }
