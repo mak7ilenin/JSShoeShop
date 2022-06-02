@@ -86,8 +86,36 @@ public class ModelServlet extends HttpServlet {
                 Model editingModel = modelFacade.find(Long.parseLong(modelId));
                 mjb = new ModelJsonBuilder();
                 job.add("status", true)
-                    .add("info", "Вы редактируете: " + editingModel.getModelFirm() + editingModel.getModelName())
+                    .add("info", "Вы редактируете: " + editingModel.getModelFirm() + " " + editingModel.getModelName())
                     .add("model", mjb.getModelJsonObject(editingModel));
+                try(PrintWriter out = response.getWriter()) {
+                    out.println(job.build().toString());
+                }
+                break;
+            case "/editModel":
+                jsonReader = Json.createReader(request.getReader());
+                jsonObject = jsonReader.readObject();
+                modelId = jsonObject.getString("id", "");
+                modelName = jsonObject.getString("modelName", "");
+                modelFirm = jsonObject.getString("modelFirm", "");
+                modelSize = jsonObject.getString("modelSize", "");
+                Double modelPrice = Double.parseDouble(jsonObject.getString("modelPrice", ""));
+                bd = new BigDecimal(modelPrice).setScale(2, RoundingMode.HALF_UP);
+                decimalPrice = bd.doubleValue();
+                int modelAmount = Integer.parseInt(jsonObject.getString("modelAmount", ""));
+                
+                Model editModel = modelFacade.find(Long.parseLong(modelId));
+                editModel.setModelName(modelName);
+                editModel.setModelFirm(modelFirm);
+                editModel.setModelSize(modelSize);
+                editModel.setPrice(decimalPrice);
+                editModel.setAmount(modelAmount);
+                modelFacade.edit(editModel);
+                
+                mjb = new ModelJsonBuilder();
+                job.add("status", true)
+                    .add("info", "Модель " + editModel.getModelFirm() + " " + editModel.getModelName() + " изменена")
+                    .add("editedModel", mjb.getModelJsonObject(editModel));
                 try(PrintWriter out = response.getWriter()) {
                     out.println(job.build().toString());
                 }

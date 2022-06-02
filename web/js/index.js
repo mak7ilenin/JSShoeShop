@@ -1,6 +1,7 @@
 import {loginModule} from './LoginModule.js';
-import { shoeModule } from './ShoeModule.js';
+import {shoeModule} from './ShoeModule.js';
 import {viewModule} from './ViewModule.js';
+import {userModule} from './UserModule.js';
 export {checkRole};
 
 const buyModel = document.getElementById('buy-model');
@@ -111,8 +112,17 @@ createModel.addEventListener('click', (e) => {
     e.preventDefault();
     viewModule.showCreateModel();
 });
+createUser.addEventListener('click', (e) => {
+    e.preventDefault();
+    viewModule.showCreateUser();
+});
 editModel.addEventListener('click', (e) => {
     e.preventDefault();
     viewModule.showEditModel();
     shoeModule.getListModels();
+});
+editUser.addEventListener('click', (e) => {
+    e.preventDefault();
+    viewModule.showEditUser(); 
+    userModule.getListUsers();
 });

@@ -90,14 +90,6 @@ class ShoeModule {
                         document.getElementById('model-size').value = response.model.modelSize;
                         document.getElementById('model-price').value = response.model.modelPrice;
                         document.getElementById('model-amount').value = response.model.modelAmount;
-                        // let select = document.getElementById('list-models');
-                        // console.log(response.option.id);
-                        // for (let i = 0; i < response.options.length; i++) {
-                        //     let option = document.getElementByValue(i);
-                        //     option.addEventListener('click', (e) => {
-                        //         e.preventDefault();
-                        //     });
-                        // }
                     }else {
                         document.getElementById('info').innerHTML = response.info;                 
                     }
@@ -108,11 +100,56 @@ class ShoeModule {
 
     }
     editModel() {
-        const modelName = document.getElementById('model-name');
-        const modelFirm = document.getElementById('model-firm');
-        const modelSize = document.getElementById('model-size');
-        const modelPrice = document.getElementById('model-price');
-        const modelAmount = document.getElementById('model-amount');
+        const modelId = document.getElementById('list-models').value;
+        const modelName = document.getElementById('model-name').value;
+        const modelFirm = document.getElementById('model-firm').value;
+        const modelSize = document.getElementById('model-size').value;
+        const modelPrice = document.getElementById('model-price').value;
+        const modelAmount = document.getElementById('model-amount').value;
+        const editModel = {
+            "id": modelId,
+            "modelName": modelName,
+            "modelFirm": modelFirm,
+            "modelSize": modelSize,
+            "modelPrice": modelPrice,
+            "modelAmount": modelAmount,
+        };
+
+        let promiseEditModel = fetch('editModel', {
+            method: 'POST',
+            headers: {
+                 'Content-Type': 'application/json;charset:utf8'
+            },
+            credentials: 'include',
+            body: JSON.stringify(editModel)
+        });
+        promiseEditModel.then(response => response.json())
+            .then(response => {
+                if(response.status) {
+                    const body = document.getElementsByTagName('body');
+                        body[0].style.transition = 'ease all 0.4s';
+                        body[0].style.transitionTimingFunction = 'cubic-bezier(.76,.08,.47,.79)';
+                        body[0].style.backgroundColor = 'rgb(0, 255, 0)'
+                        setTimeout(() => {
+                            body[0].style.transition = 'ease all 0.7s';
+                            body[0].style.backgroundColor = 'white'
+                        }, 230);
+                    document.getElementById('info').innerHTML = response.info;
+                }else {
+                    document.getElementById('info').innerHTML = response.info;
+                }
+            })
+            .catch(error => {
+                document.getElementById('info').innerHTML = error.info;
+                const body = document.getElementsByTagName('body');
+                body[0].style.transition = 'ease all 0.4s';
+                body[0].style.transitionTimingFunction = 'cubic-bezier(.76,.08,.47,.79)';
+                body[0].style.backgroundColor = 'red'
+                setTimeout(() => {
+                    body[0].style.transition = 'ease all 0.7s';
+                    body[0].style.backgroundColor = 'white'
+                }, 50);
+            });
     }
 }
 const shoeModule = new ShoeModule();
