@@ -10,11 +10,21 @@ class GainModule {
             .then(response => {
                 if(response.status) {
                     document.getElementById('allGainTxt').innerHTML = response.allGain;
+                    document.getElementById('gainCont').style.paddingBottom = '1px';
+                    document.getElementById('collapseExample').style.height = '100%';
+                    document.getElementById('collapseExample').style.opacity = '1';
+                    document.getElementById('collapseExample').style.transform = 'translateY(0)';
                     document.getElementById('allGainTxt').style.opacity = '1';
                     document.getElementById('allGainTxt').style.transform = 'translateY(0)';
                     setTimeout(() => {
+                        document.getElementById('gainCont').style.paddingBottom = '0px';
+                        document.getElementById('collapseExample').style.opacity = '0';
+                        document.getElementById('collapseExample').style.transition = 'ease all 0.15s';
+                        document.getElementById('collapseExample').style.transform = 'translateY(-140%)';
+                        document.getElementById('collapseExample').style.height = '0';
                         document.getElementById('allGainTxt').style.opacity = '0';
-                        document.getElementById('allGainTxt').style.transform = 'translateY(-180%)';
+                        document.getElementById('allGainTxt').style.transition = 'ease all 0.15s';
+                        document.getElementById('allGainTxt').style.transform = 'translateY(-140%)';
                     }, 5000);
                 }
             })

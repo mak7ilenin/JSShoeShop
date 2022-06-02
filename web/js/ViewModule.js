@@ -377,7 +377,7 @@ class ViewModule {
         document.getElementById('info').innerHTML = '';
         const content = document.getElementById('content');
         content.innerHTML = 
-        `<div class="gain-container">
+        `<div id="gainCont" class="gain-container">
             <button id="allGainBtn">
                 Показать заработок за всё время
             </button>
