@@ -1,11 +1,17 @@
 package servlets;
 
+import entity.History;
 import entity.Model;
 import entity.User;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.math.BigDecimal;
 import java.text.DecimalFormat;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.ZoneOffset;
+import java.util.Calendar;
+import java.util.Date;
 import javax.ejb.EJB;
 import javax.json.Json;
 import javax.json.JsonObject;
@@ -19,6 +25,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import jsontools.ModelJsonBuilder;
 import jsontools.UserJsonBuilder;
+import session.HistoryFacade;
 import session.ModelFacade;
 import session.UserFacade;
 import tools.PasswordProtected;
@@ -35,6 +42,10 @@ import tools.PasswordProtected;
 public class LoginServlet extends HttpServlet {
     @EJB private UserFacade userFacade;
     @EJB private ModelFacade modelFacade;
+    @EJB private HistoryFacade historyFacade;
+    
+    Calendar calendar = Calendar.getInstance();
+    Date date = calendar.getTime();
     
     @Override
     public void init() throws ServletException {
@@ -105,17 +116,22 @@ public class LoginServlet extends HttpServlet {
                 jsonReader = Json.createReader(request.getReader());
                 jsonObject = jsonReader.readObject();
                 
-                Long modelId = Long.parseLong(jsonObject.getString("modelId", ""));
-                Long userId = Long.parseLong(jsonObject.getString("userId", ""));
+                Long modelId = Long.parseLong(jsonObject.getString("id", ""));
                 Model model = modelFacade.find(modelId);
-                User user = userFacade.find(userId);
-//                User user = (User) session.getAttribute("authUser");
+                User user = (User) session.getAttribute("authUser");
                 
                 if(user.getMoney() >= model.getPrice() && model.getAmount() != 0) {
                     user.setMoney(user.getMoney() - model.getPrice());
                     model.setAmount(model.getAmount() - 1);
-                    userFacade.edit(user);
+                    
+                    History history = new History();
+                    history.setModel(model);
+                    history.setUser(user);
+                    history.setBuy(Date.from(LocalDate.now().atTime(LocalTime.now().plusHours(date.getHours() - 13)).toInstant(ZoneOffset.UTC)));
+                    history.setGain(history.getGain() + model.getPrice());
                     modelFacade.edit(model);
+                    userFacade.edit(user);
+                    historyFacade.create(history);
                     ModelJsonBuilder mjb = new ModelJsonBuilder();
                     UserJsonBuilder ujb = new UserJsonBuilder();
                     job.add("status", true)

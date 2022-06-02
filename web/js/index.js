@@ -2,6 +2,7 @@ import {loginModule} from './LoginModule.js';
 import {shoeModule} from './ShoeModule.js';
 import {viewModule} from './ViewModule.js';
 import {userModule} from './UserModule.js';
+import {purchaseModule} from './PurchaseModule.js';
 export {checkRole};
 
 const buyModel = document.getElementById('buy-model');
@@ -129,5 +130,5 @@ editUser.addEventListener('click', (e) => {
 buyModel.addEventListener('click', (e) => {
     e.preventDefault();
     viewModule.showPurchaseForm();
-    shoeModule.getListModels();
+    purchaseModule.getModels();
 });

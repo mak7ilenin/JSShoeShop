@@ -327,7 +327,7 @@ class ViewModule {
             </div>
             <div class="mid-content">
                 <label for="list models">Список моделей:</label>
-                <select name="list models" id="list-models">
+                <select name="list models" id="purchase-list-models">
 
                 </select>
                 <div class="container-login100-form-btn">
@@ -337,8 +337,7 @@ class ViewModule {
         </div>`;
         const purchase = document.getElementById('submit-purchase');
         purchase.addEventListener('click', (e) => {
-            shoeModule.getListModels();
-            userModule.getListUsers();
+            // purchaseModule.getModels();
             purchaseModule.buyModel();
         });
     }
