@@ -1,5 +1,6 @@
 package servlets;
 
+import entity.Model;
 import entity.User;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -16,7 +17,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import jsontools.ModelJsonBuilder;
 import jsontools.UserJsonBuilder;
+import session.ModelFacade;
 import session.UserFacade;
 import tools.PasswordProtected;
 
@@ -26,10 +29,12 @@ import tools.PasswordProtected;
  */
 @WebServlet(name = "LoginServlet", loadOnStartup = 0, urlPatterns = {
     "/login",
-    "/logout"
+    "/logout",
+    "/buyModel"
 })
 public class LoginServlet extends HttpServlet {
     @EJB private UserFacade userFacade;
+    @EJB private ModelFacade modelFacade;
     
     @Override
     public void init() throws ServletException {
@@ -66,10 +71,9 @@ public class LoginServlet extends HttpServlet {
                 if(authUser == null){
                     job.add("info", "Нет такого пользователя!")
                        .add("auth", false);
-                try (PrintWriter out = response.getWriter()) {
-                    out.println(job.build().toString());
-                }
-                break;
+                    try (PrintWriter out = response.getWriter()) {
+                        out.println(job.build().toString());
+                    }
                 }
                 PasswordProtected pp = new PasswordProtected();
                 password = pp.getProtectedPassword(password, authUser.getSalt());
@@ -85,17 +89,47 @@ public class LoginServlet extends HttpServlet {
                 session.setAttribute("authUser", authUser);
                 job.add("info", "Приветствуем вас, " + authUser.getFirstName() + "!")
                    .add("auth",true)
-                   .add("user", new UserJsonBuilder().getUserJsonObject(authUser));
-                
+                   .add("user", new UserJsonBuilder().getUserJsonObject(authUser));          
                 try (PrintWriter out = response.getWriter()) {
                     out.println(job.build().toString());
                 }
                 break;
             case "/logout":
+                authUser = null;
                 session = request.getSession(false);
                 if(session != null) {
                     session.invalidate();
                 }
+                break;
+            case "/buyModel":
+                jsonReader = Json.createReader(request.getReader());
+                jsonObject = jsonReader.readObject();
+                
+                Long modelId = Long.parseLong(jsonObject.getString("modelId", ""));
+                Long userId = Long.parseLong(jsonObject.getString("userId", ""));
+                Model model = modelFacade.find(modelId);
+                User user = userFacade.find(userId);
+//                User user = (User) session.getAttribute("authUser");
+                
+                if(user.getMoney() >= model.getPrice() && model.getAmount() != 0) {
+                    user.setMoney(user.getMoney() - model.getPrice());
+                    model.setAmount(model.getAmount() - 1);
+                    userFacade.edit(user);
+                    modelFacade.edit(model);
+                    ModelJsonBuilder mjb = new ModelJsonBuilder();
+                    UserJsonBuilder ujb = new UserJsonBuilder();
+                    job.add("status", true)
+                       .add("model", mjb.getModelJsonObject(model))
+                            .add("user", ujb.getUserJsonObject(user))
+                                .add("info", "Покупка прошла успешно!");
+                    }if(user.getMoney() < model.getPrice()) {
+                        job.add("info", "У вас недостаточно денег!");
+                    }if(model.getAmount() == 0) {
+                        job.add("info", "Экземпляры данной модели отсутствуют!");
+                    }
+                    try (PrintWriter out = response.getWriter()) {
+                        out.println(job.build().toString());
+                    }
                 break;
         }
     }

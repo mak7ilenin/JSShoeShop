@@ -126,3 +126,8 @@ editUser.addEventListener('click', (e) => {
     viewModule.showEditUser(); 
     userModule.getListUsers();
 });
+buyModel.addEventListener('click', (e) => {
+    e.preventDefault();
+    viewModule.showPurchaseForm();
+    shoeModule.getListModels();
+});

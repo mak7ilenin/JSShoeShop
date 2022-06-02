@@ -30,14 +30,13 @@ class UserModule {
                     }
                     document.getElementById('info').innerHTML = response.info;
                     sessionStorage.setItem('newUser', JSON.stringify(response.newUser));
-                    viewModule.showLoginForm();
                 })
                 .catch(error => {
                     if(firstName === "" || lastName === "" || username === "" || password === "" || phone === "" || money === "") {
                         document.getElementById('info').innerHTML = "Заполните все поля!";
                         return;
                     }
-                    document.getElementById('info').innerHTML = error;
+                    document.getElementById('info').innerHTML = error.info;
                 });
     }
     getListUsers() {
@@ -132,8 +131,8 @@ class UserModule {
             body: JSON.stringify(editUser)
         });
         promiseEditUser.then(response => response.json())
-            .then(response => {
-                if(response.status) {
+        .then(response => {
+            if(response.status) {
                     const body = document.getElementsByTagName('body');
                         body[0].style.transition = 'ease all 0.4s';
                         body[0].style.transitionTimingFunction = 'cubic-bezier(.76,.08,.47,.79)';

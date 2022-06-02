@@ -1,6 +1,7 @@
 import {loginModule} from './LoginModule.js';
 import {shoeModule} from './ShoeModule.js';
 import {userModule} from './UserModule.js';
+import {purchaseModule} from './PurchaseModule.js';
 class ViewModule {
     showLoginForm() {
         document.getElementById('info').innerHTML = '';
@@ -70,11 +71,6 @@ class ViewModule {
                     <img src="Images/password.png" class="input-img"></img>
                     <input class="input-field" id="password" type="password" placeholder="Password" name="psw" required>
                 </div>
-                
-                <div class="input-container">
-                    <img src="Images/email.png" class="input-img"></img>
-                    <input class="input-field" id="email" type="text" placeholder="Email" name="email" required>
-                </div>
             
                 <div class="input-container">
                     <img src="Images/phone.png" class="input-img"></img>
@@ -126,12 +122,7 @@ class ViewModule {
                     <img src="Images/password.png" class="input-img"></img>
                     <input class="input-field" id="password" type="password" placeholder="Password" name="psw" required>
                 </div>
-                
-                <div class="input-container">
-                    <img src="Images/email.png" class="input-img"></img>
-                    <input class="input-field" id="email" type="text" placeholder="Email" name="email" required>
-                </div>
-            
+
                 <div class="input-container">
                     <img src="Images/phone.png" class="input-img"></img>
                     <input class="input-field" id="phone" pattern=".{8,}" type="number" placeholder="Phone" name="phone" required>
@@ -229,7 +220,7 @@ class ViewModule {
                     <input class="input100" type="number" id="model-amount" min="1" max="50" name="amount" placeholder="Amount">
                 </div>
                 <div class="container-login100-form-btn">
-                    <button class="login100-form-btn" type=""submit id="submit-edit-model">Изменить</button>
+                    <button class="login100-form-btn" type="submit" id="submit-edit-model">Изменить</button>
                 </div>
             </div>
         </div>`;
@@ -292,7 +283,7 @@ class ViewModule {
                     <input class="input100" type="text" id="user-username" name="username" placeholder="Username">
                 </div>
                 <div class="container-login100-form-btn">
-                    <button class="login100-form-btn" type=""submit id="submit-edit-user">Изменить</button>
+                    <button class="login100-form-btn" type="submit" id="submit-edit-user">Изменить</button>
                 </div>
             </div>
         </div>`;
@@ -325,6 +316,31 @@ class ViewModule {
                 userModule.insertUserInfo();
             });
         }
+    }
+    showPurchaseForm() {
+        document.getElementById('info').innerHTML = '';
+        const content = document.getElementById('content');
+        content.innerHTML = 
+        `<div class="purchase-container">
+            <div class="top-content">
+                <span class="purchase-title">Покупка обуви</span>
+            </div>
+            <div class="mid-content">
+                <label for="list models">Список моделей:</label>
+                <select name="list models" id="list-models">
+
+                </select>
+                <div class="container-login100-form-btn">
+                    <button class="login100-form-btn" type="submit" id="submit-purchase">Купить</button>
+                </div>
+            </div>
+        </div>`;
+        const purchase = document.getElementById('submit-purchase');
+        purchase.addEventListener('click', (e) => {
+            shoeModule.getListModels();
+            userModule.getListUsers();
+            purchaseModule.buyModel();
+        });
     }
 }
 const viewModule = new ViewModule();
