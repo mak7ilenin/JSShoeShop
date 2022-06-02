@@ -3,6 +3,7 @@ import {shoeModule} from './ShoeModule.js';
 import {userModule} from './UserModule.js';
 import {purchaseModule} from './PurchaseModule.js';
 import {adminModule} from './AdminModule.js';
+import {gainModule} from './GainModule.js';
 class ViewModule {
     showLoginForm() {
         document.getElementById('info').innerHTML = '';
@@ -370,6 +371,47 @@ class ViewModule {
         changeRole.addEventListener('click', (e) => {
             adminModule.changeRole();
             adminModule.getUsers();
+        });
+    }
+    showGain() {
+        document.getElementById('info').innerHTML = '';
+        const content = document.getElementById('content');
+        content.innerHTML = 
+        `<div class="gain-container">
+            <button id="allGainBtn">
+                Показать заработок за всё время
+            </button>
+            <div id="collapseExample">
+                <p id="allGainTxt">&nbsp;</p>
+            </div>
+            <h3>Прибыль магазина за определенный месяц</h3>
+            <p id="gainForAMonth">
+                &nbsp;
+            </p>
+            <div class="allGainContainers" style="font-size: 18px; font-family: Molot">
+                <div id="firstColumn" style="width: 35em; text-align: center">
+                    <div id="gainForSeptember" class="list-group-item list-group-item-action list-group-item-warning">Сентябрь</div>
+                    <div id="gainForOctober" class="list-group-item list-group-item-action list-group-item-warning">Октябрь</div>
+                    <div id="gainForNovember" class="list-group-item list-group-item-action list-group-item-warning">Ноябрь</div>
+
+                    <div id="gainForMarch" class="list-group-item list-group-item-action list-group-item-info">Март</div>
+                    <div id="gainForApril" class="list-group-item list-group-item-action list-group-item-info">Апрель</div>
+                    <div id="gainForMay" class="list-group-item list-group-item-action list-group-item-info">Май</div>
+                </div>
+                <div id="secondColumn" style="width: 35em; text-align: center">
+                    <div id="gainForDecember" class="list-group-item list-group-item-action list-group-item-primary">Декабрь</div>
+                    <div id="gainForJanuary" class="list-group-item list-group-item-action list-group-item-primary">Январь</div>
+                    <div id="gainForFebruary" class="list-group-item list-group-item-action list-group-item-primary">Февраль</div>
+
+                    <div id="gainForJune" class="list-group-item list-group-item-action list-group-item-danger">Июнь</div>
+                    <div id="gainForJuly" class="list-group-item list-group-item-action list-group-item-danger">Июль</div>
+                    <div id="gainForAugust" class="list-group-item list-group-item-action list-group-item-danger">Август</div>
+                </div>   
+            </div>
+        </div>`
+        const allGainBtn = document.getElementById('allGainBtn');
+        allGainBtn.addEventListener('click', (e) => {
+            gainModule.showAllGain();
         });
     }
 }

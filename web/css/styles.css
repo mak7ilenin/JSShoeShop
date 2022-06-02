@@ -625,3 +625,75 @@ button {
 #list-roles {
     margin: 30px auto;
 }
+
+
+
+/* gain */
+
+
+.gain-container {
+    width: 80%;
+    height: auto;
+    margin: 0 auto;
+    padding: 15px 55px 37px 55px;
+    border: 1px solid lightgray;
+    border-radius: 10px;
+    overflow: hidden;
+    margin-top: 150px;
+}
+
+#allGainBtn {
+    width: 35%;
+    font-family: 'Molot' sans-serif;
+    font-size: 26px;
+    font-weight: bold;
+    margin: 0 auto;
+    margin-top: 20px;
+    height: 40px;
+    background-color: rgb(0, 255, 221);
+    box-shadow: 0 0 15px 1px rgba(0, 153, 255, 0.685);
+    padding: 25px;
+    border-radius: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: ease all 0.2s;
+}
+
+#allGainBtn:hover {
+    transform: scale(1.05);
+}
+
+#collapseExample {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#allGainTxt {
+    transition: ease all 0.3s;
+    transform: translateY(-180%);
+    opacity: 0;
+    font-family: 'Molot' sans-serif;
+    font-size: 30px;
+    font-style: italic;
+    font-weight: bold;
+}
+
+.allGainContainers {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.list-group-item {
+    width: 90%;
+    height: 20px;
+    padding: 15px;
+    margin-bottom: 15px;
+    background-color: lightgreen;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}

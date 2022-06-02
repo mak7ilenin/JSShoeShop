@@ -12,6 +12,7 @@ const createUser = document.getElementById('create-user');
 const editModel = document.getElementById('edit-model');
 const editUser = document.getElementById('edit-user');
 const adminPanel = document.getElementById('admin-panel');
+const gainPanel = document.getElementById('gain-panel');
 hideMenu();
 function hideMenu() {
     buyModel.style.display = "none";
@@ -20,6 +21,7 @@ function hideMenu() {
     editModel.style.display = "none";
     editUser.style.display = "none";
     adminPanel.style.display = "none";
+    gainPanel.style.display = "none";
 }
 // const dropdownContent = document.getElementsByClassName('dropdown-content');
 //     dropdown[i].addEventListener('click', (e) => {
@@ -66,6 +68,9 @@ function checkRole() {
         if(!editUser.style.display === "none") {
             editUser.style.display = "none";
         }
+        if(!gainPanel.style.display === "none") {
+            gainPanel.style.display = "none";
+        }
         return;
     }
     // console.log(JSON.parse(sessionStorage.getItem('user')));
@@ -88,6 +93,9 @@ function checkRole() {
         if(adminPanel.style.display === "none") {
             adminPanel.style.display = "unset";
         }
+        if(gainPanel.style.display === "none") {
+            gainPanel.style.display = "unset";
+        }
         return;
     }
     if(JSON.parse(sessionStorage.getItem('user')).role === "MANAGER") {
@@ -109,6 +117,9 @@ function checkRole() {
         if(adminPanel.style.display === "none") {
             adminPanel.style.display = "none";
         }
+        if(gainPanel.style.display === "none") {
+            gainPanel.style.display = "none";
+        }
         return;
     }
     if(JSON.parse(sessionStorage.getItem('user')).role === "USER") {
@@ -129,6 +140,9 @@ function checkRole() {
         }
         if(adminPanel.style.display === "none") {
             adminPanel.style.display = "none";
+        }
+        if(gainPanel.style.display === "none") {
+            gainPanel.style.display = "none";
         }
         return;
     }
@@ -161,3 +175,7 @@ adminPanel.addEventListener('click', (e) => {
     viewModule.showAdminPanel();
     adminModule.getUsers();
 })
+gainPanel.addEventListener('click', (e) => {
+    e.preventDefault();
+    viewModule.showGain();
+});

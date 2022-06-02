@@ -38,33 +38,36 @@
     </header>
     <p id="info" class="text-info">&nbsp;</p>
     <main id="content">
-        <div class="shoe-edit-container">
-            <div class="top-content">
-                <span class="model-edit-title">Изменение обуви</span>
+        <div class="gain-container">
+            <button id="allGainBtn">
+                Показать заработок за всё время
+            </button>
+            <div id="collapseExample">
+                <p id="allGainTxt">sdf</p>
             </div>
-            <div class="mid-content">
-                <label for="list models">Список моделей:</label>
-                <select name="list models" id="list-models">
+            <h3>Прибыль магазина за определенный месяц</h3>
+            <p id="gainForAMonth">
+                &nbsp;
+            </p>
+            <div class="allGainContainers" style="font-size: 18px; font-family: Molot">
+                <div id="firstColumn" style="width: 35em; text-align: center">
+                    <div id="gainForSeptember" class="list-group-item list-group-item-action list-group-item-warning">Сентябрь</div>
+                    <div id="gainForOctober" class="list-group-item list-group-item-action list-group-item-warning">Октябрь</div>
+                    <div id="gainForNovember" class="list-group-item list-group-item-action list-group-item-warning">Ноябрь</div>
 
-                </select>
-                <div class="wrap-input100 validate-input" data-validate="Enter name">
-                    <input class="input100" type="text" id="model-name" name="modelName" placeholder="Model name">
+                    <div id="gainForMarch" class="list-group-item list-group-item-action list-group-item-info">Март</div>
+                    <div id="gainForApril" class="list-group-item list-group-item-action list-group-item-info">Апрель</div>
+                    <div id="gainForMay" class="list-group-item list-group-item-action list-group-item-info">Май</div>
                 </div>
-                <div class="wrap-input100 validate-input" data-validate="Enter firm">
-                    <input class="input100" type="text" id="model-firm" name="modelFirm" placeholder="Model firm">
-                </div>
-                <div class="wrap-input100 validate-input" data-validate="Enter size">
-                    <input class="input100" type="number" maxlength="2" id="model-size" name="modelSize" placeholder="Model size">
-                </div>
-                <div class="wrap-input100 validate-input" data-validate="Enter price">
-                    <input class="input100" type="number" pattern=".{.2}" id="model-price" name="price" placeholder="Price">
-                </div>
-                <div class="wrap-input100 validate-input" data-validate="Enter amount">
-                    <input class="input100" type="number" id="model-amount" min="1" max="50" name="amount" placeholder="Amount">
-                </div>
-                <div class="container-login100-form-btn">
-                    <button class="login100-form-btn" type=""submit id="edit-model">Изменить</button>
-                </div>
+                <div id="secondColumn" style="width: 35em; text-align: center">
+                    <div id="gainForDecember" class="list-group-item list-group-item-action list-group-item-primary">Декабрь</div>
+                    <div id="gainForJanuary" class="list-group-item list-group-item-action list-group-item-primary">Январь</div>
+                    <div id="gainForFebruary" class="list-group-item list-group-item-action list-group-item-primary">Февраль</div>
+
+                    <div id="gainForJune" class="list-group-item list-group-item-action list-group-item-danger">Июнь</div>
+                    <div id="gainForJuly" class="list-group-item list-group-item-action list-group-item-danger">Июль</div>
+                    <div id="gainForAugust" class="list-group-item list-group-item-action list-group-item-danger">Август</div>
+                </div>   
             </div>
         </div>
     </main>
