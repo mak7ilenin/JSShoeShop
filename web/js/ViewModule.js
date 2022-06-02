@@ -390,22 +390,22 @@ class ViewModule {
             </p>
             <div class="allGainContainers" style="font-size: 18px; font-family: Molot">
                 <div id="firstColumn" style="width: 35em; text-align: center">
-                    <div id="gainForSeptember" class="list-group-item list-group-item-action list-group-item-warning">Сентябрь</div>
-                    <div id="gainForOctober" class="list-group-item list-group-item-action list-group-item-warning">Октябрь</div>
-                    <div id="gainForNovember" class="list-group-item list-group-item-action list-group-item-warning">Ноябрь</div>
+                    <div id="gainForSeptember" class="month list-group-item list-group-item-action list-group-item-warning">Сентябрь</div>
+                    <div id="gainForOctober" class="month list-group-item list-group-item-action list-group-item-warning">Октябрь</div>
+                    <div id="gainForNovember" class="month list-group-item list-group-item-action list-group-item-warning">Ноябрь</div>
 
-                    <div id="gainForMarch" class="list-group-item list-group-item-action list-group-item-info">Март</div>
-                    <div id="gainForApril" class="list-group-item list-group-item-action list-group-item-info">Апрель</div>
-                    <div id="gainForMay" class="list-group-item list-group-item-action list-group-item-info">Май</div>
+                    <div id="gainForMarch" class="month list-group-item list-group-item-action list-group-item-info">Март</div>
+                    <div id="gainForApril" class="month list-group-item list-group-item-action list-group-item-info">Апрель</div>
+                    <div id="gainForMay" class="month list-group-item list-group-item-action list-group-item-info">Май</div>
                 </div>
                 <div id="secondColumn" style="width: 35em; text-align: center">
-                    <div id="gainForDecember" class="list-group-item list-group-item-action list-group-item-primary">Декабрь</div>
-                    <div id="gainForJanuary" class="list-group-item list-group-item-action list-group-item-primary">Январь</div>
-                    <div id="gainForFebruary" class="list-group-item list-group-item-action list-group-item-primary">Февраль</div>
+                    <div id="gainForDecember" class="month list-group-item list-group-item-action list-group-item-primary">Декабрь</div>
+                    <div id="gainForJanuary" class="month list-group-item list-group-item-action list-group-item-primary">Январь</div>
+                    <div id="gainForFebruary" class="month list-group-item list-group-item-action list-group-item-primary">Февраль</div>
 
-                    <div id="gainForJune" class="list-group-item list-group-item-action list-group-item-danger">Июнь</div>
-                    <div id="gainForJuly" class="list-group-item list-group-item-action list-group-item-danger">Июль</div>
-                    <div id="gainForAugust" class="list-group-item list-group-item-action list-group-item-danger">Август</div>
+                    <div id="gainForJune" class="month list-group-item list-group-item-action list-group-item-danger">Июнь</div>
+                    <div id="gainForJuly" class="month list-group-item list-group-item-action list-group-item-danger">Июль</div>
+                    <div id="gainForAugust" class="month list-group-item list-group-item-action list-group-item-danger">Август</div>
                 </div>   
             </div>
         </div>`
@@ -413,6 +413,55 @@ class ViewModule {
         allGainBtn.addEventListener('click', (e) => {
             gainModule.showAllGain();
         });
+        const gainSeptemberBtn = document.getElementById('gainForSeptember');
+        gainSeptemberBtn.addEventListener('click', (e) => {
+            gainModule.showGainForSeptember();
+        });
+        const gainOctoberBtn = document.getElementById('gainForOctober');
+        gainOctoberBtn.addEventListener('click', (e) => {
+            gainModule.showGainForOctober();
+        });
+        const gainNovemberBtn = document.getElementById('gainForNovember');
+        gainNovemberBtn.addEventListener('click', (e) => {
+            gainModule.showGainForNovember();
+        });
+        const gainDecemberBtn = document.getElementById('gainForDecember');
+        gainDecemberBtn.addEventListener('click', (e) => {
+            gainModule.showGainForDecember();
+        });
+        const gainJanuaryBtn = document.getElementById('gainForJanuary');
+        gainJanuaryBtn.addEventListener('click', (e) => {
+            gainModule.showGainForJanuary();
+        });
+        const gainFebruaryBtn = document.getElementById('gainForFebruary');
+        gainFebruaryBtn.addEventListener('click', (e) => {
+            gainModule.showGainForFebruary();
+        });
+        const gainMarchBtn = document.getElementById('gainForMarch');
+        gainMarchBtn.addEventListener('click', (e) => {
+            gainModule.showGainForMarch();
+        });
+        const gainAprilBtn = document.getElementById('gainForApril');
+        gainAprilBtn.addEventListener('click', (e) => {
+            gainModule.showGainForApril();
+        });
+        const gainMayBtn = document.getElementById('gainForMay');
+        gainMayBtn.addEventListener('click', (e) => {
+            gainModule.showGainForMay();
+        });
+        const gainJuneBtn = document.getElementById('gainForJune');
+        gainJuneBtn.addEventListener('click', (e) => {
+            gainModule.showGainForJune();
+        });
+        const gainJulyBtn = document.getElementById('gainForJuly');
+        gainJulyBtn.addEventListener('click', (e) => {
+            gainModule.showGainForJuly();
+        });
+        const gainAugustBtn = document.getElementById('gainForAugust');
+        gainAugustBtn.addEventListener('click', (e) => {
+            gainModule.showGainForAugust();
+        });
+
     }
 }
 const viewModule = new ViewModule();

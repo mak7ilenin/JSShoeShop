@@ -25,7 +25,19 @@ import session.HistoryFacade;
  * @author makso
  */
 @WebServlet(name = "GainServlet", urlPatterns = {
-    "/allGain"
+    "/allGain",
+    "/septemberGain",
+    "/octoberGain",
+    "/novemberGain",
+    "/decemberGain",
+    "/januaryGain",
+    "/februaryGain",
+    "/marchGain",
+    "/aprilGain",
+    "/mayGain",
+    "/juneGain",
+    "/julyGain",
+    "/augustGain"
 })
 public class GainServlet extends HttpServlet {
     @EJB private HistoryFacade historyFacade;
@@ -45,19 +57,150 @@ public class GainServlet extends HttpServlet {
         JsonObjectBuilder job = Json.createObjectBuilder();
         String path = request.getServletPath();
         List<History> histories = historyFacade.findAll();
+        double gainForAMonth = 0;
         switch(path) {
             case "/allGain":
                 double allGain = 0;
                 for (History history : histories) {
                     allGain += history.getGain();
                 }
-                System.out.println(allGain);
                 job.add("status", true).add("allGain", allGain);
                 try(PrintWriter out = response.getWriter()) {
                     out.println(job.build().toString());
                 }
                 break;
-//            case "/"
+            case "/januaryGain":
+                for (History history : histories) {
+                    if(history.getBuy().getMonth() == 0) {
+                        gainForAMonth += history.getGain();
+                    }
+                }
+                job.add("status", true).add("januaryGain", gainForAMonth);
+                try(PrintWriter out = response.getWriter()) {
+                    out.println(job.build().toString());
+                }
+                break;
+            case "/februaryGain":
+                for (History history : histories) {
+                    if(history.getBuy().getMonth() == 1) {
+                        gainForAMonth += history.getGain();
+                    }
+                }
+                job.add("status", true).add("februaryGain", gainForAMonth);
+                try(PrintWriter out = response.getWriter()) {
+                    out.println(job.build().toString());
+                }
+                break;
+            case "/marchGain":
+                for (History history : histories) {
+                    if(history.getBuy().getMonth() == 2) {
+                        gainForAMonth += history.getGain();
+                    }
+                }
+                job.add("status", true).add("marchGain", gainForAMonth);
+                try(PrintWriter out = response.getWriter()) {
+                    out.println(job.build().toString());
+                }
+                break;
+            case "/aprilGain":
+                for (History history : histories) {
+                    if(history.getBuy().getMonth() == 3) {
+                        gainForAMonth += history.getGain();
+                    }
+                }
+                job.add("status", true).add("aprilGain", gainForAMonth);
+                try(PrintWriter out = response.getWriter()) {
+                    out.println(job.build().toString());
+                }
+                break;
+            case "/mayGain":
+                for (History history : histories) {
+                    if(history.getBuy().getMonth() == 4) {
+                        gainForAMonth += history.getGain();
+                    }
+                }
+                job.add("status", true).add("mayGain", gainForAMonth);
+                try(PrintWriter out = response.getWriter()) {
+                    out.println(job.build().toString());
+                }
+                break;
+            case "/juneGain":
+                for (History history : histories) {
+                    if(history.getBuy().getMonth() == 5) {
+                        gainForAMonth += history.getGain();
+                    }
+                }
+                job.add("status", true).add("juneGain", gainForAMonth);
+                try(PrintWriter out = response.getWriter()) {
+                    out.println(job.build().toString());
+                }
+                break;
+            case "/julyGain":
+                for (History history : histories) {
+                    if(history.getBuy().getMonth() == 6) {
+                        gainForAMonth += history.getGain();
+                    }
+                }
+                job.add("status", true).add("julyGain", gainForAMonth);
+                try(PrintWriter out = response.getWriter()) {
+                    out.println(job.build().toString());
+                }
+                break;
+            case "/augustGain":
+                for (History history : histories) {
+                    if(history.getBuy().getMonth() == 7) {
+                        gainForAMonth += history.getGain();
+                    }
+                }
+                job.add("status", true).add("augustGain", gainForAMonth);
+                try(PrintWriter out = response.getWriter()) {
+                    out.println(job.build().toString());
+                }
+                break;
+            case "/septemberGain":
+                for (History history : histories) {
+                    if(history.getBuy().getMonth() == 8) {
+                        gainForAMonth += history.getGain();
+                    }
+                }
+                job.add("status", true).add("septemberGain", gainForAMonth);
+                try(PrintWriter out = response.getWriter()) {
+                    out.println(job.build().toString());
+                }
+                break;
+            case "/octoberGain":
+                for (History history : histories) {
+                    if(history.getBuy().getMonth() == 9) {
+                        gainForAMonth += history.getGain();
+                    }
+                }
+                job.add("status", true).add("octoberGain", gainForAMonth);
+                try(PrintWriter out = response.getWriter()) {
+                    out.println(job.build().toString());
+                }
+                break;
+            case "/novemberGain":
+                for (History history : histories) {
+                    if(history.getBuy().getMonth() == 10) {
+                        gainForAMonth += history.getGain();
+                    }
+                }
+                job.add("status", true).add("novemberGain", gainForAMonth);
+                try(PrintWriter out = response.getWriter()) {
+                    out.println(job.build().toString());
+                }
+                break;
+            case "/decemberGain":
+                for (History history : histories) {
+                    if(history.getBuy().getMonth() == 11) {
+                        gainForAMonth += history.getGain();
+                    }
+                }
+                job.add("status", true).add("decemberGain", gainForAMonth);
+                try(PrintWriter out = response.getWriter()) {
+                    out.println(job.build().toString());
+                }
+                break;
         }
     }
 
