@@ -2,6 +2,7 @@ import {loginModule} from './LoginModule.js';
 import {shoeModule} from './ShoeModule.js';
 import {userModule} from './UserModule.js';
 import {purchaseModule} from './PurchaseModule.js';
+import {adminModule} from './AdminModule.js';
 class ViewModule {
     showLoginForm() {
         document.getElementById('info').innerHTML = '';
@@ -187,6 +188,7 @@ class ViewModule {
                     e.preventDefault();
                     input[i].style.borderBottom = '2px solid rgba(255,255,255,0.24)';
                     input[i].style.marginBottom = '30px';
+                    input[i].style.fontSize = '16px';
                 });
             });
         }
@@ -337,8 +339,37 @@ class ViewModule {
         </div>`;
         const purchase = document.getElementById('submit-purchase');
         purchase.addEventListener('click', (e) => {
-            // purchaseModule.getModels();
             purchaseModule.buyModel();
+            purchaseModule.getModels();
+        });
+    }
+    showAdminPanel() {
+        document.getElementById('info').innerHTML = '';
+        const content = document.getElementById('content');
+        content.innerHTML = 
+        `<div class="role-container">
+            <div class="top-content">
+                <span class="role-title">Назначение ролей</span>
+            </div>
+            <div class="mid-content">
+                <label for="list users">Список пользователей:</label>
+                <select name="list users" id="list-users">
+
+                </select>
+                <select name="list roles" id="list-roles">
+                    <option value="SECONDADMIN">ADDITIONAL ADMINISTRATOR</option>
+                    <option value="MANAGER">MANAGER</option>
+                    <option value="USER">USER</option>
+                </select>
+                <div class="container-login100-form-btn">
+                    <button class="login100-form-btn" type="submit" id="change-role">Изменить</button>
+                </div>
+            </div>
+        </div>`;
+        const changeRole = document.getElementById('change-role');
+        changeRole.addEventListener('click', (e) => {
+            adminModule.changeRole();
+            adminModule.getUsers();
         });
     }
 }

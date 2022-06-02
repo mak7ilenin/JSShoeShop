@@ -18,7 +18,7 @@ class PurchaseModule {
                         modelSelect.add(option);
                         for (let i = 0; i < response.options.length; i++) {
                             option = document.createElement('option');
-                            option.text = response.options[i].modelName + ' // ' + response.options[i].modelFirm + ' // ' + response.options[i].modelPrice + '$';
+                            option.text = response.options[i].modelName + ' // ' + response.options[i].modelFirm + ' // ' + response.options[i].modelPrice + '$' + ' // ' + response.options[i].modelAmount;
                             option.value = response.options[i].id;
                             modelSelect.add(option);
                         }
@@ -56,7 +56,7 @@ class PurchaseModule {
                 }
             })
             .catch(error => {
-                document.getElementById('info').innerHTML = error.info;
+                document.getElementById('info').innerHTML = error.message;
             });
     }
 }

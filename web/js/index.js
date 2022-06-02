@@ -3,6 +3,7 @@ import {shoeModule} from './ShoeModule.js';
 import {viewModule} from './ViewModule.js';
 import {userModule} from './UserModule.js';
 import {purchaseModule} from './PurchaseModule.js';
+import {adminModule} from './AdminModule.js';
 export {checkRole};
 
 const buyModel = document.getElementById('buy-model');
@@ -10,6 +11,7 @@ const createModel = document.getElementById('create-model');
 const createUser = document.getElementById('create-user');
 const editModel = document.getElementById('edit-model');
 const editUser = document.getElementById('edit-user');
+const adminPanel = document.getElementById('admin-panel');
 hideMenu();
 function hideMenu() {
     buyModel.style.display = "none";
@@ -17,7 +19,20 @@ function hideMenu() {
     createUser.style.display = "none";
     editModel.style.display = "none";
     editUser.style.display = "none";
+    adminPanel.style.display = "none";
 }
+// const dropdownContent = document.getElementsByClassName('dropdown-content');
+//     dropdown[i].addEventListener('click', (e) => {
+// const dropdown = document.getElementsByClassName('dropdown');
+// for (let i = 0; i < dropdown.length; i++) {
+//         e.preventDefault();
+//         dropdownContent[i].style.display = 'block';
+//     });
+//     dropdown[i].addEventListener('focusout', (e) => {
+//         e.preventDefault();
+//         dropdownContent[i].style.display = 'none';
+//     });
+// }
 const info = document.getElementById('info');
 const btnLogin = document.getElementById('logIn');
 const btnLogout = document.getElementById('logOut');
@@ -70,6 +85,9 @@ function checkRole() {
         if(editUser.style.display === "none") {
             editUser.style.display = "unset";
         }
+        if(adminPanel.style.display === "none") {
+            adminPanel.style.display = "unset";
+        }
         return;
     }
     if(JSON.parse(sessionStorage.getItem('user')).role === "MANAGER") {
@@ -88,6 +106,9 @@ function checkRole() {
         if(editUser.style.display === "none") {
             editUser.style.display = "none";
         }
+        if(adminPanel.style.display === "none") {
+            adminPanel.style.display = "none";
+        }
         return;
     }
     if(JSON.parse(sessionStorage.getItem('user')).role === "USER") {
@@ -105,6 +126,9 @@ function checkRole() {
         }
         if(editUser.style.display === "none") {
             editUser.style.display = "none";
+        }
+        if(adminPanel.style.display === "none") {
+            adminPanel.style.display = "none";
         }
         return;
     }
@@ -132,3 +156,8 @@ buyModel.addEventListener('click', (e) => {
     viewModule.showPurchaseForm();
     purchaseModule.getModels();
 });
+adminPanel.addEventListener('click', (e) => {
+    e.preventDefault();
+    viewModule.showAdminPanel();
+    adminModule.getUsers();
+})

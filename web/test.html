@@ -18,19 +18,22 @@
             <a href="#"><img src="Images/shoeger.png" alt="logo"></a>
         </div>
         <ul>
+            <li id="admin-panel"><a href="#">Панель админа</a></li>
             <li id="buy-model"><a href="#">Купить модель</a></li>
-            <li id="create-model"><a href="#">Добавить модель</a></li>
-            <li id="create-user"><a href="#">Добавить пользователя</a></li>
-            <li id="edit-model"><a href="#">Изменить модель</a></li>
-            <li id="edit-user"><a href="#">Изменить пользователя</a></li>
-        </ul>
-        <ul class="log-bar">
-            <li>
-                <a href="#" id="logIn">Войти</a>
-            </li>
-            <li>
-                <a href="#" id="logOut">Выйти</a>
-            </li>
+            <div id="dropdown-model" class="dropdown">
+                <button class="dropbtn">Модель</button>
+                <div class="dropdown-content">
+                    <a id="create-model" href="#">Добавить модель</a>
+                    <a id="edit-model" href="#">Изменить модель</a>
+                </div>
+            </div>
+            <div id="dropdown-user" class="dropdown">
+                <button class="dropbtn">Пользователь</button>
+                <div class="dropdown-content">
+                    <a id="create-user" href="#">Добавить пользователя</a>
+                    <a id="edit-user" href="#">Изменить пользователя</a>
+                </div>
+            </div>
         </ul>  
     </header>
     <p id="info" class="text-info">&nbsp;</p>

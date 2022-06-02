@@ -25,16 +25,62 @@ public class History implements Serializable{
     private Model model;
     @Temporal(TemporalType.TIMESTAMP)
     private Date buy;
-    private String gain;
+    private double gain;
 
+    @Override
+    public String toString() {
+        return "History{" + "id=" + id + ", user=" + user + ", model=" + model + ", buy=" + buy + ", gain=" + gain + '}';
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 19 * hash + Objects.hashCode(this.id);
+        hash = 19 * hash + Objects.hashCode(this.user);
+        hash = 19 * hash + Objects.hashCode(this.model);
+        hash = 19 * hash + Objects.hashCode(this.buy);
+        hash = 19 * hash + (int) (Double.doubleToLongBits(this.gain) ^ (Double.doubleToLongBits(this.gain) >>> 32));
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final History other = (History) obj;
+        if (Double.doubleToLongBits(this.gain) != Double.doubleToLongBits(other.gain)) {
+            return false;
+        }
+        if (!Objects.equals(this.id, other.id)) {
+            return false;
+        }
+        if (!Objects.equals(this.user, other.user)) {
+            return false;
+        }
+        if (!Objects.equals(this.model, other.model)) {
+            return false;
+        }
+        if (!Objects.equals(this.buy, other.buy)) {
+            return false;
+        }
+        return true;
+    }
+    
     public Long getId() {
         return id;
     }
 
-    public void setId(Long Id) {
-        this.id = Id;
+    public void setId(Long id) {
+        this.id = id;
     }
-    
+
     public User getUser() {
         return user;
     }
@@ -59,44 +105,13 @@ public class History implements Serializable{
         this.buy = buy;
     }
 
-    public String getGain() {
+    public double getGain() {
         return gain;
     }
 
-    public void setGain(String gain) {
+    public void setGain(double gain) {
         this.gain = gain;
     }
 
-    @Override
-    public int hashCode() {
-        int hash = 7;
-        hash = 43 * hash + Objects.hashCode(this.id);
-        hash = 43 * hash + Objects.hashCode(this.user);
-        hash = 43 * hash + Objects.hashCode(this.model);
-        hash = 43 * hash + Objects.hashCode(this.buy);
-        hash = 43 * hash + Objects.hashCode(this.gain);;
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final History other = (History) obj;
-        return true;
-    }
-
-    
-    @Override
-    public String toString() {
-        return "History{" + "id=" + id + ", user=" + user + ", model=" + model + ", buy=" + buy + ", gain=" + gain +'}';
-    }
 
 }

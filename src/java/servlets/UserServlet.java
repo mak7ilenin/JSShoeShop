@@ -28,7 +28,8 @@ import tools.PasswordProtected;
     "/registration",
     "/getListUsers",
     "/getUser",
-    "/editUser"
+    "/editUser",
+    "/changeRole"
 })
 public class UserServlet extends HttpServlet {
     @EJB private UserFacade userFacade;
@@ -94,7 +95,7 @@ public class UserServlet extends HttpServlet {
                 newUser.setPassword(userPassword);
                 newUser.setRole("USER");
                 userFacade.create(newUser);
-                job.add("info", "Аккаунт" + username + "успешно создан!")
+                job.add("info", "Аккаунт " + username + " успешно создан!")
                         .add("status", true);
                 try(PrintWriter out = response.getWriter()) {
                     out.println(job.build().toString());
@@ -102,6 +103,7 @@ public class UserServlet extends HttpServlet {
                 break;
             case "/getListUsers":
                 List<User> users = userFacade.findAll();
+                users.remove(0);
                 UserJsonBuilder ujb = new UserJsonBuilder();
                 if(!users.isEmpty()) {
                     job.add("status", true)
@@ -149,10 +151,30 @@ public class UserServlet extends HttpServlet {
 //                editUser.setPassword(userPassword);
                 userFacade.edit(editUser);
                 
-                ujb = new UserJsonBuilder();
+//                ujb = new UserJsonBuilder();
                 job.add("status", true)
-                    .add("info", "Пользователь " + editUser.getFirstName() + " " + editUser.getLastName() + " изменен(а)")
-                    .add("editedUser", ujb.getUserJsonObject(editUser));
+                    .add("info", "Пользователь " + editUser.getFirstName() + " " + editUser.getLastName() + " изменен(а)");
+//                    .add("editedUser", ujb.getUserJsonObject(editUser));
+                try(PrintWriter out = response.getWriter()) {
+                    out.println(job.build().toString());
+                }
+                break;
+            case "/changeRole":
+                jsonReader = Json.createReader(request.getReader());
+                jsonObject = jsonReader.readObject();
+                Long userRoleId = Long.parseLong(jsonObject.getString("id", ""));
+                String role = jsonObject.getString("role", "");
+                User changingRoleUser = userFacade.find(userRoleId);
+                changingRoleUser.setRole(role);
+                userFacade.edit(changingRoleUser);
+                job.add("status", true);
+                if("SECONDADMIN".equals(changingRoleUser.getRole())) {
+                    job.add("info", "Теперь " + changingRoleUser.getFirstName() + " " + 
+                        changingRoleUser.getLastName() + " ADDITIONAL ADMINISTRATOR");
+                }else {
+                job.add("info", "Теперь " + changingRoleUser.getFirstName() + " " + 
+                        changingRoleUser.getLastName() + " " + changingRoleUser.getRole());
+                }
                 try(PrintWriter out = response.getWriter()) {
                     out.println(job.build().toString());
                 }

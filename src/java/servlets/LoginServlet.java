@@ -6,6 +6,7 @@ import entity.User;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.text.DecimalFormat;
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -43,6 +44,7 @@ public class LoginServlet extends HttpServlet {
     @EJB private UserFacade userFacade;
     @EJB private ModelFacade modelFacade;
     @EJB private HistoryFacade historyFacade;
+    HttpSession session = null;
     
     Calendar calendar = Calendar.getInstance();
     Date date = calendar.getTime();
@@ -69,7 +71,7 @@ public class LoginServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         request.setCharacterEncoding("UTF-8");
-        HttpSession session = null;
+        User authUser = null;
         JsonObjectBuilder job = Json.createObjectBuilder();
         String path = request.getServletPath();
         switch (path) {
@@ -78,7 +80,7 @@ public class LoginServlet extends HttpServlet {
                 JsonObject jsonObject = jsonReader.readObject();
                 String username = jsonObject.getString("username","");
                 String password = jsonObject.getString("password","");
-                User authUser = userFacade.findByLogin(username);
+                authUser = userFacade.findByLogin(username);
                 if(authUser == null){
                     job.add("info", "Нет такого пользователя!")
                        .add("auth", false);
@@ -106,7 +108,6 @@ public class LoginServlet extends HttpServlet {
                 }
                 break;
             case "/logout":
-                authUser = null;
                 session = request.getSession(false);
                 if(session != null) {
                     session.invalidate();
@@ -128,24 +129,35 @@ public class LoginServlet extends HttpServlet {
                     history.setModel(model);
                     history.setUser(user);
                     history.setBuy(Date.from(LocalDate.now().atTime(LocalTime.now().plusHours(date.getHours() - 13)).toInstant(ZoneOffset.UTC)));
-                    history.setGain(history.getGain() + model.getPrice());
+                    double gain = history.getGain() + model.getPrice();
+                    BigDecimal bd = new BigDecimal(gain).setScale(2, RoundingMode.HALF_UP);
+                    double decimalGain = bd.doubleValue();
+                    history.setGain(decimalGain);
                     modelFacade.edit(model);
                     userFacade.edit(user);
                     historyFacade.create(history);
                     ModelJsonBuilder mjb = new ModelJsonBuilder();
                     UserJsonBuilder ujb = new UserJsonBuilder();
                     job.add("status", true)
-                       .add("model", mjb.getModelJsonObject(model))
-                            .add("user", ujb.getUserJsonObject(user))
-                                .add("info", "Покупка прошла успешно!");
-                    }if(user.getMoney() < model.getPrice()) {
-                        job.add("info", "У вас недостаточно денег!");
-                    }if(model.getAmount() == 0) {
-                        job.add("info", "Экземпляры данной модели отсутствуют!");
-                    }
+                        .add("model", mjb.getModelJsonObject(model))
+                        .add("user", ujb.getUserJsonObject(user));
+                    job.add("info", "Покупка прошла успешно!");
                     try (PrintWriter out = response.getWriter()) {
                         out.println(job.build().toString());
                     }
+                }
+                else if(user.getMoney() < model.getPrice()) {
+                    job.add("info", "У вас недостаточно денег!");
+                    try (PrintWriter out = response.getWriter()) {
+                        out.println(job.build().toString());
+                    }
+                }
+                else if(model.getAmount() < 1) {
+                    job.add("info", "Экземпляры данной модели отсутствуют!");
+                    try (PrintWriter out = response.getWriter()) {
+                        out.println(job.build().toString());
+                    }
+                }
                 break;
         }
     }
