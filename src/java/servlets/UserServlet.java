@@ -158,7 +158,6 @@ public class UserServlet extends HttpServlet {
 //                ujb = new UserJsonBuilder();
                 job.add("status", true)
                     .add("info", "Пользователь " + editUser.getFirstName() + " " + editUser.getLastName() + " изменен(а)");
-//                    .add("editedUser", ujb.getUserJsonObject(editUser));
                 try(PrintWriter out = response.getWriter()) {
                     out.println(job.build().toString());
                 }
