@@ -15,6 +15,13 @@ const editUser = document.getElementById('edit-user');
 const editMyself = document.getElementById('edit-myself');
 const adminPanel = document.getElementById('admin-panel');
 const gainPanel = document.getElementById('gain-panel');
+window.addEventListener('load', (e) => {
+    if(sessionStorage.getItem('user') !== null) {
+        checkRole();
+        btnLogout.style.display = "unset";
+        btnLogin.style.display = "none";
+    }
+});
 hideMenu();
 function hideMenu() {
     buyModel.style.display = "none";

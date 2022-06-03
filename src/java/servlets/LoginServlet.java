@@ -108,9 +108,13 @@ public class LoginServlet extends HttpServlet {
                 }
                 break;
             case "/logout":
+                authUser = null;
                 session = request.getSession(false);
                 if(session != null) {
                     session.invalidate();
+                }
+                try (PrintWriter out = response.getWriter()) {
+                    out.println(job.build().toString());
                 }
                 break;
             case "/buyModel":
