@@ -42,6 +42,7 @@ public class UserServlet extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
         JsonObjectBuilder job = Json.createObjectBuilder();
         String path = request.getServletPath();
+        BigDecimal zeroDecimal = null;
         switch (path) {
             case "/registration":
                 JsonReader jsonReader = Json.createReader(request.getReader());
@@ -51,11 +52,12 @@ public class UserServlet extends HttpServlet {
                 String username = jsonObject.getString("username","");
                 String password = jsonObject.getString("password","");
                 String phone = jsonObject.getString("phone","");
-                double money = Double.parseDouble(jsonObject.getString("money",""));
-                BigDecimal bd = new BigDecimal(money).setScale(2, RoundingMode.HALF_UP);
-                double decimalMoney = bd.doubleValue();
+                String money = jsonObject.getString("money","");
+                BigDecimal decimalMoney = new BigDecimal(money);
+                String strMoney = "0";
                 if(firstName.isEmpty() || lastName.isEmpty() 
-                        || username.isEmpty() || password.isEmpty() || phone.isEmpty()
+                        || username.isEmpty() || password.isEmpty() 
+                        || phone.isEmpty() || money.isEmpty()
                 ){
                     job.add("info", "Заполните все поля!")
                        .add("firstName", firstName)
@@ -63,21 +65,21 @@ public class UserServlet extends HttpServlet {
                        .add("username", username)
                        .add("password", password)
                        .add("phone", phone)
-                       .add("money", decimalMoney);
+                       .add("money", money);
                     job.add("status", false);
                     try(PrintWriter out = response.getWriter()) {
                         out.println(job.build().toString());
                     }
                     break;
                 }
-                if(decimalMoney == 0.0) {
+                if(decimalMoney.compareTo(zeroDecimal) == 0) {
                     job.add("info", "Введите сумму больше нуля!")
-                    .add("firstName", firstName)
+                       .add("firstName", firstName)
                        .add("lastName", lastName)
                        .add("username", username)
                        .add("password", password)
                        .add("phone", phone)
-                       .add("money", decimalMoney);
+                       .add("money", money);
                     job.add("status", false);
                     try(PrintWriter out = response.getWriter()) {
                         out.println(job.build().toString());
@@ -89,7 +91,8 @@ public class UserServlet extends HttpServlet {
                 newUser.setLastName(lastName);
                 newUser.setLogin(username);
                 newUser.setPhone(phone);
-                newUser.setMoney(decimalMoney);
+                strMoney = decimalMoney.toString();
+                newUser.setMoney(strMoney);
                 PasswordProtected passwordProtected = new PasswordProtected();
                 String salt = passwordProtected.getSalt();
                 newUser.setSalt(salt);
@@ -135,28 +138,21 @@ public class UserServlet extends HttpServlet {
                 firstName = jsonObject.getString("firstName", "");
                 lastName = jsonObject.getString("lastName", "");
                 phone = jsonObject.getString("phone", "");
-                money = Double.parseDouble(jsonObject.getString("money", ""));
-                bd = new BigDecimal(money).setScale(2, RoundingMode.HALF_UP);
-                decimalMoney = bd.doubleValue();
+                money = jsonObject.getString("money", "");
+                decimalMoney = new BigDecimal(money);
+                strMoney = decimalMoney.toString();
                 username = jsonObject.getString("username", "");
                 
                 User editUser = userFacade.find(Long.parseLong(userId));
                 editUser.setFirstName(firstName);
                 editUser.setLastName(lastName);
                 editUser.setPhone(phone);
-                editUser.setMoney(decimalMoney);
+                editUser.setMoney(strMoney);
                 editUser.setLogin(username);
-//                passwordProtected = new PasswordProtected();
-//                salt = passwordProtected.getSalt();
-//                editUser.setSalt(salt);
-//                userPassword = passwordProtected.getProtectedPassword(password, salt);
-//                editUser.setPassword(userPassword);
                 userFacade.edit(editUser);
                 
-//                ujb = new UserJsonBuilder();
                 job.add("status", true)
                     .add("info", "Пользователь " + editUser.getFirstName() + " " + editUser.getLastName() + " изменен(а)");
-//                    .add("editedUser", ujb.getUserJsonObject(editUser));
                 try(PrintWriter out = response.getWriter()) {
                     out.println(job.build().toString());
                 }
@@ -200,9 +196,9 @@ public class UserServlet extends HttpServlet {
                 String myFirstName = jsonObject.getString("firstName", "");
                 String myLastName = jsonObject.getString("lastName", "");
                 String myPhone = jsonObject.getString("phone", "");
-                double myMoney = Double.parseDouble(jsonObject.getString("money", ""));
-                bd = new BigDecimal(myMoney).setScale(2, RoundingMode.HALF_UP);
-                decimalMoney = bd.doubleValue();
+                String myMoney = jsonObject.getString("money", "");
+                decimalMoney = new BigDecimal(myMoney);
+                strMoney = decimalMoney.toString();
                 String myUsername = jsonObject.getString("username", "");
                 
                 try {
@@ -210,7 +206,7 @@ public class UserServlet extends HttpServlet {
                     existingUser.setFirstName(myFirstName);
                     existingUser.setLastName(myLastName);
                     existingUser.setPhone(myPhone);
-                    existingUser.setMoney(decimalMoney);
+                    existingUser.setMoney(strMoney);
                     existingUser.setLogin(myUsername);
                     userFacade.edit(existingUser);
                     

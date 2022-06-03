@@ -46,7 +46,6 @@ class LoginModule {
         });
         promiseLogout.then(response => response.json())
             .then(response => {
-                document.getElementById("info").innerHTML = response.info;
                 if(!response.auth) {
                     if(sessionStorage.getItem('user')) {
                         sessionStorage.removeItem('user');

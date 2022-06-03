@@ -57,7 +57,10 @@ public class LoginServlet extends HttpServlet {
         user.setFirstName("Maksim");
         user.setLastName("Dzjubenko");
         user.setPhone("53005207");
-        user.setMoney(248.46);
+        String money = "350";
+        BigDecimal decimalMoney = new BigDecimal(money);
+        String strMoney = decimalMoney.toString();
+        user.setMoney(strMoney);
         user.setLogin("admin");
         PasswordProtected passwordProtected = new PasswordProtected();
         String salt = passwordProtected.getSalt();
@@ -123,20 +126,25 @@ public class LoginServlet extends HttpServlet {
                 
                 Long modelId = Long.parseLong(jsonObject.getString("id", ""));
                 Model model = modelFacade.find(modelId);
-                User user = (User) session.getAttribute("authUser");
+                User user = (User) session.getAttribute("authUser");                
+                BigDecimal decimalMoney = new BigDecimal(user.getMoney());
+                BigDecimal decimalPrice = new BigDecimal(model.getPrice());
                 
-                if(user.getMoney() >= model.getPrice() && model.getAmount() != 0) {
-                    user.setMoney(user.getMoney() - model.getPrice());
+                if(decimalMoney.compareTo(decimalPrice) >= 0 && model.getAmount() != 0) {
+                    BigDecimal moneyDifference = decimalMoney.subtract(decimalPrice);
+                    String strMoney = moneyDifference.toString();
+                    user.setMoney(strMoney);
                     model.setAmount(model.getAmount() - 1);
                     
                     History history = new History();
                     history.setModel(model);
                     history.setUser(user);
                     history.setBuy(Date.from(LocalDate.now().atTime(LocalTime.now().plusHours(date.getHours())).toInstant(ZoneOffset.UTC)));
-                    double gain = history.getGain() + model.getPrice();
-                    BigDecimal bd = new BigDecimal(gain).setScale(2, RoundingMode.HALF_UP);
-                    double decimalGain = bd.doubleValue();
-                    history.setGain(decimalGain);
+                    BigDecimal decimalGain = new BigDecimal(history.getGain());
+                    decimalPrice = new BigDecimal(model.getPrice());
+                    BigDecimal sumGain = decimalGain.add(decimalPrice);
+                    String strGain = sumGain.toString();
+                    history.setGain(strGain);
                     modelFacade.edit(model);
                     userFacade.edit(user);
                     historyFacade.create(history);
@@ -150,18 +158,18 @@ public class LoginServlet extends HttpServlet {
                         out.println(job.build().toString());
                     }
                 }
-                else if(user.getMoney() < model.getPrice()) {
-                    job.add("info", "У вас недостаточно денег!");
-                    try (PrintWriter out = response.getWriter()) {
-                        out.println(job.build().toString());
-                    }
-                }
-                else if(model.getAmount() < 1) {
-                    job.add("info", "Экземпляры данной модели отсутствуют!");
-                    try (PrintWriter out = response.getWriter()) {
-                        out.println(job.build().toString());
-                    }
-                }
+//                else if(decimalMoney.compareTo(decimalPrice) < 0) {
+//                    job.add("info", "У вас недостаточно денег!");
+//                    try (PrintWriter out = response.getWriter()) {
+//                        out.println(job.build().toString());
+//                    }
+//                }
+//                else if(model.getAmount() < 1) {
+//                    job.add("info", "Экземпляры данной модели отсутствуют!");
+//                    try (PrintWriter out = response.getWriter()) {
+//                        out.println(job.build().toString());
+//                    }
+//                }
                 break;
         }
     }

@@ -13,24 +13,28 @@
             <a href="#"><img src="Images/shoeger.png" alt="logo"></a>
         </div>
         <ul>
+            <div id="model-panel" onclick="myDrop1()" class="dropdown">
+                <button class="dropbtn">Модели</button>
+                <div id="myDropdown1" class="dropdown-content">
+                    <a id="create-model" href="#">Добавить</a>
+                    <a id="edit-model" href="#">Изменить</a>
+                </div>
+            </div>
+            <div id="user-panel" onclick="myDrop2()" class="dropdown">
+                <button class="dropbtn">Пользователи</button>
+                <div id="myDropdown2" class="dropdown-content">
+                    <a id="create-user" href="#">Добавить</a>
+                    <a id="edit-user" href="#">Изменить</a>
+                </div>
+            </div>
             <li id="admin-panel"><a href="#">Панель админа</a></li>
             <li id="buy-model"><a href="#">Купить модель</a></li>
             <li id="gain-panel"><a href="#">Прибыль</a></li>
-            <li id="create-model"><a href="#">Добавить модель</a>
-            <li id="edit-model"><a href="#">Изменить модель</a>
-            <li id="create-user"><a href="#">Добавить пользователя</a>
-            <li id="edit-user"><a href="#">Изменить пользователя</a>
+            <!-- <li id="create-model"><a href="#">Добавить модель</a> -->
+            <!-- <li id="edit-model"><a href="#">Изменить модель</a> -->
+            <!-- <li id="create-user"><a href="#">Добавить пользователя</a> -->
+            <!-- <li id="edit-user"><a href="#">Изменить пользователя</a> -->
             <li id="edit-myself"><a href="#">Изменить себя</a>
-            <!-- <div id="dropdown-model" class="dropdown">
-                <button class="dropbtn">Модель</button>
-                <div class="dropdown-content">
-                </div>
-            </div>
-            <div id="dropdown-user" class="dropdown">
-                <button class="dropbtn">Пользователь</button>
-                <div class="dropdown-content">
-                </div>
-            </div> -->
         </ul>
         <ul class="log-bar">
             <li>
@@ -45,5 +49,27 @@
     <main id="content"></main>
     <footer>Dzjubenko 2022</footer>
     <script type="module" src="js/index.js"></script>
+    <script name="dropdown">
+        function myDrop1() {
+            document.getElementById("myDropdown1").classList.add('show');
+            document.getElementById("myDropdown2").classList.remove('show');
+        }
+        function myDrop2() {
+            document.getElementById("myDropdown2").classList.add('show');
+            document.getElementById("myDropdown1").classList.remove('show');
+        }
+        window.onclick = function(event) {
+            if (!event.target.matches('.dropbtn')) {
+                var dropdowns = document.getElementsByClassName("dropdown-content");
+                var i;
+                for (i = 0; i < dropdowns.length; i++) {
+                    var openDropdown = dropdowns[i];
+                    if (openDropdown.classList.contains('show')) {
+                        openDropdown.classList.remove('show');
+                    }
+                }
+            }
+        }
+    </script>
 </body>
 </html>

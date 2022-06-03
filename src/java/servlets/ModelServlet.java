@@ -50,16 +50,16 @@ public class ModelServlet extends HttpServlet {
                 String modelName = jsonObject.getString("modelName", "");
                 String modelFirm = jsonObject.getString("modelFirm", "");
                 String modelSize = jsonObject.getString("modelSize", "");
-                Double price = Double.parseDouble(jsonObject.getString("modelPrice", ""));
-                BigDecimal bd = new BigDecimal(price).setScale(2, RoundingMode.HALF_UP);
-                double decimalPrice = bd.doubleValue();
+                String price = jsonObject.getString("modelPrice", "");
+                BigDecimal decimalPrice = new BigDecimal(price);
+                String strPrice = decimalPrice.toString();
                 int amount = Integer.parseInt(jsonObject.getString("modelAmount", ""));
                 
                 Model newModel = new Model();
                 newModel.setModelName(modelName);
                 newModel.setModelFirm(modelFirm);
                 newModel.setModelSize(modelSize);
-                newModel.setPrice(decimalPrice);
+                newModel.setPrice(strPrice);
                 newModel.setAmount(amount);
                 modelFacade.create(newModel);
                 job.add("info", "Модель " + modelName + " успешно добавлена!")
@@ -99,16 +99,16 @@ public class ModelServlet extends HttpServlet {
                 modelName = jsonObject.getString("modelName", "");
                 modelFirm = jsonObject.getString("modelFirm", "");
                 modelSize = jsonObject.getString("modelSize", "");
-                Double modelPrice = Double.parseDouble(jsonObject.getString("modelPrice", ""));
-                bd = new BigDecimal(modelPrice).setScale(2, RoundingMode.HALF_UP);
-                decimalPrice = bd.doubleValue();
+                String modelPrice = jsonObject.getString("modelPrice", "");
+                decimalPrice = new BigDecimal(modelPrice);
+                strPrice = decimalPrice.toString();
                 int modelAmount = Integer.parseInt(jsonObject.getString("modelAmount", ""));
                 
                 Model editModel = modelFacade.find(Long.parseLong(modelId));
                 editModel.setModelName(modelName);
                 editModel.setModelFirm(modelFirm);
                 editModel.setModelSize(modelSize);
-                editModel.setPrice(decimalPrice);
+                editModel.setPrice(strPrice);
                 editModel.setAmount(modelAmount);
                 modelFacade.edit(editModel);
                 

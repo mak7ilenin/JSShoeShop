@@ -1,7 +1,6 @@
 package entity;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
 import java.util.Objects;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -22,7 +21,7 @@ public class User implements Serializable {
     private String firstName;
     private String lastName;
     private String phone;
-    private double money;
+    private String money;
     private String login;
     private String password;
     private String salt;
@@ -32,24 +31,25 @@ public class User implements Serializable {
     }
 
     @Override
-    public String toString() {
-        return "User{" + "id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", phone=" + phone + ", money=" + money + ", login=" + login + ", password=" + password + ", salt=" + salt + ", role=" + role + '}';
+    public int hashCode() {
+        int hash = 7;
+        hash = 67 * hash + Objects.hashCode(this.id);
+        hash = 67 * hash + Objects.hashCode(this.firstName);
+        hash = 67 * hash + Objects.hashCode(this.lastName);
+        hash = 67 * hash + Objects.hashCode(this.phone);
+        hash = 67 * hash + Objects.hashCode(this.money);
+        hash = 67 * hash + Objects.hashCode(this.login);
+        hash = 67 * hash + Objects.hashCode(this.password);
+        hash = 67 * hash + Objects.hashCode(this.salt);
+        hash = 67 * hash + Objects.hashCode(this.role);
+        return hash;
     }
 
     @Override
-    public int hashCode() {
-        int hash = 7;
-        hash = 53 * hash + Objects.hashCode(this.id);
-        hash = 53 * hash + Objects.hashCode(this.firstName);
-        hash = 53 * hash + Objects.hashCode(this.lastName);
-        hash = 53 * hash + Objects.hashCode(this.phone);
-        hash = 53 * hash + (int) (Double.doubleToLongBits(this.money) ^ (Double.doubleToLongBits(this.money) >>> 32));
-        hash = 53 * hash + Objects.hashCode(this.login);
-        hash = 53 * hash + Objects.hashCode(this.password);
-        hash = 53 * hash + Objects.hashCode(this.salt);
-        hash = 53 * hash + Objects.hashCode(this.role);
-        return hash;
+    public String toString() {
+        return "User{" + "id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", phone=" + phone + ", money=" + money + ", login=" + login + ", password=" + password + ", salt=" + salt + ", role=" + role + '}';
     }
+    
 
     @Override
     public boolean equals(Object obj) {
@@ -63,9 +63,6 @@ public class User implements Serializable {
             return false;
         }
         final User other = (User) obj;
-        if (Double.doubleToLongBits(this.money) != Double.doubleToLongBits(other.money)) {
-            return false;
-        }
         if (!Objects.equals(this.firstName, other.firstName)) {
             return false;
         }
@@ -73,6 +70,9 @@ public class User implements Serializable {
             return false;
         }
         if (!Objects.equals(this.phone, other.phone)) {
+            return false;
+        }
+        if (!Objects.equals(this.money, other.money)) {
             return false;
         }
         if (!Objects.equals(this.login, other.login)) {
@@ -93,7 +93,7 @@ public class User implements Serializable {
         return true;
     }
 
-    
+
     public Long getId() {
         return id;
     }
@@ -126,11 +126,11 @@ public class User implements Serializable {
         this.phone = phone;
     }
 
-    public double getMoney() {
+    public String getMoney() {
         return money;
     }
 
-    public void setMoney(double money) {
+    public void setMoney(String money) {
         this.money = money;
     }
 
@@ -165,7 +165,6 @@ public class User implements Serializable {
     public void setRole(String role) {
         this.role = role;
     }
-
-    
+ 
   
 }

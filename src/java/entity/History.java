@@ -25,24 +25,24 @@ public class History implements Serializable{
     private Model model;
     @Temporal(TemporalType.TIMESTAMP)
     private Date buy;
-    private double gain;
+    private String gain;
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 17 * hash + Objects.hashCode(this.id);
+        hash = 17 * hash + Objects.hashCode(this.user);
+        hash = 17 * hash + Objects.hashCode(this.model);
+        hash = 17 * hash + Objects.hashCode(this.buy);
+        hash = 17 * hash + Objects.hashCode(this.gain);
+        return hash;
+    }
 
     @Override
     public String toString() {
         return "History{" + "id=" + id + ", user=" + user + ", model=" + model + ", buy=" + buy + ", gain=" + gain + '}';
     }
-
-    @Override
-    public int hashCode() {
-        int hash = 7;
-        hash = 19 * hash + Objects.hashCode(this.id);
-        hash = 19 * hash + Objects.hashCode(this.user);
-        hash = 19 * hash + Objects.hashCode(this.model);
-        hash = 19 * hash + Objects.hashCode(this.buy);
-        hash = 19 * hash + (int) (Double.doubleToLongBits(this.gain) ^ (Double.doubleToLongBits(this.gain) >>> 32));
-        return hash;
-    }
-
+    
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {
@@ -55,7 +55,7 @@ public class History implements Serializable{
             return false;
         }
         final History other = (History) obj;
-        if (Double.doubleToLongBits(this.gain) != Double.doubleToLongBits(other.gain)) {
+        if (!Objects.equals(this.gain, other.gain)) {
             return false;
         }
         if (!Objects.equals(this.id, other.id)) {
@@ -72,7 +72,7 @@ public class History implements Serializable{
         }
         return true;
     }
-    
+
     public Long getId() {
         return id;
     }
@@ -105,13 +105,13 @@ public class History implements Serializable{
         this.buy = buy;
     }
 
-    public double getGain() {
+    public String getGain() {
         return gain;
     }
 
-    public void setGain(double gain) {
+    public void setGain(String gain) {
         this.gain = gain;
     }
 
-
+   
 }

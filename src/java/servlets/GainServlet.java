@@ -60,11 +60,14 @@ public class GainServlet extends HttpServlet {
         double gainForAMonth = 0;
         switch(path) {
             case "/allGain":
-                double allGain = 0;
+                BigDecimal allGain = new BigDecimal(0);
+                String strAllGain = null;
                 for (History history : histories) {
-                    allGain += history.getGain();
+                    BigDecimal decimalGain = new BigDecimal(history.getGain());
+                    allGain = allGain.add(decimalGain);
+                    strAllGain = allGain.toString();
                 }
-                job.add("status", true).add("allGain", allGain);
+                job.add("status", true).add("allGain", strAllGain);
                 try(PrintWriter out = response.getWriter()) {
                     out.println(job.build().toString());
                 }
@@ -72,7 +75,7 @@ public class GainServlet extends HttpServlet {
             case "/januaryGain":
                 for (History history : histories) {
                     if(history.getBuy().getMonth() == 0) {
-                        gainForAMonth += history.getGain();
+                        gainForAMonth += Double.parseDouble(history.getGain());
                     }
                 }
                 job.add("status", true).add("januaryGain", gainForAMonth);
@@ -83,7 +86,7 @@ public class GainServlet extends HttpServlet {
             case "/februaryGain":
                 for (History history : histories) {
                     if(history.getBuy().getMonth() == 1) {
-                        gainForAMonth += history.getGain();
+                        gainForAMonth += Double.parseDouble(history.getGain());
                     }
                 }
                 job.add("status", true).add("februaryGain", gainForAMonth);
@@ -94,7 +97,7 @@ public class GainServlet extends HttpServlet {
             case "/marchGain":
                 for (History history : histories) {
                     if(history.getBuy().getMonth() == 2) {
-                        gainForAMonth += history.getGain();
+                        gainForAMonth += Double.parseDouble(history.getGain());
                     }
                 }
                 job.add("status", true).add("marchGain", gainForAMonth);
@@ -105,7 +108,7 @@ public class GainServlet extends HttpServlet {
             case "/aprilGain":
                 for (History history : histories) {
                     if(history.getBuy().getMonth() == 3) {
-                        gainForAMonth += history.getGain();
+                        gainForAMonth += Double.parseDouble(history.getGain());
                     }
                 }
                 job.add("status", true).add("aprilGain", gainForAMonth);
@@ -116,7 +119,7 @@ public class GainServlet extends HttpServlet {
             case "/mayGain":
                 for (History history : histories) {
                     if(history.getBuy().getMonth() == 4) {
-                        gainForAMonth += history.getGain();
+                        gainForAMonth += Double.parseDouble(history.getGain());
                     }
                 }
                 job.add("status", true).add("mayGain", gainForAMonth);
@@ -127,7 +130,7 @@ public class GainServlet extends HttpServlet {
             case "/juneGain":
                 for (History history : histories) {
                     if(history.getBuy().getMonth() == 5) {
-                        gainForAMonth += history.getGain();
+                        gainForAMonth += Double.parseDouble(history.getGain());
                     }
                 }
                 job.add("status", true).add("juneGain", gainForAMonth);
@@ -138,7 +141,7 @@ public class GainServlet extends HttpServlet {
             case "/julyGain":
                 for (History history : histories) {
                     if(history.getBuy().getMonth() == 6) {
-                        gainForAMonth += history.getGain();
+                        gainForAMonth += Double.parseDouble(history.getGain());
                     }
                 }
                 job.add("status", true).add("julyGain", gainForAMonth);
@@ -149,7 +152,7 @@ public class GainServlet extends HttpServlet {
             case "/augustGain":
                 for (History history : histories) {
                     if(history.getBuy().getMonth() == 7) {
-                        gainForAMonth += history.getGain();
+                        gainForAMonth += Double.parseDouble(history.getGain());
                     }
                 }
                 job.add("status", true).add("augustGain", gainForAMonth);
@@ -160,7 +163,7 @@ public class GainServlet extends HttpServlet {
             case "/septemberGain":
                 for (History history : histories) {
                     if(history.getBuy().getMonth() == 8) {
-                        gainForAMonth += history.getGain();
+                        gainForAMonth += Double.parseDouble(history.getGain());
                     }
                 }
                 job.add("status", true).add("septemberGain", gainForAMonth);
@@ -171,7 +174,7 @@ public class GainServlet extends HttpServlet {
             case "/octoberGain":
                 for (History history : histories) {
                     if(history.getBuy().getMonth() == 9) {
-                        gainForAMonth += history.getGain();
+                        gainForAMonth += Double.parseDouble(history.getGain());
                     }
                 }
                 job.add("status", true).add("octoberGain", gainForAMonth);
@@ -182,7 +185,7 @@ public class GainServlet extends HttpServlet {
             case "/novemberGain":
                 for (History history : histories) {
                     if(history.getBuy().getMonth() == 10) {
-                        gainForAMonth += history.getGain();
+                        gainForAMonth += Double.parseDouble(history.getGain());
                     }
                 }
                 job.add("status", true).add("novemberGain", gainForAMonth);
@@ -193,7 +196,7 @@ public class GainServlet extends HttpServlet {
             case "/decemberGain":
                 for (History history : histories) {
                     if(history.getBuy().getMonth() == 11) {
-                        gainForAMonth += history.getGain();
+                        gainForAMonth += Double.parseDouble(history.getGain());
                     }
                 }
                 job.add("status", true).add("decemberGain", gainForAMonth);

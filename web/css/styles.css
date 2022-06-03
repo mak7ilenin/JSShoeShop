@@ -2,11 +2,15 @@ html {
     scroll-behavior: smooth;
 }
 
+body {
+    background-color: rgba(240, 128, 128, 0.377);
+}
+
 header {
     width: 100%;
     height: 110px;
-    background-color:rgb(216, 167, 114);
-    box-shadow: 0px 7px 10px 0 lightgray;
+    background-color:rgb(114, 216, 174);
+    box-shadow: 0px 7px 10px 0 rgba(0, 0, 0, 0.253);
     display: flex;
     position: fixed;
     top: 0;
@@ -54,25 +58,49 @@ header ul li {
     margin-left: 20px;
 }
 
-/* .dropdown {
-    position: relative;
-    display: none;
+.dropbtn {
+    outline: none;
+    border: none;
+    cursor: pointer;
+    margin-left: 20px;
+    color: black;
+    font-size: 20px;
+    text-align: center;
+    
+    background-image: linear-gradient(currentColor, currentColor);
+    background-position: 0% 100%;
+    background-repeat: no-repeat;
+    background-size: 0% 2px;
+    transition: background-size .3s;
 }
 
-.dropbtn {
-    color: rgb(0, 0, 0);
-    font-size: 22px;
-    text-align: center;
-    margin-left: 25px;
+.dropbtn:hover {
+    background-size: 100% 2px;
+}
+
+.dropdown {
+    position: relative;
+    top: -1px;
+    left: 42px;
+    display: inline-block;
+    transition: all 0.2s;
+}
+
+#user-panel {
+    padding-right: 150px;
 }
 
 .dropdown-content {
     display: none;
     position: absolute;
     background-color: #f1f1f1;
-    min-width: 160px;
+    min-width: 100px;
+    margin-left: 25px;
+    overflow: auto;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
     z-index: 1;
+    transform: translateY(-80%);
+    transition: all 0.2s;
 }
 
 .dropdown-content a {
@@ -80,15 +108,17 @@ header ul li {
     padding: 12px 16px;
     text-decoration: none;
     display: block;
+    font-size: 16px;
 }
 
-.dropdown-content a:hover {
-    background-color: rgba(211, 211, 211, 0.418);
-} */
-  
-/* .dropdown:hover .dropdown-content {
+.dropdown a:hover {
+    background-color: #ddd;
+}
+
+.show {
     display: block;
-} */
+    transform: translateY(0%);
+}
 
 .log-bar {
     position: absolute;
@@ -127,7 +157,8 @@ footer {
     justify-content: center;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     font-size: 24px;
-    background-color: rgb(216, 167, 114);
+    /* background-color: rgb(216, 167, 114); */
+    background-color:rgb(114, 216, 174);
 }
 
 
@@ -138,7 +169,8 @@ footer {
     width: 40%;
     margin: 0px auto;
     margin-top: 135px;
-    border: 3px solid #f1f1f1;
+    border: 3px solid #000000;
+    background-color: rgba(198, 255, 198, 0.74);
     transition: ease all 0.3s;
 }
 
@@ -513,9 +545,10 @@ button {
     font-family: 'Poppins', sans-serif;
     font-size: 22px;
     font-weight: bold;
-    border: 2px dashed white;
+    border: 1px solid white;
+    letter-spacing: 2px;
     background: rgb(75,198,255);
-    background: linear-gradient(90deg, rgba(75,198,255,1) 0%, rgb(222, 166, 255) 50%, rgba(75,198,255,1) 100%);
+    background: linear-gradient(180deg, rgb(218, 163, 255) 0%, rgba(105, 208, 255, 0.699) 100%, rgb(200, 118, 255) 0%);
 }
 
 .mid-content select option {
@@ -532,7 +565,7 @@ button {
 .user-edit-container {
     width: 50%;
     margin: 0 auto;
-    margin-top: 135px;
+    margin-top: 115px;
     padding: 15px 55px 37px 55px;
     border: 1px solid lightgray;
     border-radius: 10px;
@@ -547,13 +580,37 @@ button {
 .user-edit-title {
     font-family: 'Poppins', sans-serif;
     font-size: 48px;
-    /* margin-bottom: 25px; */
+    margin-bottom: 5px;
     display: flex;
     justify-content: center;
     align-items: center;
     color: white;
 }
 
+.myself-edit-title {
+    font-family: 'Poppins', sans-serif;
+    font-size: 48px;
+    margin: 65px auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+}
+
+.myself-edit-container {
+    width: 50%;
+    margin: 0 auto;
+    margin-top: 155px;
+    padding: 15px 55px 37px 55px;
+    border: 1px solid lightgray;
+    border-radius: 10px;
+    overflow: hidden;
+    background: #9152f8;
+    background: -webkit-linear-gradient(top, #7579ff, #b224ef);
+    background: -o-linear-gradient(top, #7579ff, #b224ef);
+    background: -moz-linear-gradient(top, #7579ff, #b224ef);
+    background: linear-gradient(top, #7579ff, #b224ef);
+}
 
 /* purchase */
 
