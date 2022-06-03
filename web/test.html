@@ -1,17 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/styles.css">
-    
+    <link rel="stylesheet/less" type="text/css" href="components/upload.scss" />
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
 
     <title>Shoeger</title>
 </head>
+
 <body>
     <header>
         <div class="logo-container">
@@ -34,44 +37,42 @@
                     <a id="edit-user" href="#">Изменить пользователя</a>
                 </div>
             </div>
-        </ul>  
+        </ul>
     </header>
     <p id="info" class="text-info">&nbsp;</p>
     <main id="content">
-        <div id="gainCont" class="gain-container">
-            <button id="allGainBtn">
-                Показать заработок за всё время
-            </button>
-            <div id="collapseExample">
-                <p id="allGainTxt">&nbsp;</p>
-            </div>
-            <h3>Прибыль магазина за определенный месяц</h3>
-            <p id="gainForAMonth">
-                &nbsp;
-            </p>
-            <div class="allGainContainers" style="font-size: 18px; font-family: Molot">
-                <div id="firstColumn" style="width: 35em; text-align: center">
-                    <div id="gainForSeptember" class="month list-group-item list-group-item-action list-group-item-warning">Сентябрь</div>
-                    <div id="gainForOctober" class="month list-group-item list-group-item-action list-group-item-warning">Октябрь</div>
-                    <div id="gainForNovember" class="month list-group-item list-group-item-action list-group-item-warning">Ноябрь</div>
-
-                    <div id="gainForMarch" class="month list-group-item list-group-item-action list-group-item-info">Март</div>
-                    <div id="gainForApril" class="month list-group-item list-group-item-action list-group-item-info">Апрель</div>
-                    <div id="gainForMay" class="month list-group-item list-group-item-action list-group-item-info">Май</div>
+        <div id="upload-content">
+            <div class="top-content">
+                <div class="img-container">
+                    <img src="Images/upload.png" alt="upload">
                 </div>
-                <div id="secondColumn" style="width: 35em; text-align: center">
-                    <div id="gainForDecember" class="month list-group-item list-group-item-action list-group-item-primary">Декабрь</div>
-                    <div id="gainForJanuary" class="month list-group-item list-group-item-action list-group-item-primary">Январь</div>
-                    <div id="gainForFebruary" class="month list-group-item list-group-item-action list-group-item-primary">Февраль</div>
-
-                    <div id="gainForJune" class="month list-group-item list-group-item-action list-group-item-danger">Июнь</div>
-                    <div id="gainForJuly" class="month list-group-item list-group-item-action list-group-item-danger">Июль</div>
-                    <div id="gainForAugust" class="month list-group-item list-group-item-action list-group-item-danger">Август</div>
-                </div>   
+                <div class="after-img">
+                    <p>Загрузка изображений</p>
+                </div>
+            </div>
+            <div class="mid-content">
+                <label for="forImg">Выберите файл</label>
+                <label name="forImg" class="download-img">
+                    <input type="file" id="inputTag" name="img" accept="image/*"> <br>
+                </label>
+                <div class="selected-file">
+                    <input id="imageName" readonly>
+                </div>
             </div>
         </div>
     </main>
     <footer>Dzjubenko 2022</footer>
     <script type="module" src="js/index.js"></script>
+    <script>
+        let input = document.getElementById("inputTag");
+        let imageName = document.getElementById("imageName")
+
+        input.addEventListener("change", ()=>{
+            let inputImage = document.querySelector("input[type=file]").files[0];
+            imageName.value = inputImage.name;
+        })
+    </script>
+    <script src="components/upload.js" type="text/javascript"></script>
 </body>
+
 </html>

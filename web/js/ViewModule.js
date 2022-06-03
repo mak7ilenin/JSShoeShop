@@ -515,6 +515,16 @@ class ViewModule {
         });
 
     }
+    showUploadImage() {
+        const content = document.getElementById('content');
+        content.innerHTML = 
+        `<div id="upload-content">
+            <label for="img">Выбрать изображение:</label>
+            <input type="file" id="img" name="img" accept="image/*">
+            <input type="submit">
+        </div>`
+        
+    }
 }
 const viewModule = new ViewModule();
 export {viewModule};

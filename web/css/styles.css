@@ -1,7 +1,6 @@
 html {
     scroll-behavior: smooth;
 }
-
 header {
     width: 100%;
     height: 110px;
@@ -13,7 +12,6 @@ header {
     left: 0;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
-
 a:not(.psw a, .dropdown-content a) {
     text-decoration: none; 
     color: black;
@@ -23,37 +21,31 @@ a:not(.psw a, .dropdown-content a) {
     background-size: 0% 2px;
     transition: background-size .3s;
 }
-
 a:hover:not(.logo-container a) {
-    background-size: 100% 2px;
+    background-size: 100% 2px; 
 }
-
 .logo-container {
     display: flex;
     align-items: center;
     justify-content: center;
 }
-
 .logo-container img {
     width: 240px;
     height: 110px;
     margin-top: 11px
 }
-
 header ul:not(.log-bar){
     width: 80%;
     display: flex;
     justify-content: flex-start;
     margin-top: 45px;
 }
-
 header ul li {
     list-style: none;
     font-size: 20px;
     text-align: center;
     margin-left: 20px;
 }
-
 .dropbtn {
     outline: none;
     border: none;
@@ -73,7 +65,6 @@ header ul li {
 .dropbtn:hover {
     background-size: 100% 2px;
 }
-
 .dropdown {
     position: relative;
     top: -1px;
@@ -81,15 +72,12 @@ header ul li {
     display: inline-block;
     transition: all 0.2s;
 }
-
 #user-panel {
     padding-right: 150px;
 }
-
 #model-panel {
     top: -2px;
 }
-
 .dropdown-content {
     display: none;
     position: absolute;
@@ -102,7 +90,6 @@ header ul li {
     transform: translateY(-80%);
     transition: all 0.2s;
 }
-
 .dropdown-content a {
     color: black;
     padding: 12px 16px;
@@ -110,26 +97,21 @@ header ul li {
     display: block;
     font-size: 16px;
 }
-
 .dropdown a:hover {
     background-color: #ddd;
 }
-
 .show {
     display: block;
     transform: translateY(0%);
 }
-
 .log-bar {
     position: absolute;
     right: 50px;
     top: 25px;
 }
-
 #logOut {
     display: none;
 }
-
 #info {
     width: 30%;
     margin: 0 auto;
@@ -144,12 +126,10 @@ header ul li {
     font-size: 22px;
     margin-top: 10px;
 }
-
 main {
     width: 85%;
     margin: 0 auto;
 }
-
 footer {
     width: 100%;
     height: 50px;
@@ -177,11 +157,9 @@ footer {
     background-color: rgba(198, 255, 198, 0.74);
     transition: ease all 0.3s;
 }
-
 .login-container:hover {
     box-shadow: 1px 8px 10px 0 lightgray;
 }
-
 label {
     width: 100%;
     display: flex;
@@ -190,7 +168,6 @@ label {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     font-size: 20px;
 }
-  
 .container #username, .container #password {
     width: 70%;
     padding: 12px 20px;
@@ -200,7 +177,6 @@ label {
     box-sizing: border-box;
     font-size: 20px;
 }
-
 .container #login {
     width: 70%;
     font-family: 'Courier New', Courier, monospace;
@@ -217,13 +193,11 @@ label {
     border-radius: 40px;
     transition: all 0.4s;
 }
-
 .container #login:hover {
     background-color: rgb(30, 165, 255);
     transform: scale(1.05);
     transition: all 0.2s;
 }
-
 .container #registration {
     width: 68%;
     font-family: 'Courier New', Courier, monospace;
@@ -238,31 +212,25 @@ label {
     cursor: pointer;
     transition: all 0.4s;
 }
-
 .container #registration:hover {
     transform: scale(1.05);
     background-color: rgb(223, 223, 223);
 }
-
 .imgcontainer {
     text-align: center;
     margin: 24px 0 12px 0;
 }
-
 img.avatar {
     width: 40%;
     border-radius: 50%;
 }
-
 .container {
     padding: 16px;
 }
-
 .remember {
     display: flex;
     justify-content: flex-end;
 }
-
 input[type=checkbox] {
     margin-top: 7px;
     margin-right: 7px;
@@ -281,11 +249,9 @@ input[type=checkbox] {
     border: 3px solid #f1f1f1;
     transition: ease all .3s;
 }
-
 .registration-container:hover {
     box-shadow: 0 0 60px 6px lightgray;
 }
-
 .registration-heading {
     height: 100px;
     margin-bottom: 15px;
@@ -300,11 +266,9 @@ input[type=checkbox] {
     align-items: center;
     transition: ease all .3s;
 }
-
 .registration-container:hover > .registration-heading {
     box-shadow: 0 0 20px 5px rgb(184, 184, 184);
 }
-
 .registration-heading h2 {
     color: rgb(179, 255, 0);
     text-shadow:
@@ -322,7 +286,6 @@ input[type=checkbox] {
     display: flex;
     justify-content: center;
 }
-
 .registration-heading h2:before {
     position: absolute;
     left: 0;
@@ -330,17 +293,14 @@ input[type=checkbox] {
     content: attr(filter-content);
     filter: url(#motion-blur-filter);
 }
-
 .registration-heading svg {
     display: none;
 }
-
 .input-container {
     display: flex;
     width: 100%;
     margin-bottom: 15px;
 }
-
 .input-container .input-field {
     width: 85.1%;
     margin: 0px auto;
@@ -348,15 +308,12 @@ input[type=checkbox] {
     margin-left: 22px;
     outline: none;
 }
-
 .input-container .input-field {
     font-size: 20px;
 }
-
 .input-field:focus {
     border: 2px solid rgb(72, 163, 255);
 }
-
 #register {
     width: 98%;
     font-family: 'Courier New', Courier, monospace;
@@ -375,14 +332,12 @@ input[type=checkbox] {
     opacity: 0.9;
     transition: ease all .3s;
 }
-
 #register:hover {
     opacity: 1;
     transform: scale(1.02);
     box-shadow: 0px 0px 30px 3px rgb(95, 175, 255);
     font-size: 24px;
 }
-
 .input-container .input-img {
     width: 45px;
     height: 45px;
@@ -408,12 +363,10 @@ input[type=checkbox] {
     background: -moz-linear-gradient(top, #7579ff, #b224ef);
     background: linear-gradient(top, #7579ff, #b224ef);
 }
-
 .mid-content {
     width: 100%;
     padding: 0;
 }
-
 .container-title {
     padding-bottom: 40px;
     font-family: 'Poppins', sans-serif;
@@ -425,15 +378,12 @@ input[type=checkbox] {
     text-transform: uppercase;
     display: block;
 }
-
 .validate-input {
     position: relative;
 }
-
 .input100::placeholder {
     color: rgb(255, 255, 255);
 }
-
 .input100 {
     font-family: 'Poppins', sans-serif;
     font-size: 16px;
@@ -447,32 +397,26 @@ input[type=checkbox] {
     border-bottom: 2px solid rgba(255,255,255,0.24);
     margin-bottom: 30px;
 }
-
 input {
     outline: none;
     border: none;
     transition: ease all .2s;
 }
-
 button, input {
     overflow: visible;
 }
-
 button, input, optgroup, select, textarea {
     margin: 0;
     font-family: inherit;
     font-size: inherit;
     line-height: inherit;
 }
-
 .login100-form-btn:hover {
     color: #fff;
 }
-
 button:hover {
     cursor: pointer;
 }
-
 .login100-form-btn {
     width: 40%;
     height: 50px;
@@ -493,11 +437,9 @@ button:hover {
     z-index: 1;
     transition: all 0.4s;
 }
-
 .login100-form-btn:hover {
     box-shadow: 0 0 30px 10px cyan;
 }
-
 button {
     outline: none;
     border: none;
@@ -522,7 +464,6 @@ button {
     background: -moz-linear-gradient(top, #7579ff, #b224ef);
     background: linear-gradient(top, #7579ff, #b224ef);
 }
-
 .model-edit-title {
     font-family: 'Poppins', sans-serif;
     font-size: 48px;
@@ -532,7 +473,6 @@ button {
     align-items: center;
     color: white;
 }
-
 .mid-content label {
     font-family: 'Poppins', sans-serif;
     font-weight: medium;
@@ -540,7 +480,6 @@ button {
     font-size: 30px;
     color: white;
 }
-
 .mid-content select {
     width: 100%;
     padding: 10px;
@@ -554,7 +493,6 @@ button {
     background: rgb(75,198,255);
     background: linear-gradient(180deg, rgb(218, 163, 255) 0%, rgba(105, 208, 255, 0.699) 100%, rgb(200, 118, 255) 0%);
 }
-
 .mid-content select option {
     font-family: 'Poppins', sans-serif;
     font-style: italic;
@@ -580,7 +518,6 @@ button {
     background: -moz-linear-gradient(top, #7579ff, #b224ef);
     background: linear-gradient(top, #7579ff, #b224ef);
 }
-
 .user-edit-title {
     font-family: 'Poppins', sans-serif;
     font-size: 48px;
@@ -590,7 +527,6 @@ button {
     align-items: center;
     color: white;
 }
-
 .myself-edit-title {
     font-family: 'Poppins', sans-serif;
     font-size: 48px;
@@ -600,7 +536,6 @@ button {
     align-items: center;
     color: white;
 }
-
 .myself-edit-container {
     width: 50%;
     margin: 0 auto;
@@ -634,7 +569,6 @@ button {
     background: -moz-linear-gradient(top, #7579ff, #b224ef);
     background: linear-gradient(top, #7579ff, #b224ef);
 }
-
 .purchase-title {
     font-family: 'Poppins', sans-serif;
     font-size: 48px;
@@ -644,11 +578,9 @@ button {
     align-items: center;
     color: white;
 }
-
 .purchase-container .mid-content .container-login100-form-btn {
     margin-top: 25px;
 }
-
 .purchase-container .mid-content label {
     margin-bottom: 20px
 }
@@ -672,7 +604,6 @@ button {
     background: -moz-linear-gradient(top, #7579ff, #b224ef);
     background: linear-gradient(top, #7579ff, #b224ef);
 }
-
 .role-title {
     font-family: 'Poppins', sans-serif;
     font-size: 48px;
@@ -682,7 +613,6 @@ button {
     align-items: center;
     color: white;
 }
-
 #list-roles {
     margin: 30px auto;
 }
@@ -704,7 +634,6 @@ button {
     margin-top: 140px;
     transition: ease all 0.3s;
 }
-
 #allGainBtn {
     width: 45%;
     font-family: 'Molot' sans-serif;
@@ -722,7 +651,6 @@ button {
     align-items: center;
     transition: all 0.13s;
 }
-
 #allGainBtn:hover {
     transform: scale(1.05);
     border-radius: 15px;
@@ -730,7 +658,6 @@ button {
     background-color: rgb(123, 246, 255);
     box-shadow: 0 0 30px 1px rgba(102, 102, 102, 0.685);
 }
-
 #collapseExample {
     position: absolute;
     left: 45%;
@@ -741,19 +668,16 @@ button {
     transition: ease all 2s;
     transition-timing-function: cubic-bezier(1,-0.11,.08,2);
 }
-
 #allGainTxt {
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     font-size: 35px;
     font-weight: bold;
     text-align: center;
 }
-
 #gainForAMonth {
     text-align: center;
     font-size: 20px;
 }
-
 .gain-container h3 {
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     text-align: center;
@@ -763,21 +687,17 @@ button {
     transition: ease all 1s;
     transition-timing-function: cubic-bezier(1,-0.11,.08,2);
 }
-
 .allGainContainers {
     display: flex;
     justify-content: center;
     align-items: center;
 }
-
 #gainForNovember {
     margin-bottom: 50px;
 }
-
 #gainForFebruary {
     margin-bottom: 50px;
 }
-
 .list-group-item-warning {
     background-color: rgb(255, 207, 161);
     transition: ease all 0.2s;
@@ -794,7 +714,6 @@ button {
     background-color: rgb(255, 161, 161);
     transition: ease all 0.2s;
 }
-
 .list-group-item-warning:hover {
     background-color: rgb(255, 123, 0);
     color: white;
@@ -811,7 +730,6 @@ button {
     background-color: rgb(255, 0, 0);
     color: white;
 }
-
 .list-group-item {
     width: 90%;
     height: 20px;
@@ -827,11 +745,120 @@ button {
     cursor: pointer;
     transition: ease all 0.2s;
 }
-
 .list-group-item:hover {
     transform: scale(1.02);
     opacity: 1;
     border: 1px solid rgba(0, 0, 0, 0.342);
     font-size: 20px;
     font-weight: bold;
+}
+
+
+
+/* upload */
+
+
+#upload-content {
+    width: 35%;
+    height: auto;
+    margin: 0 auto;
+    margin-top: 170px;
+    border: 1px solid lightgray;
+    border-radius: 10px;
+    overflow: hidden;
+    border: 1px solid rgba(128, 128, 128, 0.466);
+    background: #9152f8;
+    background: -webkit-linear-gradient(top, #ff73f31f, #94c4e454);
+    background: -o-linear-gradient(top, #ff73f31f, #94c4e454);
+    background: -moz-linear-gradient(top, #ff73f31f, #94c4e454);
+    background: linear-gradient(top, #ff73f31f, #94c4e454);
+}
+#upload-content .top-content {
+    width: 100%;
+    height: 70px;
+    display: flex;
+    background: rgb(75,198,255);
+    background: linear-gradient(180deg, rgba(0, 255, 64, 0.103) 83%, rgba(0, 0, 0, 0.123) 100%);
+    border-bottom: 2px solid gray;
+    align-items: center;
+}
+#upload-content .top-content .img-container img {
+    width: 70px;
+    padding: 0 5px;
+    filter: grayscale(100%);
+    transform: scale(0.95);
+    transition: ease all .3s;
+}
+#upload-content .top-content .img-container {
+    display: flex;
+}
+.after-img {
+    width: 100%;
+    height: 85%;
+    border-left: 2px solid rgba(128, 128, 128, 0.432);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.after-img p {
+    padding: 0;
+    justify-content: center;
+    text-align: center;
+    font-size: 23px;
+    text-transform: uppercase;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+#upload-content .top-content .img-container img:hover {
+    filter: grayscale(0);
+    transform: scale(1.02);
+}
+.mid-content {
+    height: 520px;
+    border:thin solid black;
+}
+.mid-content label:not(.download-img) {
+    width: 60%;
+    padding: 8px 0;
+    margin: 0 auto;
+    margin-top: 40px;
+    color: black;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-weight: bold;
+    border-bottom: 2px solid gray;
+}
+#upload-content .mid-content .download-img {
+    margin-top: 15px;
+    font-size: 30px;
+    color: black;
+    font-style: normal;
+    cursor:pointer;
+}
+.download-img {
+    width: 50%;
+    height: 50%;
+    position: relative;
+    top: 20px;
+    left: 110px;
+    background-image: url("../Images/upload-secondary.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+#inputTag {
+    display: none;
+}
+.selected-file {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 60px;
+}
+#imageName {
+    width: 55%;
+    padding: 15px;
+    border-radius: 5px;
+    border: 1px solid gray;
+    font-style: italic;
+    font-size: 18px;
 }

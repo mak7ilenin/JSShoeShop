@@ -2,5 +2,5 @@
 /dist
 /nbproject
 /test
-/src/conf
+src/conf/
 build.xml
