@@ -2,7 +2,6 @@ class MyselfModule {
     insertMyselfInfo() {
         let myId;
         myId = JSON.parse(sessionStorage.getItem('user')).id.toString();
-        console.log(myId);
         const myInfo = {
             "id": myId
         }
@@ -19,7 +18,9 @@ class MyselfModule {
                         document.getElementById('user-first-name').value = response.user.firstname;
                         document.getElementById('user-last-name').value = response.user.lastname;
                         document.getElementById('user-phone').value = response.user.phone;
-                        document.getElementById('user-money').value = response.user.money;
+                        var formatedMoney = new Intl.NumberFormat().format(response.user.money);
+                        var frMoney = formatedMoney.replace(",",".");
+                        document.getElementById('user-money').value = frMoney;
                         document.getElementById('user-username').value = response.user.username;
                     }else {
                         document.getElementById('info').innerHTML = response.info;                 
@@ -58,30 +59,30 @@ class MyselfModule {
         promiseEditMyself.then(response => response.json())
         .then(response => {
             if(response.status) {
-                    const body = document.getElementsByTagName('body');
-                        body[0].style.transition = 'ease all 0.4s';
-                        body[0].style.transitionTimingFunction = 'cubic-bezier(.76,.08,.47,.79)';
-                        body[0].style.backgroundColor = 'rgb(0, 255, 0)'
-                        setTimeout(() => {
-                            body[0].style.transition = 'ease all 0.7s';
-                            body[0].style.backgroundColor = 'white'
-                        }, 230);
-                    document.getElementById('info').innerHTML = response.info;
-                }else {
-                    document.getElementById('info').innerHTML = response.info;
-                }
-            })
-            .catch(error => {
-                document.getElementById('info').innerHTML = error.info;
                 const body = document.getElementsByTagName('body');
                 body[0].style.transition = 'ease all 0.4s';
                 body[0].style.transitionTimingFunction = 'cubic-bezier(.76,.08,.47,.79)';
-                body[0].style.backgroundColor = 'red'
+                body[0].style.backgroundColor = 'rgb(0, 255, 0)'
                 setTimeout(() => {
                     body[0].style.transition = 'ease all 0.7s';
                     body[0].style.backgroundColor = 'white'
-                }, 50);
-            });
+                }, 230);
+                document.getElementById('info').innerHTML = response.info;
+            }else {
+                document.getElementById('info').innerHTML = response.info;
+            }
+            })
+        .catch(error => {
+            document.getElementById('info').innerHTML = error.info;
+            const body = document.getElementsByTagName('body');
+            body[0].style.transition = 'ease all 0.4s';
+            body[0].style.transitionTimingFunction = 'cubic-bezier(.76,.08,.47,.79)';
+            body[0].style.backgroundColor = 'red'
+            setTimeout(() => {
+                body[0].style.transition = 'ease all 0.7s';
+                body[0].style.backgroundColor = 'white'
+            }, 230);
+        });
     }
 }
 const myselfModule = new MyselfModule();

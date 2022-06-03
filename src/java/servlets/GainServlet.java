@@ -9,6 +9,7 @@ import entity.History;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.math.BigDecimal;
+import java.text.DecimalFormat;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.json.Json;
@@ -57,6 +58,7 @@ public class GainServlet extends HttpServlet {
         JsonObjectBuilder job = Json.createObjectBuilder();
         String path = request.getServletPath();
         List<History> histories = historyFacade.findAll();
+        DecimalFormat df = new DecimalFormat("0.00");
         double gainForAMonth = 0;
         switch(path) {
             case "/allGain":
@@ -64,7 +66,8 @@ public class GainServlet extends HttpServlet {
                 for (History history : histories) {
                     allGain += history.getGain();
                 }
-                job.add("status", true).add("allGain", allGain);
+                df = new DecimalFormat("0.00");
+                job.add("status", true).add("allGain", df.format(allGain));
                 try(PrintWriter out = response.getWriter()) {
                     out.println(job.build().toString());
                 }
@@ -75,7 +78,7 @@ public class GainServlet extends HttpServlet {
                         gainForAMonth += history.getGain();
                     }
                 }
-                job.add("status", true).add("januaryGain", gainForAMonth);
+                job.add("status", true).add("januaryGain", df.format(gainForAMonth));
                 try(PrintWriter out = response.getWriter()) {
                     out.println(job.build().toString());
                 }
@@ -86,7 +89,7 @@ public class GainServlet extends HttpServlet {
                         gainForAMonth += history.getGain();
                     }
                 }
-                job.add("status", true).add("februaryGain", gainForAMonth);
+                job.add("status", true).add("februaryGain", df.format(gainForAMonth));
                 try(PrintWriter out = response.getWriter()) {
                     out.println(job.build().toString());
                 }
@@ -97,7 +100,7 @@ public class GainServlet extends HttpServlet {
                         gainForAMonth += history.getGain();
                     }
                 }
-                job.add("status", true).add("marchGain", gainForAMonth);
+                job.add("status", true).add("marchGain", df.format(gainForAMonth));
                 try(PrintWriter out = response.getWriter()) {
                     out.println(job.build().toString());
                 }
@@ -108,7 +111,7 @@ public class GainServlet extends HttpServlet {
                         gainForAMonth += history.getGain();
                     }
                 }
-                job.add("status", true).add("aprilGain", gainForAMonth);
+                job.add("status", true).add("aprilGain", df.format(gainForAMonth));
                 try(PrintWriter out = response.getWriter()) {
                     out.println(job.build().toString());
                 }
@@ -119,7 +122,7 @@ public class GainServlet extends HttpServlet {
                         gainForAMonth += history.getGain();
                     }
                 }
-                job.add("status", true).add("mayGain", gainForAMonth);
+                job.add("status", true).add("mayGain", df.format(gainForAMonth));
                 try(PrintWriter out = response.getWriter()) {
                     out.println(job.build().toString());
                 }
@@ -130,7 +133,7 @@ public class GainServlet extends HttpServlet {
                         gainForAMonth += history.getGain();
                     }
                 }
-                job.add("status", true).add("juneGain", gainForAMonth);
+                job.add("status", true).add("juneGain", df.format(gainForAMonth));
                 try(PrintWriter out = response.getWriter()) {
                     out.println(job.build().toString());
                 }
@@ -141,7 +144,7 @@ public class GainServlet extends HttpServlet {
                         gainForAMonth += history.getGain();
                     }
                 }
-                job.add("status", true).add("julyGain", gainForAMonth);
+                job.add("status", true).add("julyGain", df.format(gainForAMonth));
                 try(PrintWriter out = response.getWriter()) {
                     out.println(job.build().toString());
                 }
@@ -152,7 +155,7 @@ public class GainServlet extends HttpServlet {
                         gainForAMonth += history.getGain();
                     }
                 }
-                job.add("status", true).add("augustGain", gainForAMonth);
+                job.add("status", true).add("augustGain", df.format(gainForAMonth));
                 try(PrintWriter out = response.getWriter()) {
                     out.println(job.build().toString());
                 }
@@ -163,7 +166,7 @@ public class GainServlet extends HttpServlet {
                         gainForAMonth += history.getGain();
                     }
                 }
-                job.add("status", true).add("septemberGain", gainForAMonth);
+                job.add("status", true).add("septemberGain", df.format(gainForAMonth));
                 try(PrintWriter out = response.getWriter()) {
                     out.println(job.build().toString());
                 }
@@ -174,7 +177,7 @@ public class GainServlet extends HttpServlet {
                         gainForAMonth += history.getGain();
                     }
                 }
-                job.add("status", true).add("octoberGain", gainForAMonth);
+                job.add("status", true).add("octoberGain", df.format(gainForAMonth));
                 try(PrintWriter out = response.getWriter()) {
                     out.println(job.build().toString());
                 }
@@ -185,7 +188,7 @@ public class GainServlet extends HttpServlet {
                         gainForAMonth += history.getGain();
                     }
                 }
-                job.add("status", true).add("novemberGain", gainForAMonth);
+                job.add("status", true).add("novemberGain", df.format(gainForAMonth));
                 try(PrintWriter out = response.getWriter()) {
                     out.println(job.build().toString());
                 }
@@ -196,7 +199,7 @@ public class GainServlet extends HttpServlet {
                         gainForAMonth += history.getGain();
                     }
                 }
-                job.add("status", true).add("decemberGain", gainForAMonth);
+                job.add("status", true).add("decemberGain", df.format(gainForAMonth));
                 try(PrintWriter out = response.getWriter()) {
                     out.println(job.build().toString());
                 }

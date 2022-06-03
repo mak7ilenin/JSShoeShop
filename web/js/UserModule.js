@@ -28,10 +28,26 @@ class UserModule {
                         document.getElementById('info').innerHTML = "Введите сумму больше нуля!";
                         return;
                     }
+                    const body = document.getElementsByTagName('body');
+                    body[0].style.transition = 'ease all 0.4s';
+                    body[0].style.transitionTimingFunction = 'cubic-bezier(.76,.08,.47,.79)';
+                    body[0].style.backgroundColor = 'rgb(0, 255, 0)'
+                    setTimeout(() => {
+                        body[0].style.transition = 'ease all 0.7s';
+                        body[0].style.backgroundColor = 'white'
+                    }, 230);
                     document.getElementById('info').innerHTML = response.info;
                     sessionStorage.setItem('newUser', JSON.stringify(response.newUser));
                 })
                 .catch(error => {
+                    const body = document.getElementsByTagName('body');
+                    body[0].style.transition = 'ease all 0.4s';
+                    body[0].style.transitionTimingFunction = 'cubic-bezier(.76,.08,.47,.79)';
+                    body[0].style.backgroundColor = 'red'
+                    setTimeout(() => {
+                        body[0].style.transition = 'ease all 0.7s';
+                        body[0].style.backgroundColor = 'white'
+                    }, 230);
                     if(firstName === "" || lastName === "" || username === "" || password === "" || phone === "" || money === "") {
                         document.getElementById('info').innerHTML = "Заполните все поля!";
                         return;
@@ -53,12 +69,16 @@ class UserModule {
                         userSelect.options.length = 0;
                         let option = null;
                         option = document.createElement('option');
-                        option.text = "--Выберите пользователя--";
+                        option.text = "-Выберите пользователя-";
                         option.value = '';
                         userSelect.add(option);
                         for (let i = 0; i < response.options.length; i++) {
                             option = document.createElement('option');
-                            option.text = response.options[i].firstname + ' // ' + response.options[i].lastname + ' // ' + response.options[i].money + '$';
+                            let formatedMoney = new Intl.NumberFormat().format(response.options[i].money);
+                            let frMoney = formatedMoney.replace(",",".");
+                            option.text = response.options[i].firstname 
+                            + ' // ' + response.options[i].lastname 
+                            + ' // ' + frMoney + '$';
                             option.value = response.options[i].id;
                             userSelect.add(option);
                         }
@@ -95,7 +115,9 @@ class UserModule {
                         document.getElementById('user-first-name').value = response.user.firstname;
                         document.getElementById('user-last-name').value = response.user.lastname;
                         document.getElementById('user-phone').value = response.user.phone;
-                        document.getElementById('user-money').value = response.user.money;
+                        let formatedMoney = new Intl.NumberFormat().format(response.user.money);
+                        let frMoney = formatedMoney.replace(",",".");
+                        document.getElementById('user-money').value = frMoney;
                         document.getElementById('user-username').value = response.user.username;
                     }else {
                         document.getElementById('info').innerHTML = response.info;                 
@@ -134,13 +156,13 @@ class UserModule {
         .then(response => {
             if(response.status) {
                     const body = document.getElementsByTagName('body');
-                        body[0].style.transition = 'ease all 0.4s';
-                        body[0].style.transitionTimingFunction = 'cubic-bezier(.76,.08,.47,.79)';
-                        body[0].style.backgroundColor = 'rgb(0, 255, 0)'
-                        setTimeout(() => {
-                            body[0].style.transition = 'ease all 0.7s';
-                            body[0].style.backgroundColor = 'white'
-                        }, 230);
+                    body[0].style.transition = 'ease all 0.4s';
+                    body[0].style.transitionTimingFunction = 'cubic-bezier(.76,.08,.47,.79)';
+                    body[0].style.backgroundColor = 'rgb(0, 255, 0)'
+                    setTimeout(() => {
+                        body[0].style.transition = 'ease all 0.7s';
+                        body[0].style.backgroundColor = 'white'
+                    }, 230);
                     document.getElementById('info').innerHTML = response.info;
                 }else {
                     document.getElementById('info').innerHTML = response.info;
@@ -155,7 +177,7 @@ class UserModule {
                 setTimeout(() => {
                     body[0].style.transition = 'ease all 0.7s';
                     body[0].style.backgroundColor = 'white'
-                }, 50);
+                }, 230);
             });
     }
 }

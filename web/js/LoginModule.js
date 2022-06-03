@@ -51,6 +51,7 @@ class LoginModule {
                         sessionStorage.removeItem('user');
                     }
                     checkRole();
+                    document.getElementById('info').innerHTML = 'До скорой встречи!';
                 }
             });
     }

@@ -13,12 +13,17 @@ class PurchaseModule {
                         modelSelect.options.length = 0;
                         let option = null;
                         option = document.createElement('option');
-                        option.text = "--Выберите модель--";
+                        option.text = "-Выберите модель-";
                         option.value = '';
                         modelSelect.add(option);
                         for (let i = 0; i < response.options.length; i++) {
                             option = document.createElement('option');
-                            option.text = response.options[i].modelName + ' // ' + response.options[i].modelFirm + ' // ' + response.options[i].modelPrice + '$' + ' // ' + response.options[i].modelAmount;
+                            var formatedPrice = new Intl.NumberFormat().format(response.options[i].modelPrice);
+                            var frPrice = formatedPrice.replace(",",".");
+                            option.text = response.options[i].modelName + ' // ' 
+                            + response.options[i].modelFirm + ' // ' 
+                            + frPrice + '$ // ' 
+                            + response.options[i].modelAmount;
                             option.value = response.options[i].id;
                             modelSelect.add(option);
                         }
@@ -52,11 +57,48 @@ class PurchaseModule {
         promisePurchase.then(response => response.json())
             .then(response => {
                 if(response.status) {
+                    const body = document.getElementsByTagName('body');
+                    body[0].style.transition = 'ease all 0.4s';
+                    body[0].style.transitionTimingFunction = 'cubic-bezier(.76,.08,.47,.79)';
+                    body[0].style.backgroundColor = 'rgb(0, 255, 0)'
+                    setTimeout(() => {
+                        body[0].style.transition = 'ease all 0.7s';
+                        body[0].style.backgroundColor = 'white'
+                    }, 230);
                     document.getElementById('info').innerHTML = response.info;
+                    if(response.noMoney) {
+                        const body = document.getElementsByTagName('body');
+                        body[0].style.transition = 'ease all 0.4s';
+                        body[0].style.transitionTimingFunction = 'cubic-bezier(.76,.08,.47,.79)';
+                        body[0].style.backgroundColor = 'red'
+                        setTimeout(() => {
+                            body[0].style.transition = 'ease all 0.7s';
+                            body[0].style.backgroundColor = 'white'
+                        }, 230);
+                        document.getElementById('info').innerHTML = response.info;
+                    }
+                    if(response.empty) {
+                        const body = document.getElementsByTagName('body');
+                        body[0].style.transition = 'ease all 0.4s';
+                        body[0].style.transitionTimingFunction = 'cubic-bezier(.76,.08,.47,.79)';
+                        body[0].style.backgroundColor = 'red'
+                        setTimeout(() => {
+                            body[0].style.transition = 'ease all 0.7s';
+                            body[0].style.backgroundColor = 'white'
+                        }, 230);
+                        document.getElementById('info').innerHTML = response.info;
+                    }
                 }
             })
             .catch(error => {
-                document.getElementById('info').innerHTML = error.message;
+                const body = document.getElementsByTagName('body');
+                body[0].style.transition = 'ease all 0.4s';
+                body[0].style.transitionTimingFunction = 'cubic-bezier(.76,.08,.47,.79)';
+                body[0].style.backgroundColor = 'red'
+                setTimeout(() => {
+                    body[0].style.transition = 'ease all 0.7s';
+                    body[0].style.backgroundColor = 'white'
+                }, 230);
             });
     }
 }

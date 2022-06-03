@@ -49,6 +49,8 @@ public class LoginServlet extends HttpServlet {
     Calendar calendar = Calendar.getInstance();
     Date date = calendar.getTime();
     
+    DecimalFormat df = new DecimalFormat("0.00");
+    
     @Override
     public void init() throws ServletException {
         super.init();
@@ -149,20 +151,24 @@ public class LoginServlet extends HttpServlet {
                     try (PrintWriter out = response.getWriter()) {
                         out.println(job.build().toString());
                     }
+                    break;
                 }
-                else if(user.getMoney() < model.getPrice()) {
+                if(user.getMoney() < model.getPrice()) {
+                    job.add("noMoney", true);
                     job.add("info", "У вас недостаточно денег!");
                     try (PrintWriter out = response.getWriter()) {
                         out.println(job.build().toString());
                     }
+                    break;
                 }
-                else if(model.getAmount() < 1) {
+                if(model.getAmount() < 1) {
+                    job.add("empty", true);
                     job.add("info", "Экземпляры данной модели отсутствуют!");
                     try (PrintWriter out = response.getWriter()) {
                         out.println(job.build().toString());
                     }
+                    break;
                 }
-                break;
         }
     }
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

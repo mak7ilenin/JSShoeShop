@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.text.DecimalFormat;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.json.Json;
@@ -41,6 +42,7 @@ public class UserServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         request.setCharacterEncoding("UTF-8");
         JsonObjectBuilder job = Json.createObjectBuilder();
+        DecimalFormat df = new DecimalFormat("0.00");
         String path = request.getServletPath();
         switch (path) {
             case "/registration":
