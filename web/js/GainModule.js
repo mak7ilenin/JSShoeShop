@@ -53,7 +53,7 @@ class GainModule {
         });
         gainForOctober.then(response => response.json())
             .then(response => {
-                document.getElementById('gainForAMonth').innerHTML = "Прибыль за сентябрь: " + response.octoberGain + "$";
+                document.getElementById('gainForAMonth').innerHTML = "Прибыль за октябрь: " + response.octoberGain + "$";
             })
     }
     showGainForNovember() {
@@ -65,7 +65,7 @@ class GainModule {
         });
         gainForNovember.then(response => response.json())
             .then(response => {
-                document.getElementById('gainForAMonth').innerHTML = "Прибыль за сентябрь: " + response.novemberGain + "$";
+                document.getElementById('gainForAMonth').innerHTML = "Прибыль за ноябрь: " + response.novemberGain + "$";
             })
     }
     showGainForDecember() {
@@ -77,7 +77,7 @@ class GainModule {
         });
         gainForDecember.then(response => response.json())
             .then(response => {
-                document.getElementById('gainForAMonth').innerHTML = "Прибыль за сентябрь: " + response.decemberGain + "$";
+                document.getElementById('gainForAMonth').innerHTML = "Прибыль за декабрь: " + response.decemberGain + "$";
             })
     }
     showGainForJanuary() {
@@ -89,7 +89,7 @@ class GainModule {
         });
         gainForJanuary.then(response => response.json())
             .then(response => {
-                document.getElementById('gainForAMonth').innerHTML = "Прибыль за сентябрь: " + response.januaryGain + "$";
+                document.getElementById('gainForAMonth').innerHTML = "Прибыль за январь: " + response.januaryGain + "$";
             })
     }
     showGainForFebruary() {
@@ -101,7 +101,7 @@ class GainModule {
         });
         gainForFebruary.then(response => response.json())
             .then(response => {
-                document.getElementById('gainForAMonth').innerHTML = "Прибыль за сентябрь: " + response.februaryGain + "$";
+                document.getElementById('gainForAMonth').innerHTML = "Прибыль за февраль: " + response.februaryGain + "$";
             })
     }
     showGainForMarch() {
@@ -113,7 +113,7 @@ class GainModule {
         });
         gainForMarch.then(response => response.json())
             .then(response => {
-                document.getElementById('gainForAMonth').innerHTML = "Прибыль за сентябрь: " + response.marchGain + "$";
+                document.getElementById('gainForAMonth').innerHTML = "Прибыль за март: " + response.marchGain + "$";
             })
     }
     showGainForApril() {
@@ -125,7 +125,7 @@ class GainModule {
         });
         gainForApril.then(response => response.json())
             .then(response => {
-                document.getElementById('gainForAMonth').innerHTML = "Прибыль за сентябрь: " + response.aprilGain + "$";
+                document.getElementById('gainForAMonth').innerHTML = "Прибыль за апрель: " + response.aprilGain + "$";
             })
     }
     showGainForMay() {
@@ -137,7 +137,7 @@ class GainModule {
         });
         gainForMay.then(response => response.json())
             .then(response => {
-                document.getElementById('gainForAMonth').innerHTML = "Прибыль за сентябрь: " + response.mayGain + "$";
+                document.getElementById('gainForAMonth').innerHTML = "Прибыль за май: " + response.mayGain + "$";
             })
     }
     showGainForJune() {
@@ -149,7 +149,7 @@ class GainModule {
         });
         gainForJune.then(response => response.json())
             .then(response => {
-                document.getElementById('gainForAMonth').innerHTML = "Прибыль за сентябрь: " + response.juneGain + "$";
+                document.getElementById('gainForAMonth').innerHTML = "Прибыль за июнь: " + response.juneGain + "$";
             })
     }
     showGainForJuly() {
@@ -161,7 +161,7 @@ class GainModule {
         });
         gainForJuly.then(response => response.json())
             .then(response => {
-                document.getElementById('gainForAMonth').innerHTML = "Прибыль за сентябрь: " + response.julyGain + "$";
+                document.getElementById('gainForAMonth').innerHTML = "Прибыль за июль: " + response.julyGain + "$";
             })
     }
     showGainForAugust() {
@@ -173,7 +173,7 @@ class GainModule {
         });
         gainForAugust.then(response => response.json())
             .then(response => {
-                document.getElementById('gainForAMonth').innerHTML = "Прибыль за сентябрь: " + response.augustGain + "$";
+                document.getElementById('gainForAMonth').innerHTML = "Прибыль за август: " + response.augustGain + "$";
             })
     }
 }

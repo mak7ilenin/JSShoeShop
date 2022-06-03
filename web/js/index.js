@@ -24,6 +24,7 @@ function hideMenu() {
     editUser.style.display = "none";
     adminPanel.style.display = "none";
     gainPanel.style.display = "none";
+    editMyself.style.display = "none";
 }
 // const dropdownContent = document.getElementsByClassName('dropdown-content');
 //     dropdown[i].addEventListener('click', (e) => {
@@ -98,6 +99,9 @@ function checkRole() {
         if(gainPanel.style.display === "none") {
             gainPanel.style.display = "unset";
         }
+        if(editMyself.style.display === "none") {
+            editMyself.style.display = "unset";
+        }
         return;
     }
     if(JSON.parse(sessionStorage.getItem('user')).role === "MANAGER") {
@@ -122,6 +126,9 @@ function checkRole() {
         if(gainPanel.style.display === "none") {
             gainPanel.style.display = "none";
         }
+        if(editMyself.style.display === "none") {
+            editMyself.style.display = "unset";
+        }
         return;
     }
     if(JSON.parse(sessionStorage.getItem('user')).role === "USER") {
@@ -145,6 +152,9 @@ function checkRole() {
         }
         if(gainPanel.style.display === "none") {
             gainPanel.style.display = "none";
+        }
+        if(editMyself.style.display === "none") {
+            editMyself.style.display = "unset";
         }
         return;
     }

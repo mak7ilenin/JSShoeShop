@@ -2,6 +2,7 @@ class MyselfModule {
     insertMyselfInfo() {
         let myId;
         myId = JSON.parse(sessionStorage.getItem('user')).id.toString();
+        console.log(myId);
         const myInfo = {
             "id": myId
         }
@@ -44,15 +45,16 @@ class MyselfModule {
             "money": money,
             "username": username
         };
-
+        
         let promiseEditMyself = fetch('editMyself', {
             method: 'POST',
             headers: {
-                 'Content-Type': 'application/json;charset:utf8'
+                'Content-Type': 'application/json;charset:utf8'
             },
             credentials: 'include',
             body: JSON.stringify(editUser)
         });
+        console.log(promiseEditMyself);
         promiseEditMyself.then(response => response.json())
         .then(response => {
             if(response.status) {

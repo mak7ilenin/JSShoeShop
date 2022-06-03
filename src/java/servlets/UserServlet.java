@@ -30,7 +30,8 @@ import tools.PasswordProtected;
     "/getUser",
     "/editUser",
     "/changeRole",
-    "/getMyself"
+    "/getMyself",
+    "/editMyself"
 })
 public class UserServlet extends HttpServlet {
     @EJB private UserFacade userFacade;
@@ -180,7 +181,7 @@ public class UserServlet extends HttpServlet {
                     out.println(job.build().toString());
                 }
                 break;
-            case "/insertMyInfo":
+            case "/getMyself":
                 JsonReader jr = Json.createReader(request.getReader());
                 JsonObject jo = jr.readObject();
                 Long findUserId = Long.parseLong(jo.getString("id", ""));
@@ -195,7 +196,7 @@ public class UserServlet extends HttpServlet {
             case "/editMyself":
                 jsonReader = Json.createReader(request.getReader());
                 jsonObject = jsonReader.readObject();
-                Long myId = Long.parseLong(jsonObject.getString("myIdToEdit", ""));
+                Long myId = Long.parseLong(jsonObject.getString("id", ""));
                 String myFirstName = jsonObject.getString("firstName", "");
                 String myLastName = jsonObject.getString("lastName", "");
                 String myPhone = jsonObject.getString("phone", "");
