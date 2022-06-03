@@ -4,6 +4,7 @@ import {viewModule} from './ViewModule.js';
 import {userModule} from './UserModule.js';
 import {purchaseModule} from './PurchaseModule.js';
 import {adminModule} from './AdminModule.js';
+import {myselfModule} from './MyselfModule.js';
 export {checkRole};
 
 const buyModel = document.getElementById('buy-model');
@@ -11,6 +12,7 @@ const createModel = document.getElementById('create-model');
 const createUser = document.getElementById('create-user');
 const editModel = document.getElementById('edit-model');
 const editUser = document.getElementById('edit-user');
+const editMyself = document.getElementById('edit-myself');
 const adminPanel = document.getElementById('admin-panel');
 const gainPanel = document.getElementById('gain-panel');
 hideMenu();
@@ -164,6 +166,11 @@ editUser.addEventListener('click', (e) => {
     e.preventDefault();
     viewModule.showEditUser(); 
     userModule.getListUsers();
+});
+editMyself.addEventListener('click', (e) => {
+    e.preventDefault();
+    viewModule.showEditMyself(); 
+    myselfModule.insertMyselfInfo();
 });
 buyModel.addEventListener('click', (e) => {
     e.preventDefault();

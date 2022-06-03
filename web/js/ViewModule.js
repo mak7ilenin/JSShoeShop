@@ -4,6 +4,7 @@ import {userModule} from './UserModule.js';
 import {purchaseModule} from './PurchaseModule.js';
 import {adminModule} from './AdminModule.js';
 import {gainModule} from './GainModule.js';
+import {myselfModule} from './MyselfModule.js';
 class ViewModule {
     showLoginForm() {
         document.getElementById('info').innerHTML = '';
@@ -317,6 +318,57 @@ class ViewModule {
             chooseUser[i].addEventListener('change', (e) => {
                 e.preventDefault();
                 userModule.insertUserInfo();
+            });
+        }
+    }
+    showEditMyself() {
+        document.getElementById('info').innerHTML = '';
+        const content = document.getElementById('content');
+        content.innerHTML = 
+        `<div class="user-edit-container">
+            <div class="top-content">
+                <span class="user-edit-title">Изменение данных</span>
+            </div>
+            <div class="mid-content">
+                <div class="wrap-input100 validate-input" data-validate="Enter first name">
+                    <input class="input100" type="text" id="user-first-name" name="user-firstNamer" placeholder="First name">
+                </div>
+                <div class="wrap-input100 validate-input" data-validate="Enter last name">
+                    <input class="input100" type="text" id="user-last-name" name="user-lastName" placeholder="Last name">
+                </div>
+                <div class="wrap-input100 validate-input" data-validate="Enter phone">
+                    <input class="input100" type="number" pattern=".{8,}" maxlength="2" id="user-phone" name="phone" placeholder="Phone">
+                </div>
+                <div class="wrap-input100 validate-input" data-validate="Enter money">
+                    <input class="input100" type="number" id="user-money" name="money" placeholder="Money">
+                </div>
+                <div class="wrap-input100 validate-input" data-validate="Enter username">
+                    <input class="input100" type="text" id="user-username" name="username" placeholder="Username">
+                </div>
+                <div class="container-login100-form-btn">
+                    <button class="login100-form-btn" type="submit" id="submit-edit-user">Изменить</button>
+                </div>
+            </div>
+        </div>`;
+        const editUser = document.getElementById('submit-edit-user');
+        editUser.addEventListener('click', (e) => {
+            e.preventDefault();
+            myselfModule.editMyself();
+        });
+        const input = document.getElementsByClassName('input100');
+        for (let i = 0; i < input.length; i++) {
+            input[i].addEventListener('focusin', (e) => {
+                e.preventDefault();
+                input[i].style.borderBottom = '2px solid white';
+                input[i].style.marginBottom = '60px';
+                input[i].style.fontSize = '20px';
+                
+                input[i].addEventListener('focusout', (e) => {
+                    e.preventDefault();
+                    input[i].style.borderBottom = '2px solid rgba(255,255,255,0.24)';
+                    input[i].style.marginBottom = '30px';
+                    input[i].style.fontSize = '16px';
+                });
             });
         }
     }

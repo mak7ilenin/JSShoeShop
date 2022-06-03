@@ -29,7 +29,8 @@ import tools.PasswordProtected;
     "/getListUsers",
     "/getUser",
     "/editUser",
-    "/changeRole"
+    "/changeRole",
+    "/getMyself"
 })
 public class UserServlet extends HttpServlet {
     @EJB private UserFacade userFacade;
@@ -179,6 +180,53 @@ public class UserServlet extends HttpServlet {
                     out.println(job.build().toString());
                 }
                 break;
+            case "/insertMyInfo":
+                JsonReader jr = Json.createReader(request.getReader());
+                JsonObject jo = jr.readObject();
+                Long findUserId = Long.parseLong(jo.getString("id", ""));
+                User user = userFacade.find(findUserId);
+                ujb = new UserJsonBuilder();
+                job.add("user", ujb.getUserJsonObject(user))
+                        .add("status", true);
+                try (PrintWriter out = response.getWriter()) {
+                    out.println(job.build().toString());
+                }   
+                break;
+            case "/editMyself":
+                jsonReader = Json.createReader(request.getReader());
+                jsonObject = jsonReader.readObject();
+                Long myId = Long.parseLong(jsonObject.getString("myIdToEdit", ""));
+                String myFirstName = jsonObject.getString("firstName", "");
+                String myLastName = jsonObject.getString("lastName", "");
+                String myPhone = jsonObject.getString("phone", "");
+                double myMoney = Double.parseDouble(jsonObject.getString("money", ""));
+                bd = new BigDecimal(myMoney).setScale(2, RoundingMode.HALF_UP);
+                decimalMoney = bd.doubleValue();
+                String myUsername = jsonObject.getString("username", "");
+                
+                try {
+                    User existingUser = userFacade.find(myId);
+                    existingUser.setFirstName(myFirstName);
+                    existingUser.setLastName(myLastName);
+                    existingUser.setPhone(myPhone);
+                    existingUser.setMoney(decimalMoney);
+                    existingUser.setLogin(myUsername);
+                    userFacade.edit(existingUser);
+                    
+                    job.add("status", true);
+                    job.add("info", "Ваши данные успешно изменены!");
+                    try(PrintWriter out = response.getWriter()) {
+                        out.println(job.build().toString());
+                    }
+                    break;
+                } catch (Exception e) {
+                    job.add("status", false);
+                    job.add("info", "Не получилось изменить данные!");
+                    try(PrintWriter out = response.getWriter()) {
+                        out.println(job.build().toString());
+                    }
+                    break;
+                }      
         }
     }
 
