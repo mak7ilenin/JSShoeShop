@@ -8,6 +8,10 @@ import {myselfModule} from './MyselfModule.js';
 export {checkRole};
 
 const buyModel = document.getElementById('buy-model');
+const modelCont = document.getElementById('model-panel');
+const userCont = document.getElementById('user-panel');
+const modelPanel = document.getElementById('myDropdown1');
+const userPanel = document.getElementById('myDropdown2');
 const createModel = document.getElementById('create-model');
 const createUser = document.getElementById('create-user');
 const editModel = document.getElementById('edit-model');
@@ -15,6 +19,11 @@ const editUser = document.getElementById('edit-user');
 const editMyself = document.getElementById('edit-myself');
 const adminPanel = document.getElementById('admin-panel');
 const gainPanel = document.getElementById('gain-panel');
+
+const info = document.getElementById('info');
+const btnLogin = document.getElementById('logIn');
+const btnLogout = document.getElementById('logOut');
+
 window.addEventListener('load', (e) => {
     if(sessionStorage.getItem('user') !== null) {
         checkRole();
@@ -25,29 +34,14 @@ window.addEventListener('load', (e) => {
 hideMenu();
 function hideMenu() {
     buyModel.style.display = "none";
-    createModel.style.display = "none";
-    createUser.style.display = "none";
-    editModel.style.display = "none";
-    editUser.style.display = "none";
+    modelCont.style.display = "none";
+    modelPanel.classList.remove('show');
+    userCont.style.display = "none";
+    userPanel.classList.remove('show');
     adminPanel.style.display = "none";
     gainPanel.style.display = "none";
     editMyself.style.display = "none";
 }
-// const dropdownContent = document.getElementsByClassName('dropdown-content');
-//     dropdown[i].addEventListener('click', (e) => {
-// const dropdown = document.getElementsByClassName('dropdown');
-// for (let i = 0; i < dropdown.length; i++) {
-//         e.preventDefault();
-//         dropdownContent[i].style.display = 'block';
-//     });
-//     dropdown[i].addEventListener('focusout', (e) => {
-//         e.preventDefault();
-//         dropdownContent[i].style.display = 'none';
-//     });
-// }
-const info = document.getElementById('info');
-const btnLogin = document.getElementById('logIn');
-const btnLogout = document.getElementById('logOut');
 btnLogin.addEventListener('click', (e) => {
     e.preventDefault();
     viewModule.showLoginForm();
@@ -59,6 +53,7 @@ btnLogout.addEventListener('click', (e) => {
     btnLogin.style.display = "unset";
     info.innerHTML = "Вы вышли из аккаунта!";
     hideMenu();
+    viewModule.showLoginForm();
 });
 function checkRole() {
     let role = null;
@@ -66,17 +61,13 @@ function checkRole() {
         if(!buyModel.style.display === "none") {
             buyModel.style.display = "none";
         }
-        if(!createModel.style.display === "none") {
-            createModel.style.display = "none";
+        if(!modelPanel.classList.contains('show')) {
+            modelCont.style.display = "none";
+            modelPanel.classList.remove('show');
         }
-        if(!createUser.style.display === "none") {
-            createUser.style.display = "none";
-        }
-        if(!editModel.style.display === "none") {
-            editModel.style.display = "none";
-        }
-        if(!editUser.style.display === "none") {
-            editUser.style.display = "none";
+        if(!userPanel.classList.contains('show')) {
+            userCont.style.display = "none";
+            userPanel.classList.remove('show');
         }
         if(!gainPanel.style.display === "none") {
             gainPanel.style.display = "none";
@@ -88,17 +79,32 @@ function checkRole() {
         if(buyModel.style.display === "none") {
             buyModel.style.display = "unset";
         }
-        if(createModel.style.display === "none") {
-            createModel.style.display = "unset";
+        if(!modelPanel.classList.contains('show')) {
+            modelCont.style.display = "unset";
         }
-        if(createUser.style.display === "none") {
-            createUser.style.display = "unset";
+        if(!userPanel.classList.contains('show')) {
+            userCont.style.display = "unset";
         }
-        if(editModel.style.display === "none") {
-            editModel.style.display = "unset";
+        if(adminPanel.style.display === "none") {
+            adminPanel.style.display = "unset";
         }
-        if(editUser.style.display === "none") {
-            editUser.style.display = "unset";
+        if(gainPanel.style.display === "none") {
+            gainPanel.style.display = "unset";
+        }
+        if(editMyself.style.display === "none") {
+            editMyself.style.display = "unset";
+        }
+        return;
+    }
+    if(JSON.parse(sessionStorage.getItem('user')).role === "SECONDADMIN") {
+        if(buyModel.style.display === "none") {
+            buyModel.style.display = "unset";
+        }
+        if(!modelPanel.classList.contains('show')) {
+            modelCont.style.display = "unset";
+        }
+        if(!userPanel.classList.contains('show')) {
+            userCont.style.display = "unset";
         }
         if(adminPanel.style.display === "none") {
             adminPanel.style.display = "unset";
@@ -115,16 +121,11 @@ function checkRole() {
         if(buyModel.style.display === "none") {
             buyModel.style.display = "unset";
         }
-        if(createModel.style.display === "none") {
-            createModel.style.display = "unset";
+        if(!modelPanel.classList.contains('show')) {
+            modelCont.style.display = "unset";
         }
-        if(createUser.style.display === "none") {
-            createUser.style.display = "unset";
-        }
-        if(editModel.style.display === "none") {
-            editModel.style.display = "unset";
-        }
-        if(editUser.style.display === "none") {
+        if(!userPanel.classList.contains('show')) {
+            userCont.style.display = "unset";
             editUser.style.display = "none";
         }
         if(adminPanel.style.display === "none") {
@@ -142,17 +143,11 @@ function checkRole() {
         if(buyModel.style.display === "none") {
             buyModel.style.display = "unset";
         }
-        if(createModel.style.display === "none") {
-            createModel.style.display = "none";
+        if(!modelPanel.classList.contains('show')) {
+            modelCont.style.display = "none";
         }
-        if(createUser.style.display === "none") {
-            createUser.style.display = "unset";
-        }
-        if(editModel. style.display === "none") {
-            editModel.style.display = "none";
-        }
-        if(editUser.style.display === "none") {
-            editUser.style.display = "none";
+        if(!userPanel.classList.contains('show')) {
+            userCont.style.display = "none";
         }
         if(adminPanel.style.display === "none") {
             adminPanel.style.display = "none";

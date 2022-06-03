@@ -325,9 +325,9 @@ class ViewModule {
         document.getElementById('info').innerHTML = '';
         const content = document.getElementById('content');
         content.innerHTML = 
-        `<div class="user-edit-container">
+        `<div class="myself-edit-container">
             <div class="top-content">
-                <span class="user-edit-title">Изменение данных</span>
+                <span class="myself-edit-title">Изменение данных</span>
             </div>
             <div class="mid-content">
                 <div class="wrap-input100 validate-input" data-validate="Enter first name">
@@ -436,7 +436,7 @@ class ViewModule {
             <div id="collapseExample">
                 <p id="allGainTxt">&nbsp;</p>
             </div>
-            <h3>Прибыль магазина за определенный месяц</h3>
+            <h3 id="monthHeading">Прибыль магазина за определенный месяц</h3>
             <p id="gainForAMonth">
                 &nbsp;
             </p>
