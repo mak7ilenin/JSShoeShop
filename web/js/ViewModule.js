@@ -47,51 +47,61 @@ class ViewModule {
         const content = document.getElementById('content');
         content.innerHTML = 
             `<div class="registration-container">
-                <div class="registration-heading">
-                    <svg xmlns="http://www.w3.org/2000/svg">
-                        <filter id="motion-blur-filter" filterUnits="userSpaceOnUse">
-                            <feGaussianBlur stdDeviation="100 0"></feGaussianBlur>
-                        </filter>
-                    </svg>
-                    <h2 filter-content="S">РЕГИСТРАЦИЯ</h2>
-                </div>
-                <div class="input-container">
-                    <img src="Images/first_name.png" class="input-img"></img>
-                    <input class="input-field" id="first-name" type="text" placeholder="First name" name="fname" required>
-                </div>
-
-                <div class="input-container">
-                    <img src="Images/last_name.png" class="input-img"></img>
-                    <input class="input-field" id="last-name" type="text" placeholder="Last name" name="lname" required>
-                </div>
-
-                <div class="input-container">
-                    <img src="Images/username.png" class="input-img"></img>
-                    <input class="input-field" id="username" type="text" placeholder="Username" name="uname" required>
-                </div>
-                    
-                <div class="input-container">
-                    <img src="Images/password.png" class="input-img"></img>
-                    <input class="input-field" id="password" type="password" placeholder="Password" name="psw" required>
-                </div>
-            
-                <div class="input-container">
-                    <img src="Images/phone.png" class="input-img"></img>
-                    <input class="input-field" id="phone" pattern=".{8,}" type="number" placeholder="Phone" name="phone" required>
-                </div>
-            
-                <div class="input-container">
-                    <img src="Images/money.png" class="input-img"></img>
-                    <input class="input-field" id="money" type="number" placeholder="$" name="money" required>
-                </div>
-            
-                <button type="submit" id="register">Зарегистрироваться</button>
-            </div>`;
+            <div class="registration-heading">
+                <svg xmlns="http://www.w3.org/2000/svg">
+                    <filter id="motion-blur-filter" filterUnits="userSpaceOnUse">
+                        <feGaussianBlur stdDeviation="100 0"></feGaussianBlur>
+                    </filter>
+                </svg>
+                <h2 filter-content="S">Регистрация</h2>
+            </div>
+            <div class="wrap-input100 validate-input input-container" data-validate="Enter first name">
+                <img src="Images/first_name.png" class="input-img"></img>
+                <input class="input100" type="text" id="first-name" name="user-firstNamer" placeholder="First name">
+            </div>
+            <div class="wrap-input100 validate-input input-container" data-validate="Enter last name">
+                <img src="Images/last_name.png" class="input-img"></img>
+                <input class="input100" type="text" id="last-name" name="user-lastName" placeholder="Last name">
+            </div>
+            <div class="wrap-input100 validate-input input-container" data-validate="Enter username">
+                <img src="Images/username.png" class="input-img"></img>
+                <input class="input100" type="text" id="username" name="username" placeholder="Username">
+            </div>
+            <div class="wrap-input100 validate-input input-container" data-validate="Enter password">
+                <img src="Images/password.png" class="input-img"></img>
+                <input class="input100" type="password" id="password" name="password" placeholder="Password">
+            </div>
+            <div class="wrap-input100 validate-input input-container" data-validate="Enter phone">
+                <img src="Images/phone.png" class="input-img"></img>
+                <input class="input100" type="number" pattern=".{8,}" maxlength="2" id="phone" name="phone" placeholder="Phone">
+            </div>
+            <div class="wrap-input100 validate-input input-container" data-validate="Enter money">
+                <img src="Images/money.png" class="input-img"></img>
+                <input class="input100" type="number" id="money" name="money" placeholder="Money">
+            </div>
+            <button type="submit" id="register">Добавить</button>
+        </div>`;
         const register = document.getElementById('register');
         register.addEventListener('click', (e) => {
             e.preventDefault();
             userModule.registration();
         });
+        const input = document.getElementsByClassName('input100');
+        for (let i = 0; i < input.length; i++) {
+            input[i].addEventListener('focusin', (e) => {
+                e.preventDefault();
+                input[i].style.borderBottom = '2px solid white';
+                input[i].style.marginBottom = '60px';
+                input[i].style.fontSize = '20px';
+                
+                input[i].addEventListener('focusout', (e) => {
+                    e.preventDefault();
+                    input[i].style.borderBottom = '2px solid rgba(255,255,255,0.24)';
+                    input[i].style.marginBottom = '30px';
+                    input[i].style.fontSize = '16px';
+                });
+            });
+        }
     }
     showCreateUser() {
         document.getElementById('info').innerHTML = '';
