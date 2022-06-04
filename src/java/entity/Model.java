@@ -1,12 +1,13 @@
 package entity;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
 import java.util.Objects;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
@@ -24,6 +25,7 @@ public class Model implements Serializable{
     private int amount;
     private double price;
     private String modelFirm;
+    @OneToOne(cascade = CascadeType.DETACH)
     private Picture picture;
 
     @Override

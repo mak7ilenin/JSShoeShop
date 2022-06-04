@@ -5,6 +5,7 @@ import {purchaseModule} from './PurchaseModule.js';
 import {adminModule} from './AdminModule.js';
 import {gainModule} from './GainModule.js';
 import {myselfModule} from './MyselfModule.js';
+import {uploadModule} from './UploadModule.js';
 class ViewModule {
     showLoginForm() {
         document.getElementById('info').innerHTML = '';
@@ -558,7 +559,7 @@ class ViewModule {
                 <label name="forImg" class="download-img">
                     <input type="file" id="inputTag" name="img" accept="image/*"> <br>
                 </label>
-                <div class="selected-file">
+                <div id="selected-file" class="selected-file">
                     <input type="text" id="imageName" placeholder="Назовите файл">
                     <input id="imagePathName" readonly>
                 </div>
@@ -568,21 +569,22 @@ class ViewModule {
             </div>
         </div>`
         let uploadContent = document.getElementById("upload-content");
-        let selectedFile = document.getElementsByClassName("selected-file");
+        let selectedFile = document.getElementById("selected-file");
         let input = document.getElementById("inputTag");
         let imagePathName = document.getElementById("imagePathName")
         let imageName = document.getElementById("imageName")
-        let filrButton = document.getElementById("submit-file")
+        let fileButton = document.getElementById("submit-file")
         input.addEventListener("change", (e) =>{
             let inputImage = document.querySelector("input[type=file]").files[0];
             imagePathName.style.display = 'unset';
             imageName.style.display = 'unset';
             imagePathName.value = inputImage.name;
             uploadContent.style.height = '660px';
-            selectedFile.style.marginTop = '60px'
+            selectedFile.style.marginTop = '30px';
         });
-        filrButton.addEventListener('click', (e) => {
-            
+        fileButton.addEventListener('click', (e) => {
+            uploadModule.uploadPicture();
+            // viewModule.showCreateModel();
         });
     }
 }

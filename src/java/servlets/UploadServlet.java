@@ -7,12 +7,17 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.PrintWriter;
 import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
 import java.util.List;
 import java.util.stream.Collectors;
 import javax.ejb.EJB;
 import javax.imageio.ImageIO;
+import javax.json.Json;
+import javax.json.JsonObject;
+import javax.json.JsonObjectBuilder;
+import javax.json.JsonReader;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
@@ -20,6 +25,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
+import jsontools.PictureJsonBuilder;
 import org.imgscalr.Scalr;
 import session.PictureFacade;
 
@@ -28,7 +34,7 @@ import session.PictureFacade;
  * @author makso
  */
 @WebServlet(name = "UploadServlet", urlPatterns = {
-    "/uploadFile"
+    "/uploadPicture"
 })
 @MultipartConfig()
 public class UploadServlet extends HttpServlet {
@@ -47,12 +53,14 @@ public class UploadServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         request.setCharacterEncoding("UTF-8");
         String path = request.getServletPath();
+        JsonObjectBuilder job = Json.createObjectBuilder();
+        JsonReader jsonReader = Json.createReader(request.getReader());
+        JsonObject jsonObject = jsonReader.readObject();
         switch (path) {
-            case "/uploadFile":
-                List<Part> fileParts = request.getParts()
-                .stream()
-                .filter( part -> "file".equals(part.getName()))
-                .collect(Collectors.toList());
+            case "/uploadPicture":
+                List<Part> fileParts = request.getParts().stream()
+                    .filter( part -> "file".equals(part.getName()) && part.getSize() > 0)
+                    .collect(Collectors.toList());
                 String imagesFolder = "C:\\Shoeger\\ShoeShop";
                 for(Part filePart : fileParts){
                     String pathToFile = imagesFolder + File.separatorChar
@@ -68,14 +76,20 @@ public class UploadServlet extends HttpServlet {
                        writeToFile(resize(tempFile),pathToFile);
                        tempFile.delete();
                     }
-                    String description = request.getParameter("description");
+                    String description = jsonObject.getString("description", "");
                     Picture picture = new Picture();
                     picture.setDescription(description);
                     picture.setPathToFile(pathToFile);
                     pictureFacade.create(picture);
-                }    
-                break;
-            
+                    PictureJsonBuilder pjb = new PictureJsonBuilder();
+                    job.add("status", true);
+                    job.add("picture", pjb.getPictureJsonObject(picture));
+                    job.add("info", "Изображение " + picture.getDescription());
+                    try (PrintWriter out = response.getWriter()) {
+                        out.println(job.build().toString());
+                    }
+                    break;
+                } 
         }
     }
     private String getFileName(Part part){
