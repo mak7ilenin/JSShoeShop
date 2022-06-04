@@ -41,7 +41,7 @@
     </header>
     <p id="info" class="text-info">&nbsp;</p>
     <main id="content">
-        <div id="upload-content">
+        <!-- <div id="upload-content">
             <div class="top-content">
                 <div class="img-container">
                     <img src="Images/upload.png" alt="upload">
@@ -59,6 +59,41 @@
                     <input id="imageName" readonly>
                 </div>
             </div>
+        </div> -->
+        <div class="registration-container">
+            <div class="registration-heading">
+                <svg xmlns="http://www.w3.org/2000/svg">
+                    <filter id="motion-blur-filter" filterUnits="userSpaceOnUse">
+                        <feGaussianBlur stdDeviation="100 0"></feGaussianBlur>
+                    </filter>
+                </svg>
+                <h2 filter-content="S">Добавление пользователя</h2>
+            </div>
+            <div class="wrap-input100 validate-input input-container" data-validate="Enter first name">
+                <img src="Images/first_name.png" class="input-img"></img>
+                <input class="input100" type="text" id="first-name" name="user-firstNamer" placeholder="First name">
+            </div>
+            <div class="wrap-input100 validate-input input-container" data-validate="Enter last name">
+                <img src="Images/last_name.png" class="input-img"></img>
+                <input class="input100" type="text" id="last-name" name="user-lastName" placeholder="Last name">
+            </div>
+            <div class="wrap-input100 validate-input input-container" data-validate="Enter username">
+                <img src="Images/username.png" class="input-img"></img>
+                <input class="input100" type="text" id="username" name="username" placeholder="Username">
+            </div>
+            <div class="wrap-input100 validate-input input-container" data-validate="Enter password">
+                <img src="Images/password.png" class="input-img"></img>
+                <input class="input100" type="password" id="password" name="password" placeholder="Password">
+            </div>
+            <div class="wrap-input100 validate-input input-container" data-validate="Enter phone">
+                <img src="Images/phone.png" class="input-img"></img>
+                <input class="input100" type="number" pattern=".{8,}" maxlength="2" id="phone" name="phone" placeholder="Phone">
+            </div>
+            <div class="wrap-input100 validate-input input-container" data-validate="Enter money">
+                <img src="Images/money.png" class="input-img"></img>
+                <input class="input100" type="number" id="money" name="money" placeholder="Money">
+            </div>
+            <button type="submit" id="register">Добавить</button>
         </div>
     </main>
     <footer>Dzjubenko 2022</footer>
