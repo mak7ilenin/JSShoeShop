@@ -138,7 +138,7 @@ public class LoginServlet extends HttpServlet {
                     history.setModel(model);
                     history.setUser(user);
                     history.setBuy(Date.from(LocalDate.now().atTime(LocalTime.now().plusHours(date.getHours())).toInstant(ZoneOffset.UTC)));
-                    double gain = history.getGain() + model.getPrice();
+                    double gain = model.getPrice();
                     bd = new BigDecimal(gain).setScale(2, RoundingMode.HALF_UP);
                     double decimalGain = bd.doubleValue();
                     history.setGain(decimalGain);

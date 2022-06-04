@@ -24,21 +24,23 @@ public class Model implements Serializable{
     private int amount;
     private double price;
     private String modelFirm;
+    private Picture picture;
 
     @Override
     public String toString() {
-        return "Model{" + "id=" + id + ", modelName=" + modelName + ", modelSize=" + modelSize + ", amount=" + amount + ", price=" + price + ", modelFirm=" + modelFirm + '}';
+        return "Model{" + "id=" + id + ", modelName=" + modelName + ", modelSize=" + modelSize + ", amount=" + amount + ", price=" + price + ", modelFirm=" + modelFirm + ", picture=" + picture + '}';
     }
 
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 73 * hash + Objects.hashCode(this.id);
-        hash = 73 * hash + Objects.hashCode(this.modelName);
-        hash = 73 * hash + Objects.hashCode(this.modelSize);
-        hash = 73 * hash + this.amount;
-        hash = 73 * hash + (int) (Double.doubleToLongBits(this.price) ^ (Double.doubleToLongBits(this.price) >>> 32));
-        hash = 73 * hash + Objects.hashCode(this.modelFirm);
+        hash = 41 * hash + Objects.hashCode(this.id);
+        hash = 41 * hash + Objects.hashCode(this.modelName);
+        hash = 41 * hash + Objects.hashCode(this.modelSize);
+        hash = 41 * hash + this.amount;
+        hash = 41 * hash + (int) (Double.doubleToLongBits(this.price) ^ (Double.doubleToLongBits(this.price) >>> 32));
+        hash = 41 * hash + Objects.hashCode(this.modelFirm);
+        hash = 41 * hash + Objects.hashCode(this.picture);
         return hash;
     }
 
@@ -72,7 +74,18 @@ public class Model implements Serializable{
         if (!Objects.equals(this.id, other.id)) {
             return false;
         }
+        if (!Objects.equals(this.picture, other.picture)) {
+            return false;
+        }
         return true;
+    }
+
+    public Picture getPicture() {
+        return picture;
+    }
+
+    public void setPicture(Picture picture) {
+        this.picture = picture;
     }
 
     public Long getId() {
@@ -123,5 +136,4 @@ public class Model implements Serializable{
         this.modelFirm = modelFirm;
     }
 
-    
 }

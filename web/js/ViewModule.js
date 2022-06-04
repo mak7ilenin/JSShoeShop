@@ -189,10 +189,16 @@ class ViewModule {
                     <input class="input100" type="number" id="model-amount" min="1" max="50" name="amount" placeholder="Amount">
                 </div>
                 <div class="container-login100-form-btn">
+                    <button class="file-form-btn" id="add-file">Добавить файл</button>
                     <button class="login100-form-btn" id="add-model">Добавить</button>
                 </div>
             </div>
         </div>`;
+        const addFile = document.getElementById('add-file');
+        addFile.addEventListener('click', (e) => {
+            e.preventDefault();
+            viewModule.showUploadImage();
+        });
         const addModel = document.getElementById('add-model');
         addModel.addEventListener('click', (e) => {
             e.preventDefault();
@@ -539,11 +545,45 @@ class ViewModule {
         const content = document.getElementById('content');
         content.innerHTML = 
         `<div id="upload-content">
-            <label for="img">Выбрать изображение:</label>
-            <input type="file" id="img" name="img" accept="image/*">
-            <input type="submit">
+            <div class="top-content">
+                <div class="img-container">
+                    <img src="Images/upload.png" alt="upload">
+                </div>
+                <div class="after-img">
+                    <p>Загрузка изображений</p>
+                </div>
+            </div>
+            <div class="mid-content">
+                <label for="forImg">Выберите файл</label>
+                <label name="forImg" class="download-img">
+                    <input type="file" id="inputTag" name="img" accept="image/*"> <br>
+                </label>
+                <div class="selected-file">
+                    <input type="text" id="imageName" placeholder="Назовите файл">
+                    <input id="imagePathName" readonly>
+                </div>
+                <div class="add-file-container">
+                    <button type="submit" id="submit-file">Загрузить файл</button>
+                </div>
+            </div>
         </div>`
-        
+        let uploadContent = document.getElementById("upload-content");
+        let selectedFile = document.getElementsByClassName("selected-file");
+        let input = document.getElementById("inputTag");
+        let imagePathName = document.getElementById("imagePathName")
+        let imageName = document.getElementById("imageName")
+        let filrButton = document.getElementById("submit-file")
+        input.addEventListener("change", (e) =>{
+            let inputImage = document.querySelector("input[type=file]").files[0];
+            imagePathName.style.display = 'unset';
+            imageName.style.display = 'unset';
+            imagePathName.value = inputImage.name;
+            uploadContent.style.height = '660px';
+            selectedFile.style.marginTop = '60px'
+        });
+        filrButton.addEventListener('click', (e) => {
+            
+        });
     }
 }
 const viewModule = new ViewModule();
