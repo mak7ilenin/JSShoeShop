@@ -41,29 +41,66 @@
     </header>
     <p id="info" class="text-info">&nbsp;</p>
     <main id="content">
-        <div id="upload-content">
-            <div class="top-content">
-                <div class="img-container">
-                    <img src="Images/upload.png" alt="upload">
-                </div>
-                <div class="after-img">
-                    <p>Загрузка изображений</p>
+        <div id="adding-shoe" class="shoe-add-container">
+            <div class="img-side">
+                <div class="img-card">
+                    <img src="../web/WEB-INF/Uploaded_Images/Screenshot_20200903-212610_00000.jpg">
+                    <!-- <img src="Images/upload-secondary.png"> -->
                 </div>
             </div>
-            <div class="mid-content">
-                <label for="forImg">Выберите файл</label>
-                <label name="forImg" class="download-img">
-                    <input type="file" id="inputTag" name="img" accept="image/*"> <br>
-                </label>
-                <div class="selected-file">
-                    <input type="text" id="imageName" placeholder="Назовите файл">
-                    <input id="imagePathName" readonly>
+            <div class="shoe-info-side">
+                <div class="top-content">
+                    <span class="container-title">Добавление обуви</span>
                 </div>
-                <div class="add-file-container">
-                    <button type="submit" id="submit-file">Загрузить файл</button>
+                <div class="mid-content">
+                    <div class="wrap-input100 validate-input" data-validate="Enter name">
+                        <input class="input100" type="text" id="model-name" name="modelName" placeholder="Model name">
+                    </div>
+                    <div class="wrap-input100 validate-input" data-validate="Enter firm">
+                        <input class="input100" type="text" id="model-firm" name="modelFirm" placeholder="Model firm">
+                    </div>
+                    <div class="wrap-input100 validate-input" data-validate="Enter size">
+                        <input class="input100" type="number" maxlength="2" id="model-size" name="modelSize" placeholder="Model size">
+                    </div>
+                    <div class="wrap-input100 validate-input" data-validate="Enter price">
+                        <input class="input100" type="number" pattern="[^,\x22]" id="model-price" name="price" placeholder="Price">
+                    </div>
+                    <div class="wrap-input100 validate-input" data-validate="Enter amount">
+                        <input class="input100" type="number" id="model-amount" min="1" max="50" name="amount" placeholder="Amount">
+                    </div>
+                    <div class="container-login100-form-btn">
+                        <button class="file-form-btn" id="add-file">Добавить файл</button>
+                        <button class="login100-form-btn" id="add-model">Добавить</button>
+                    </div>
                 </div>
             </div>
         </div>
+
+        <form id="uploadForm" method="POST">
+            <div id="upload-content">
+                <div class="top-content">
+                    <div class="img-container">
+                        <img src="Images/upload.png" alt="upload">
+                    </div>
+                    <div class="after-img">
+                        <p>Загрузка изображений</p>
+                    </div>
+                </div>
+                <div class="mid-content">
+                    <label for="forImg">Выберите файл</label>
+                    <label name="forImg" class="download-img">
+                        <input type="file" id="inputTag" name="img" accept="image/*"> <br>
+                    </label>
+                    <div id="selected-file" class="selected-file">
+                        <input type="text" id="imageName" placeholder="Назовите файл">
+                        <input id="imagePathName" readonly>
+                    </div>
+                    <div class="add-file-container">
+                        <button type="submit" id="submit-file">Загрузить файл</button>
+                    </div>
+                </div>
+            </div>
+        </form>
     </main>
     <footer>Dzjubenko 2022</footer>
     <script type="module" src="js/index.js"></script>
@@ -73,7 +110,7 @@
         let input = document.getElementById("inputTag");
         let imagePathName = document.getElementById("imagePathName")
         let imageName = document.getElementById("imageName")
-        let filrButton = document.getElementById("submit-file")
+        let fileButton = document.getElementById("submit-file")
         input.addEventListener("change", (e) =>{
             let inputImage = document.querySelector("input[type=file]").files[0];
             imagePathName.style.display = 'unset';
@@ -82,7 +119,7 @@
             uploadContent.style.height = '660px';
             selectedFile.style.marginTop = '60px'
         });
-        filrButton.addEventListener('click', (e) => {
+        fileButton.addEventListener('click', (e) => {
         });
     </script>
     <script src="components/upload.js" type="text/javascript"></script>

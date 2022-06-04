@@ -7,6 +7,20 @@ import {gainModule} from './GainModule.js';
 import {myselfModule} from './MyselfModule.js';
 import {uploadModule} from './UploadModule.js';
 class ViewModule {
+    // CHECK IF IMAGE EXISTS FUNCTION
+    checkIfImageExists(url, callback) {
+        const img = new Image();
+        img.src = url;
+        if(img.complete) {
+            callback(true);
+        }else {
+            img.onload = () => {
+                callback(true);
+            };
+            img.onerror = () => {
+                callback(false);
+            }}
+    }
     showLoginForm() {
         document.getElementById('info').innerHTML = '';
         const content = document.getElementById('content');
@@ -109,40 +123,40 @@ class ViewModule {
         const content = document.getElementById('content');
         content.innerHTML = 
             `<div class="registration-container">
-            <div class="registration-heading">
-                <svg xmlns="http://www.w3.org/2000/svg">
-                    <filter id="motion-blur-filter" filterUnits="userSpaceOnUse">
-                        <feGaussianBlur stdDeviation="100 0"></feGaussianBlur>
-                    </filter>
-                </svg>
-                <h2 filter-content="S">Добавление пользователя</h2>
-            </div>
-            <div class="wrap-input100 validate-input input-container" data-validate="Enter first name">
-                <img src="Images/first_name.png" class="input-img"></img>
-                <input class="input100" type="text" id="first-name" name="user-firstNamer" placeholder="First name">
-            </div>
-            <div class="wrap-input100 validate-input input-container" data-validate="Enter last name">
-                <img src="Images/last_name.png" class="input-img"></img>
-                <input class="input100" type="text" id="last-name" name="user-lastName" placeholder="Last name">
-            </div>
-            <div class="wrap-input100 validate-input input-container" data-validate="Enter username">
-                <img src="Images/username.png" class="input-img"></img>
-                <input class="input100" type="text" id="username" name="username" placeholder="Username">
-            </div>
-            <div class="wrap-input100 validate-input input-container" data-validate="Enter password">
-                <img src="Images/password.png" class="input-img"></img>
-                <input class="input100" type="password" id="password" name="password" placeholder="Password">
-            </div>
-            <div class="wrap-input100 validate-input input-container" data-validate="Enter phone">
-                <img src="Images/phone.png" class="input-img"></img>
-                <input class="input100" type="number" pattern=".{8,}" maxlength="2" id="phone" name="phone" placeholder="Phone">
-            </div>
-            <div class="wrap-input100 validate-input input-container" data-validate="Enter money">
-                <img src="Images/money.png" class="input-img"></img>
-                <input class="input100" type="number" id="money" name="money" placeholder="Money">
-            </div>
-            <button type="submit" id="register">Добавить</button>
-        </div>`;
+                <div class="registration-heading">
+                    <svg xmlns="http://www.w3.org/2000/svg">
+                        <filter id="motion-blur-filter" filterUnits="userSpaceOnUse">
+                            <feGaussianBlur stdDeviation="100 0"></feGaussianBlur>
+                        </filter>
+                    </svg>
+                    <h2 filter-content="S">Добавление пользователя</h2>
+                </div>
+                <div class="wrap-input100 validate-input input-container" data-validate="Enter first name">
+                    <img src="Images/first_name.png" class="input-img"></img>
+                    <input class="input100" type="text" id="first-name" name="user-firstNamer" placeholder="First name">
+                </div>
+                <div class="wrap-input100 validate-input input-container" data-validate="Enter last name">
+                    <img src="Images/last_name.png" class="input-img"></img>
+                    <input class="input100" type="text" id="last-name" name="user-lastName" placeholder="Last name">
+                </div>
+                <div class="wrap-input100 validate-input input-container" data-validate="Enter username">
+                    <img src="Images/username.png" class="input-img"></img>
+                    <input class="input100" type="text" id="username" name="username" placeholder="Username">
+                </div>
+                <div class="wrap-input100 validate-input input-container" data-validate="Enter password">
+                    <img src="Images/password.png" class="input-img"></img>
+                    <input class="input100" type="password" id="password" name="password" placeholder="Password">
+                </div>
+                <div class="wrap-input100 validate-input input-container" data-validate="Enter phone">
+                    <img src="Images/phone.png" class="input-img"></img>
+                    <input class="input100" type="number" pattern=".{8,}" maxlength="2" id="phone" name="phone" placeholder="Phone">
+                </div>
+                <div class="wrap-input100 validate-input input-container" data-validate="Enter money">
+                    <img src="Images/money.png" class="input-img"></img>
+                    <input class="input100" type="number" id="money" name="money" placeholder="Money">
+                </div>
+                <button type="submit" id="register">Добавить</button>
+            </div>`;
         const register = document.getElementById('register');
         register.addEventListener('click', (e) => {
             e.preventDefault();
@@ -169,32 +183,51 @@ class ViewModule {
         document.getElementById('info').innerHTML = '';
         const content = document.getElementById('content');
         content.innerHTML = 
-        `<div class="shoe-add-container">
-            <div class="top-content">
-                <span class="container-title">Добавление обуви</span>
+        `<div id="adding-shoe" class="shoe-add-container">
+            <div id="img-side" class="img-side">
+                <div class="img-card">
+                    <img id="model-image" src="">
+                </div>
             </div>
-            <div class="mid-content">
-                <div class="wrap-input100 validate-input" data-validate="Enter name">
-                    <input class="input100" type="text" id="model-name" name="modelName" placeholder="Model name">
+            <div class="shoe-info-side">
+                <div class="top-content">
+                    <span class="container-title">Добавление обуви</span>
                 </div>
-                <div class="wrap-input100 validate-input" data-validate="Enter firm">
-                    <input class="input100" type="text" id="model-firm" name="modelFirm" placeholder="Model firm">
-                </div>
-                <div class="wrap-input100 validate-input" data-validate="Enter size">
-                    <input class="input100" type="number" maxlength="2" id="model-size" name="modelSize" placeholder="Model size">
-                </div>
-                <div class="wrap-input100 validate-input" data-validate="Enter price">
-                    <input class="input100" type="number" pattern="[^,\x22]" id="model-price" name="price" placeholder="Price">
-                </div>
-                <div class="wrap-input100 validate-input" data-validate="Enter amount">
-                    <input class="input100" type="number" id="model-amount" min="1" max="50" name="amount" placeholder="Amount">
-                </div>
-                <div class="container-login100-form-btn">
-                    <button class="file-form-btn" id="add-file">Добавить файл</button>
-                    <button class="login100-form-btn" id="add-model">Добавить</button>
+                <div class="mid-content">
+                    <div class="wrap-input100 validate-input" data-validate="Enter name">
+                        <input class="input100" type="text" id="model-name" name="modelName" placeholder="Model name">
+                    </div>
+                    <div class="wrap-input100 validate-input" data-validate="Enter firm">
+                        <input class="input100" type="text" id="model-firm" name="modelFirm" placeholder="Model firm">
+                    </div>
+                    <div class="wrap-input100 validate-input" data-validate="Enter size">
+                        <input class="input100" type="number" maxlength="2" id="model-size" name="modelSize" placeholder="Model size">
+                    </div>
+                    <div class="wrap-input100 validate-input" data-validate="Enter price">
+                        <input class="input100" type="number" pattern="[^,\x22]" id="model-price" name="price" placeholder="Price">
+                    </div>
+                    <div class="wrap-input100 validate-input" data-validate="Enter amount">
+                        <input class="input100" type="number" id="model-amount" min="1" max="50" name="amount" placeholder="Amount">
+                    </div>
+                    <div class="container-login100-form-btn">
+                        <button class="file-form-btn" id="add-file">Добавить файл</button>
+                        <button class="login100-form-btn" id="add-model">Добавить</button>
+                    </div>
                 </div>
             </div>
         </div>`;
+        const modelImage = document.getElementById('model-image');
+        viewModule.checkIfImageExists(modelImage.src, (exists) => {
+            if(exists) {
+                // console.log('Image exists. ')
+                document.getElementById('adding-shoe').style.padding = '30px 55px 37px 15px';
+                document.getElementById('img-side').style.display = 'flex';
+            }else {
+                // console.error('Image does not exists')
+                document.getElementById('adding-shoe').style.padding = '55px 95px 55px 55px';
+                document.getElementById('img-side').style.display = 'none';
+            }
+        });
         const addFile = document.getElementById('add-file');
         addFile.addEventListener('click', (e) => {
             e.preventDefault();
@@ -543,49 +576,110 @@ class ViewModule {
 
     }
     showUploadImage() {
+        const body = document.getElementsByTagName('body');
+        body[0].style.backgroundColor = 'rgba(0, 0, 0, 0.582)'
         const content = document.getElementById('content');
         content.innerHTML = 
-        `<div id="upload-content">
-            <div class="top-content">
-                <div class="img-container">
-                    <img src="Images/upload.png" alt="upload">
-                </div>
-                <div class="after-img">
-                    <p>Загрузка изображений</p>
+        `<div id="adding-shoe" class="shoe-add-container">
+            <div id="img-side" class="img-side">
+                <div class="img-card">
+                    <img id="model-image" src="">
                 </div>
             </div>
-            <div class="mid-content">
-                <label for="forImg">Выберите файл</label>
-                <label name="forImg" class="download-img">
-                    <input type="file" id="inputTag" name="img" accept="image/*"> <br>
-                </label>
-                <div id="selected-file" class="selected-file">
-                    <input type="text" id="imageName" placeholder="Назовите файл">
-                    <input id="imagePathName" readonly>
+            <div class="shoe-info-side">
+                <div class="top-content">
+                    <span class="container-title">Добавление обуви</span>
                 </div>
-                <div class="add-file-container">
-                    <button type="submit" id="submit-file">Загрузить файл</button>
+                <div class="mid-content">
+                    <div class="wrap-input100 validate-input" data-validate="Enter name">
+                        <input class="input100" type="text" id="model-name" name="modelName" placeholder="Model name">
+                    </div>
+                    <div class="wrap-input100 validate-input" data-validate="Enter firm">
+                        <input class="input100" type="text" id="model-firm" name="modelFirm" placeholder="Model firm">
+                    </div>
+                    <div class="wrap-input100 validate-input" data-validate="Enter size">
+                        <input class="input100" type="number" maxlength="2" id="model-size" name="modelSize" placeholder="Model size">
+                    </div>
+                    <div class="wrap-input100 validate-input" data-validate="Enter price">
+                        <input class="input100" type="number" pattern="[^,\x22]" id="model-price" name="price" placeholder="Price">
+                    </div>
+                    <div class="wrap-input100 validate-input" data-validate="Enter amount">
+                        <input class="input100" type="number" id="model-amount" min="1" max="50" name="amount" placeholder="Amount">
+                    </div>
+                    <div class="container-login100-form-btn">
+                        <button class="file-form-btn" id="add-file">Добавить файл</button>
+                        <button class="login100-form-btn" id="add-model">Добавить</button>
+                    </div>
                 </div>
             </div>
-        </div>`
-        let uploadContent = document.getElementById("upload-content");
-        let selectedFile = document.getElementById("selected-file");
-        let input = document.getElementById("inputTag");
-        let imagePathName = document.getElementById("imagePathName")
-        let imageName = document.getElementById("imageName")
-        let fileButton = document.getElementById("submit-file")
-        input.addEventListener("change", (e) =>{
+        </div>
+        
+        <form id="uploadForm" method="POST">
+            <div id="upload-content">
+                <div class="top-content">
+                    <div class="img-container">
+                        <img src="Images/upload.png" alt="upload">
+                    </div>
+                    <div class="after-img">
+                        <p>Загрузка изображений</p>
+                    </div>
+                </div>
+                <div class="mid-content">
+                    <label for="forImg">Выберите файл</label>
+                    <label name="forImg" class="download-img">
+                        <input type="file" id="inputTag" name="img" accept="image/*"> <br>
+                    </label>
+                    <div id="selected-file" class="selected-file">
+                        <input type="text" id="imageName" placeholder="Назовите файл">
+                        <input id="imagePathName" readonly>
+                    </div>
+                    <div class="add-file-container">
+                        <button type="submit" id="submit-file">Загрузить файл</button>
+                    </div>
+                </div>
+            </div>
+        </form>`
+        const modelImage = document.getElementById('model-image');
+        viewModule.checkIfImageExists(modelImage.src, (exists) => {
+            if(exists) {
+                // console.log('Image exists. ')
+                document.getElementById('adding-shoe').style.padding = '30px 55px 37px 15px';
+                document.getElementById('img-side').style.display = 'flex';
+            }else {
+                // console.error('Image does not exists')
+                document.getElementById('adding-shoe').style.padding = '55px 95px 55px 55px';
+                document.getElementById('img-side').style.display = 'none';
+            }
+        });
+        document.getElementById('adding-shoe').style.opacity = '0.5';
+        document.getElementById('add-file').style.cursor = 'not-allowed';
+        document.getElementById('add-model').style.cursor = 'not-allowed';
+        // insert file name into input
+        document.getElementById("inputTag").addEventListener("change", (e) =>{
+            e.preventDefault();
             let inputImage = document.querySelector("input[type=file]").files[0];
-            imagePathName.style.display = 'unset';
-            imageName.style.display = 'unset';
-            imagePathName.value = inputImage.name;
-            uploadContent.style.height = '660px';
-            selectedFile.style.marginTop = '30px';
+            document.getElementById("imagePathName").style.display = 'unset';
+            document.getElementById("imageName").style.display = 'unset';
+            document.getElementById("imagePathName").value = inputImage.name;
+            document.getElementById("upload-content").style.height = '660px';
+            document.getElementById("selected-file").style.marginTop = '30px';
+
+            // to show image on screen
+            // image.src = URL.createObjectURL(e.target.files[0]);
+            // const file = document.getElementById('inputTag');
+            // if(file.files.length > 0) {
+            //     for (let i = 0; i <= file.files.length - 1; i++) {
+            //         const fileSize = file.files.item(i).size;
+            //     }
+            // }
         });
-        fileButton.addEventListener('click', (e) => {
+        document.getElementById("uploadForm").addEventListener('submit', (e) => {
+            e.preventDefault();
+            body[0].style.backgroundColor = 'white'
             uploadModule.uploadPicture();
-            // viewModule.showCreateModel();
+            viewModule.showCreateModel();
         });
+
     }
 }
 const viewModule = new ViewModule();

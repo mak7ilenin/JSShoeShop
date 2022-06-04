@@ -173,17 +173,3 @@ class GainModule {
 }
 const gainModule = new GainModule();
 export{gainModule};
-
-
-// "/septemberGain",
-// "/octoberGain",
-// "/novemberGain",
-// "/decemberGain",
-// "/januaryGain",
-// "/februaryGain",
-// "/marchGain",
-// "/aprilGain",
-// "/mayGain",
-// "/juneGain",
-// "/julyGain",
-// "/augustGain"

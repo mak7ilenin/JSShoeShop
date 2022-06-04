@@ -44,7 +44,7 @@ class ShoeModule {
                     body[0].style.transition = 'ease all 0.7s';
                     body[0].style.backgroundColor = 'white'
                 }, 230);
-                document.getElementById('info').innerHTML = error.info;
+                // document.getElementById('info').innerHTML = error.info;
             });
     }
     getListModels() {

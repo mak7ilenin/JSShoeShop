@@ -39,6 +39,7 @@ import session.PictureFacade;
 @MultipartConfig()
 public class UploadServlet extends HttpServlet {
     @EJB private PictureFacade pictureFacade;
+    private final String imagesFolder = "C:\\Shoeger\\ShoeShop\\";
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -58,38 +59,33 @@ public class UploadServlet extends HttpServlet {
         JsonObject jsonObject = jsonReader.readObject();
         switch (path) {
             case "/uploadPicture":
-                List<Part> fileParts = request.getParts().stream()
-                    .filter( part -> "file".equals(part.getName()) && part.getSize() > 0)
-                    .collect(Collectors.toList());
-                String imagesFolder = "C:\\Shoeger\\ShoeShop";
-                for(Part filePart : fileParts){
-                    String pathToFile = imagesFolder + File.separatorChar
-                                    +getFileName(filePart);
-                    
-                    File tempFile = new File(imagesFolder+File.separatorChar+"tmp"+File.separatorChar+getFileName(filePart));
-                    tempFile.mkdirs();
-                    try(InputStream fileContent = filePart.getInputStream()){
-                       Files.copy(
-                               fileContent,tempFile.toPath(), 
-                               StandardCopyOption.REPLACE_EXISTING
-                       );
-                       writeToFile(resize(tempFile),pathToFile);
-                       tempFile.delete();
-                    }
-                    String description = jsonObject.getString("description", "");
-                    Picture picture = new Picture();
-                    picture.setDescription(description);
-                    picture.setPathToFile(pathToFile);
-                    pictureFacade.create(picture);
-                    PictureJsonBuilder pjb = new PictureJsonBuilder();
-                    job.add("status", true);
-                    job.add("picture", pjb.getPictureJsonObject(picture));
-                    job.add("info", "Изображение " + picture.getDescription());
-                    try (PrintWriter out = response.getWriter()) {
-                        out.println(job.build().toString());
-                    }
-                    break;
-                } 
+                String description = jsonObject.getString("description", "");
+//                String imagesFolder = "\\WEB-INF\\Uploaded_Images";
+                String imagesFolder = "C:\\Shoeger\\ShoeShop\\";
+                String pathToFile = imagesFolder + File.separatorChar + description;
+
+                File tempFile = new File(imagesFolder+File.separatorChar+"tmp"+File.separatorChar + description);
+                tempFile.mkdirs();
+//                try(InputStream fileContent = filePart.getInputStream()){
+//                   Files.copy(
+//                           fileContent,tempFile.toPath(), 
+//                           StandardCopyOption.REPLACE_EXISTING
+//                   );
+//                   writeToFile(resize(tempFile),pathToFile);
+//                   tempFile.delete();
+//                }
+                Picture picture = new Picture();
+                picture.setDescription(description);
+                picture.setPathToFile(pathToFile);
+                pictureFacade.create(picture);
+                PictureJsonBuilder pjb = new PictureJsonBuilder();
+                job.add("status", true);
+                job.add("picture", pjb.getPictureJsonObject(picture));
+                job.add("info", "Изображение " + picture.getDescription());
+                try (PrintWriter out = response.getWriter()) {
+                    out.println(job.build().toString());
+                }
+                break;
         }
     }
     private String getFileName(Part part){
@@ -112,7 +108,7 @@ public class UploadServlet extends HttpServlet {
     public byte[] resize(File icon) {
         try {
            BufferedImage originalImage = ImageIO.read(icon);
-           originalImage= Scalr.resize(originalImage, Scalr.Method.QUALITY, Scalr.Mode.FIT_TO_WIDTH,400);
+           originalImage = Scalr.resize(originalImage, Scalr.Method.QUALITY, Scalr.Mode.FIT_TO_WIDTH,400);
             //To save with original ratio uncomment next line and comment the above.
             //originalImage= Scalr.resize(originalImage, 153, 128);
             ByteArrayOutputStream baos = new ByteArrayOutputStream();

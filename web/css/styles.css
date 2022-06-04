@@ -133,7 +133,7 @@ main {
 footer {
     width: 100%;
     height: 50px;
-    position: absolute;
+    position: fixed;
     bottom: 0;
     left: 0;
     display: flex;
@@ -356,17 +356,43 @@ input[type=checkbox] {
 
 
 .shoe-add-container {
-    width: 50%;
+    width: 60%;
     margin: 180px auto;
     border: 1px solid lightgray;
     border-radius: 10px;
     overflow: hidden;
-    padding: 30px 55px 37px 55px;
+    display: flex;
+    padding: 30px 55px 37px 15px;
+    /* padding: 55px 95px 55px 55px; */
     background: #9152f8;
     background: -webkit-linear-gradient(top, #7579ff, #b224ef);
     background: -o-linear-gradient(top, #7579ff, #b224ef);
     background: -moz-linear-gradient(top, #7579ff, #b224ef);
     background: linear-gradient(top, #7579ff, #b224ef);
+}
+.img-side {
+    width: 80%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+}
+.img-card {
+    width: 100%;
+    border: 5px solid rgb(180, 180, 180);
+    display: flex;
+    align-items: center;
+}
+.img-card img {
+    /* width: 100%; */
+    /* height: 400px; */
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: scale-down;
+}
+.shoe-info-side {
+    width: 100%;
+    padding-left: 20px;
 }
 .mid-content {
     width: 100%;
@@ -427,11 +453,10 @@ button:hover {
     display: flex;
 }
 .login100-form-btn {
-    width: 40%;
+    width: 47%;
     height: 50px;
     margin: 0 auto;
     font-family: 'Poppins', sans-serif;
-    font-size: 26px;
     letter-spacing: 5px;
     color: #ffffff;
     display: flex;
@@ -441,17 +466,17 @@ button:hover {
     border-radius: 25px;
     background: rgb(45,194,253);
     background: linear-gradient(180deg, rgba(45,194,253,1) 0%, rgb(63, 131, 255) 100%);
-    box-shadow: 0 0 10px 2px cyan;
+    box-shadow: 0 0 2px 2px cyan;
     position: relative;
     z-index: 1;
+    opacity: 0.9;
     transition: all 0.4s;
 }
 .file-form-btn {
-    width: 40%;
+    width: 47%;
     height: 50px;
     margin: 0 auto;
     font-family: 'Poppins', sans-serif;
-    font-size: 26px;
     letter-spacing: 5px;
     color: #ffffff;
     display: flex;
@@ -461,16 +486,20 @@ button:hover {
     border-radius: 25px;
     background: rgb(141, 141, 141);
     background: linear-gradient(180deg, rgb(143, 143, 143) 0%, rgb(126, 126, 126) 100%);
-    box-shadow: 0 0 10px 2px rgb(73, 73, 73);
+    box-shadow: 0 0 2px 2px rgb(73, 73, 73);
     position: relative;
     z-index: 1;
     transition: all 0.4s;
 }
 .login100-form-btn:hover {
-    box-shadow: 0 0 30px 10px cyan;
+    opacity: 1;
+    transform: scaleX(1.03);
+    box-shadow: 0 0 5px 1px cyan;
 }
 .file-form-btn:hover {
-    box-shadow: 0 0 30px 10px rgb(73, 73, 73);
+    opacity: 1;
+    transform: scaleX(1.03);
+    box-shadow: 0 0 5px 1px rgb(73, 73, 73);
 }
 button {
     outline: none;
@@ -794,23 +823,28 @@ button {
     width: 35%;
     height: 600px;
     margin: 0 auto;
-    margin-top: 130px;
-    border: 1px solid lightgray;
+    margin-top: 125px;
     border-radius: 10px;
+    position: absolute;
+    top: 90px;
+    right: 620px;
     overflow: hidden;
     border: 1px solid rgba(128, 128, 128, 0.466);
-    background: #9152f8;
+    z-index: 1;
+    /* background: #9152f8;
     background: -webkit-linear-gradient(top, #ff73f31f, #94c4e454);
     background: -o-linear-gradient(top, #ff73f31f, #94c4e454);
     background: -moz-linear-gradient(top, #ff73f31f, #94c4e454);
-    background: linear-gradient(top, #ff73f31f, #94c4e454);
+    background: linear-gradient(top, #ff73f31f, #94c4e454); */
+    background-color: rgba(255, 255, 255, 0.918);
 }
 #upload-content .top-content {
     width: 100%;
     height: 70px;
     display: flex;
-    background: rgb(75,198,255);
-    background: linear-gradient(180deg, rgba(0, 255, 64, 0.103) 83%, rgba(0, 0, 0, 0.123) 100%);
+    /* background: rgb(75,198,255);
+    background: linear-gradient(180deg, rgba(0, 255, 64, 0.103) 83%, rgba(0, 0, 0, 0.123) 100%); */
+    background-color: lightcyan;
     border-bottom: 2px solid gray;
     align-items: center;
 }
@@ -918,6 +952,7 @@ button {
     margin-top: 20px;
     border-radius: 10px;
     font-size: 20px;
+    font-weight: bold;
     background-color: rgb(149, 255, 255);
     opacity: 0.7;
     border: 1px solid gray;
