@@ -128,7 +128,10 @@ public class LoginServlet extends HttpServlet {
                 User user = (User) session.getAttribute("authUser");
                 
                 if(user.getMoney() >= model.getPrice() && model.getAmount() != 0) {
-                    user.setMoney(user.getMoney() - model.getPrice());
+                    double finalMoney = user.getMoney() - model.getPrice();
+                    BigDecimal bd = new BigDecimal(finalMoney).setScale(2, RoundingMode.HALF_UP);
+                    double decimalMoney = bd.doubleValue();
+                    user.setMoney(decimalMoney);
                     model.setAmount(model.getAmount() - 1);
                     
                     History history = new History();
@@ -136,7 +139,7 @@ public class LoginServlet extends HttpServlet {
                     history.setUser(user);
                     history.setBuy(Date.from(LocalDate.now().atTime(LocalTime.now().plusHours(date.getHours())).toInstant(ZoneOffset.UTC)));
                     double gain = history.getGain() + model.getPrice();
-                    BigDecimal bd = new BigDecimal(gain).setScale(2, RoundingMode.HALF_UP);
+                    bd = new BigDecimal(gain).setScale(2, RoundingMode.HALF_UP);
                     double decimalGain = bd.doubleValue();
                     history.setGain(decimalGain);
                     modelFacade.edit(model);

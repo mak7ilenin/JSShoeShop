@@ -812,11 +812,11 @@ button {
     filter: grayscale(0);
     transform: scale(1.02);
 }
-.mid-content {
+#upload-content .mid-content {
     height: 520px;
     border:thin solid black;
 }
-.mid-content label:not(.download-img) {
+#upload-content .mid-content label:not(.download-img) {
     width: 60%;
     padding: 8px 0;
     margin: 0 auto;
