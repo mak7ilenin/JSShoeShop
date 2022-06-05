@@ -59,11 +59,11 @@ public class UploadServlet extends HttpServlet {
         JsonObject jsonObject = jsonReader.readObject();
         switch (path) {
             case "/uploadPicture":
-                String description = jsonObject.getString("description", "");
 //                String imagesFolder = "\\WEB-INF\\Uploaded_Images";
-                String imagesFolder = "C:\\Shoeger\\ShoeShop\\";
+                String description = request.getParameter("description");
+//                String image = request.getParameter("img");
+                System.out.println(request.getParameter("img"));
                 String pathToFile = imagesFolder + File.separatorChar + description;
-
                 File tempFile = new File(imagesFolder+File.separatorChar+"tmp"+File.separatorChar + description);
                 tempFile.mkdirs();
 //                try(InputStream fileContent = filePart.getInputStream()){

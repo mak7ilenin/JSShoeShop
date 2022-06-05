@@ -41,7 +41,7 @@
     </header>
     <p id="info" class="text-info">&nbsp;</p>
     <main id="content">
-        <div id="adding-shoe" class="shoe-add-container">
+        <div id="adding-shoe" class="shoe-add-container" style="opacity: 0.2">
             <div class="img-side">
                 <div class="img-card">
                     <img src="../web/WEB-INF/Uploaded_Images/Screenshot_20200903-212610_00000.jpg">
@@ -76,7 +76,7 @@
             </div>
         </div>
 
-        <form id="uploadForm" method="POST">
+        <!-- <form id="uploadForm" method="POST"> -->
             <div id="upload-content">
                 <div class="top-content">
                     <div class="img-container">
@@ -92,37 +92,56 @@
                         <input type="file" id="inputTag" name="img" accept="image/*"> <br>
                     </label>
                     <div id="selected-file" class="selected-file">
-                        <input type="text" id="imageName" placeholder="Назовите файл">
-                        <input id="imagePathName" readonly>
+                        <input type="text" id="description" placeholder="Назовите файл">
+                        <input id="imagePathName" name="imagePathName" readonly>
                     </div>
                     <div class="add-file-container">
                         <button type="submit" id="submit-file">Загрузить файл</button>
                     </div>
                 </div>
             </div>
-        </form>
+        <!-- </form> -->
     </main>
     <footer>Dzjubenko 2022</footer>
-    <script type="module" src="js/index.js"></script>
+    <!-- <script type="module" src="js/index.js"></script> -->
     <script>
-        let uploadContent = document.getElementById("upload-content");
-        let selectedFile = document.getElementsByClassName("selected-file");
-        let input = document.getElementById("inputTag");
-        let imagePathName = document.getElementById("imagePathName")
-        let imageName = document.getElementById("imageName")
-        let fileButton = document.getElementById("submit-file")
-        input.addEventListener("change", (e) =>{
+        const addingShoe = document.getElementById('adding-shoe');
+        const addFile = document.getElementById('add-file');
+        const addModel = document.getElementById('add-model');
+        addingShoe.style.opacity = '0.5';
+        addFile.style.cursor = 'not-allowed';
+        addModel.style.cursor = 'not-allowed';
+        // insert file name into input
+        const inputTag = document.getElementById("inputTag");
+        inputTag.addEventListener('change', (e) =>{
             let inputImage = document.querySelector("input[type=file]").files[0];
+            const imagePathName = document.getElementById('imagePathName');
+            const imageName = document.getElementById('description');
+            const uploadContent = document.getElementById('upload-content');
+            const selectedFile = document.getElementById('selected-file');
             imagePathName.style.display = 'unset';
             imageName.style.display = 'unset';
             imagePathName.value = inputImage.name;
             uploadContent.style.height = '660px';
-            selectedFile.style.marginTop = '60px'
+            selectedFile.style.marginTop = '30px';
+
+            // to show image on screen
+            // image.src = URL.createObjectURL(e.target.files[0]);
+            // const file = document.getElementById('inputTag');
+            // if(file.files.length > 0) {
+            //     for (let i = 0; i <= file.files.length - 1; i++) {
+            //         const fileSize = file.files.item(i).size;
+            //     }
+            // }
         });
-        fileButton.addEventListener('click', (e) => {
+        const uploadForm = document.getElementById("uploadForm");
+        uploadForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            body[0].style.backgroundColor = 'white'
+            uploadModule.uploadPicture();
+            viewModule.showCreateModel();
         });
     </script>
-    <script src="components/upload.js" type="text/javascript"></script>
 </body>
 
 </html>

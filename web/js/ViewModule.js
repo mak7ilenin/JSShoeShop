@@ -630,8 +630,8 @@ class ViewModule {
                         <input type="file" id="inputTag" name="img" accept="image/*"> <br>
                     </label>
                     <div id="selected-file" class="selected-file">
-                        <input type="text" id="imageName" placeholder="Назовите файл">
-                        <input id="imagePathName" readonly>
+                        <input type="text" id="description" placeholder="Назовите файл">
+                        <input id="imagePathName" name="imagePathName" readonly>
                     </div>
                     <div class="add-file-container">
                         <button type="submit" id="submit-file">Загрузить файл</button>
@@ -651,18 +651,25 @@ class ViewModule {
                 document.getElementById('img-side').style.display = 'none';
             }
         });
-        document.getElementById('adding-shoe').style.opacity = '0.5';
-        document.getElementById('add-file').style.cursor = 'not-allowed';
-        document.getElementById('add-model').style.cursor = 'not-allowed';
+        const addingShoe = document.getElementById('adding-shoe');
+        const addFile = document.getElementById('add-file');
+        const addModel = document.getElementById('add-model');
+        addingShoe.style.opacity = '0.5';
+        addFile.style.cursor = 'not-allowed';
+        addModel.style.cursor = 'not-allowed';
         // insert file name into input
-        document.getElementById("inputTag").addEventListener("change", (e) =>{
-            e.preventDefault();
+        const inputTag = document.getElementById("inputTag");
+        inputTag.addEventListener('change', (e) =>{
             let inputImage = document.querySelector("input[type=file]").files[0];
-            document.getElementById("imagePathName").style.display = 'unset';
-            document.getElementById("imageName").style.display = 'unset';
-            document.getElementById("imagePathName").value = inputImage.name;
-            document.getElementById("upload-content").style.height = '660px';
-            document.getElementById("selected-file").style.marginTop = '30px';
+            const imagePathName = document.getElementById('imagePathName');
+            const imageName = document.getElementById('description');
+            const uploadContent = document.getElementById('upload-content');
+            const selectedFile = document.getElementById('selected-file');
+            imagePathName.style.display = 'unset';
+            imageName.style.display = 'unset';
+            imagePathName.value = inputImage.name;
+            uploadContent.style.height = '660px';
+            selectedFile.style.marginTop = '30px';
 
             // to show image on screen
             // image.src = URL.createObjectURL(e.target.files[0]);
@@ -673,13 +680,13 @@ class ViewModule {
             //     }
             // }
         });
-        document.getElementById("uploadForm").addEventListener('submit', (e) => {
+        const uploadForm = document.getElementById("uploadForm");
+        uploadForm.addEventListener('submit', (e) => {
             e.preventDefault();
             body[0].style.backgroundColor = 'white'
             uploadModule.uploadPicture();
             viewModule.showCreateModel();
         });
-
     }
 }
 const viewModule = new ViewModule();
