@@ -22,6 +22,12 @@ class AdminModule {
                             option.value = response.options[i].id;
                             userSelect.add(option);
                         }
+                        let authId = JSON.parse(sessionStorage.getItem('user')).id;
+                        for (let i = 1; i < userSelect.length; i++) {
+                            if(userSelect.options[i].value == authId) {
+                                userSelect.remove(i);
+                            }
+                        }
                     }else {
                         let userSelect = document.getElementById('list-users');
                         userSelect.options.length = 0;

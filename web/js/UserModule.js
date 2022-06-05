@@ -56,6 +56,11 @@ class UserModule {
                 });
     }
     getListUsers() {
+        // const authUserId = JSON.parse(sessionStorage.getItem('user')).id;
+        // const authUser = {
+        //     "id": authUserId
+        // }
+        // console.log(authUserId);
         let promiseListUsers = fetch('getListUsers', {
             method: 'GET',
             headers: {
@@ -81,6 +86,12 @@ class UserModule {
                             + ' // ' + frMoney + '$';
                             option.value = response.options[i].id;
                             userSelect.add(option);
+                        }
+                        let authId = JSON.parse(sessionStorage.getItem('user')).id;
+                        for (let i = 1; i < userSelect.length; i++) {
+                            if(userSelect.options[i].value == authId) {
+                                userSelect.remove(i);
+                            }
                         }
                     }else {
                         let userSelect = document.getElementById('list-users');

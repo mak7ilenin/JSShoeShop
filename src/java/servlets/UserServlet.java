@@ -107,6 +107,11 @@ public class UserServlet extends HttpServlet {
                 break;
             case "/getListUsers":
                 List<User> users = userFacade.findAll();
+//                for(User user : users) {
+//                    if("ADMINISTRATOR".equals(user.getRole())) {
+//                        users.remove(user);
+//                    }
+//                }
                 users.remove(0);
                 UserJsonBuilder ujb = new UserJsonBuilder();
                 if(!users.isEmpty()) {
