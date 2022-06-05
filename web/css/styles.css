@@ -1,6 +1,9 @@
 html {
     scroll-behavior: smooth;
 }
+body {
+    overflow: hidden;
+}
 header {
     width: 100%;
     height: 110px;
@@ -61,7 +64,6 @@ header ul li {
     background-size: 0% 2px;
     transition: background-size .3s;
 }
-
 .dropbtn:hover {
     background-size: 100% 2px;
 }
@@ -125,10 +127,12 @@ header ul li {
     font-weight: bold;
     font-size: 22px;
     margin-top: 10px;
-}
-main {
+}  
+#content {
     width: 85%;
     margin: 0 auto;
+    position: relative;
+    z-index: 99999;
 }
 footer {
     width: 100%;
@@ -463,6 +467,7 @@ button:hover {
     justify-content: center;
     align-items: center;
     padding: 0 20px;
+    font-size: 26px;
     border-radius: 25px;
     background: rgb(45,194,253);
     background: linear-gradient(180deg, rgba(45,194,253,1) 0%, rgb(63, 131, 255) 100%);
@@ -483,6 +488,7 @@ button:hover {
     justify-content: center;
     align-items: center;
     padding: 0 20px;
+    font-size: 26px;
     border-radius: 25px;
     background: rgb(141, 141, 141);
     background: linear-gradient(180deg, rgb(143, 143, 143) 0%, rgb(126, 126, 126) 100%);
@@ -514,7 +520,7 @@ button {
 .shoe-edit-container {
     width: 50%;
     margin: 0 auto;
-    margin-top: 135px;
+    margin-top: 150px;
     padding: 15px 55px 37px 55px;
     border: 1px solid lightgray;
     border-radius: 10px;
@@ -568,7 +574,7 @@ button {
 .user-edit-container {
     width: 50%;
     margin: 0 auto;
-    margin-top: 115px;
+    margin-top: 145px;
     padding: 15px 55px 37px 55px;
     border: 1px solid lightgray;
     border-radius: 10px;
@@ -582,7 +588,7 @@ button {
 .user-edit-title {
     font-family: 'Poppins', sans-serif;
     font-size: 48px;
-    margin-bottom: 5px;
+    margin-bottom: 35px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -617,7 +623,7 @@ button {
 
 .purchase-container {
     width: 50%;
-    height: 300px;
+    height: 320px;
     margin: 0 auto;
     margin-top: 235px;
     padding: 15px 55px 37px 55px;
@@ -641,6 +647,7 @@ button {
 }
 .purchase-container .mid-content .container-login100-form-btn {
     margin-top: 25px;
+    font-size: 26px;
 }
 .purchase-container .mid-content label {
     margin-bottom: 20px
@@ -673,6 +680,9 @@ button {
     justify-content: center;
     align-items: center;
     color: white;
+}
+.role-container .mid-content .container-login100-form-btn .login100-form-btn {
+    font-size: 26px;
 }
 #list-roles {
     margin: 30px auto;
@@ -962,4 +972,21 @@ button {
     transform: scale(1.03);
     opacity: 1;
     background-color: rgb(137, 255, 255)
+}
+
+
+.graphic {
+    width: 20px;
+    height: 20px;
+    background-color: red;
+    border-radius: 50%;
+    position: fixed;
+    z-index: 0;
+    offset-path: path("M513.602 30.9586C276.802 -52.2414 168.102 55.4585 84.1019 139.959C15.7685 223.625 -88.5981 297.159 146.602 373.959C381.802 450.759 88.6019 700.459 378.602 688.459C488.219 694.331 705 509 804.5 621C945.602 726.959 1220.71 624.688 1369 664.5C1849.5 793.5 1213.5 339.5 1671.1 259.959C1783.9 240.351 1320.5 -101.163 1271 30.9586C1345.5 538.5 857.5 -171.5 832.5 270C607 580.542 610.174 64.8894 513.602 30.9586Z");
+    animation: move 30s linear infinite;
+}
+@keyframes move {
+    100% {
+        offset-distance: 100%;
+    }
 }

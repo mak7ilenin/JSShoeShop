@@ -9,6 +9,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintWriter;
 import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -59,13 +61,9 @@ public class UploadServlet extends HttpServlet {
         JsonObject jsonObject = jsonReader.readObject();
         switch (path) {
             case "/uploadPicture":
-//                String imagesFolder = "\\WEB-INF\\Uploaded_Images";
-                String description = request.getParameter("description");
-//                String image = request.getParameter("img");
-                System.out.println(request.getParameter("img"));
-                String pathToFile = imagesFolder + File.separatorChar + description;
-                File tempFile = new File(imagesFolder+File.separatorChar+"tmp"+File.separatorChar + description);
-                tempFile.mkdirs();
+//                String pathToFile = imagesFolder + File.separatorChar + description;
+//                File tempFile = new File(imagesFolder+File.separatorChar+"tmp"+File.separatorChar + description);
+//                tempFile.mkdirs();
 //                try(InputStream fileContent = filePart.getInputStream()){
 //                   Files.copy(
 //                           fileContent,tempFile.toPath(), 
@@ -74,18 +72,18 @@ public class UploadServlet extends HttpServlet {
 //                   writeToFile(resize(tempFile),pathToFile);
 //                   tempFile.delete();
 //                }
-                Picture picture = new Picture();
-                picture.setDescription(description);
-                picture.setPathToFile(pathToFile);
-                pictureFacade.create(picture);
-                PictureJsonBuilder pjb = new PictureJsonBuilder();
-                job.add("status", true);
-                job.add("picture", pjb.getPictureJsonObject(picture));
-                job.add("info", "Изображение " + picture.getDescription());
-                try (PrintWriter out = response.getWriter()) {
-                    out.println(job.build().toString());
-                }
-                break;
+//                Picture picture = new Picture();
+//                picture.setDescription(description);
+//                picture.setPathToFile(pathToFile);
+//                pictureFacade.create(picture);
+//                PictureJsonBuilder pjb = new PictureJsonBuilder();
+//                job.add("status", true);
+//                job.add("picture", pjb.getPictureJsonObject(picture));
+//                job.add("info", "Изображение " + picture.getDescription());
+//                try (PrintWriter out = response.getWriter()) {
+//                    out.println(job.build().toString());
+//                }
+//                break;
         }
     }
     private String getFileName(Part part){

@@ -13,11 +13,11 @@ class GainModule {
                     document.getElementById('monthHeading').style.opacity = '0';
                     document.getElementById('collapseExample').style.transform = 'translateX(0%)';
                     document.getElementById('collapseExample').style.opacity = '1';
-                    document.getElementById('collapseExample').style.top = '250px';
+                    document.getElementById('collapseExample').style.top = '100px';
                     setTimeout(() => {
                         document.getElementById('collapseExample').style.opacity = '0';
                         document.getElementById('collapseExample').style.transform = 'translateX(200%)';
-                        document.getElementById('collapseExample').style.top = '260px';
+                        document.getElementById('collapseExample').style.top = '100px';
                         document.getElementById('monthHeading').style.opacity = '1';
                     }, 5000);
                 }

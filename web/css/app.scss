@@ -1,0 +1,16 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+.graphic {
+    offset-path: path("M647 31C410.2 -52.2 163.667 59.6667 70 126C1.66667 209.667 -76.2 396.2 159 473C394.2 549.8 321 941 611 929C835 941 864 722.2 1108 703C1413 679 1165 601 955 430C745 259 943 135 647 31Z");
+    animation: move 5s linear infinite;
+}
+
+@keyframes move {
+    100% {
+        offset-distance: 100%;
+    }
+}
