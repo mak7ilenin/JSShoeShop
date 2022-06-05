@@ -55,10 +55,14 @@ class MyselfModule {
             credentials: 'include',
             body: JSON.stringify(editUser)
         });
-        console.log(promiseEditMyself);
         promiseEditMyself.then(response => response.json())
         .then(response => {
             if(response.status) {
+                if(sessionStorage.getItem('user') !== null) {
+                    sessionStorage.setItem('user', JSON.stringify(response.editedUser));
+                    const userBank = document.getElementById('user-bank');
+                    userBank.innerHTML = JSON.parse(sessionStorage.getItem('user')).money + "$";
+                }
                 const body = document.getElementsByTagName('body');
                 body[0].style.transition = 'ease all 0.4s';
                 body[0].style.transitionTimingFunction = 'cubic-bezier(.76,.08,.47,.79)';
@@ -69,6 +73,10 @@ class MyselfModule {
                 }, 230);
                 document.getElementById('info').innerHTML = response.info;
             }else {
+                if(sessionStorage.getItem('user') !== null) {
+                    const userBank = document.getElementById('user-bank');
+                    userBank.innerHTML = JSON.parse(sessionStorage.getItem('user')).money + "$";
+                }
                 document.getElementById('info').innerHTML = response.info;
             }
             })

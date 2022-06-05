@@ -155,10 +155,10 @@ public class UserServlet extends HttpServlet {
 //                editUser.setPassword(userPassword);
                 userFacade.edit(editUser);
                 
-//                ujb = new UserJsonBuilder();
+                ujb = new UserJsonBuilder();
                 job.add("status", true)
-                    .add("info", "Пользователь " + editUser.getFirstName() + " " + editUser.getLastName() + " изменен(а)");
-//                    .add("editedUser", ujb.getUserJsonObject(editUser));
+                    .add("info", "Пользователь " + editUser.getFirstName() + " " + editUser.getLastName() + " изменен(а)")
+                    .add("editedUser", ujb.getUserJsonObject(editUser));
                 try(PrintWriter out = response.getWriter()) {
                     out.println(job.build().toString());
                 }
@@ -216,8 +216,10 @@ public class UserServlet extends HttpServlet {
                     existingUser.setLogin(myUsername);
                     userFacade.edit(existingUser);
                     
+                    ujb = new UserJsonBuilder();
                     job.add("status", true);
                     job.add("info", "Ваши данные успешно изменены!");
+                    job.add("editedUser", ujb.getUserJsonObject(existingUser));
                     try(PrintWriter out = response.getWriter()) {
                         out.println(job.build().toString());
                     }

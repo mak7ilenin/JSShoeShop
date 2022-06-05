@@ -11,6 +11,7 @@ header {
     box-shadow: 0px 7px 10px 0 rgba(0, 0, 0, 0.253);
     display: flex;
     position: fixed;
+    z-index: 9999;
     top: 0;
     left: 0;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
@@ -106,6 +107,16 @@ header ul li {
     display: block;
     transform: translateY(0%);
 }
+.user-bank-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 130px;
+    margin-bottom: 6.5px;
+}
+#user-bank {
+    font-size: 24px;
+}
 .log-bar {
     position: absolute;
     right: 50px;
@@ -156,7 +167,7 @@ footer {
 .login-container {
     width: 40%;
     margin: 0px auto;
-    margin-top: 135px;
+    margin-top: 120px;
     border: 3px solid #000000;
     background-color: rgba(198, 255, 198, 0.74);
     transition: ease all 0.3s;
@@ -978,12 +989,64 @@ button {
 .graphic {
     width: 20px;
     height: 20px;
-    background-color: red;
     border-radius: 50%;
     position: fixed;
     z-index: 0;
+}
+.graphic1 {
     offset-path: path("M513.602 30.9586C276.802 -52.2414 168.102 55.4585 84.1019 139.959C15.7685 223.625 -88.5981 297.159 146.602 373.959C381.802 450.759 88.6019 700.459 378.602 688.459C488.219 694.331 705 509 804.5 621C945.602 726.959 1220.71 624.688 1369 664.5C1849.5 793.5 1213.5 339.5 1671.1 259.959C1783.9 240.351 1320.5 -101.163 1271 30.9586C1345.5 538.5 857.5 -171.5 832.5 270C607 580.542 610.174 64.8894 513.602 30.9586Z");
     animation: move 30s linear infinite;
+    background-color: #fff;
+    box-shadow:
+        0 0 60px 15px #fff,
+        0 0 40px 10px rgb(255, 0, 0),
+        0 0 60px 10px rgb(255, 0, 0);
+}
+.graphic2 {
+    width: 30px;
+    height: 30px;
+    offset-path: path("M1162.95 726.575C1399.75 809.775 1268.06 512.878 1563.06 609.378C1775.06 625.878 1603.4 75.5546 1478.06 288.878C1350.56 505.878 1486.45 -10.3839 1196.45 1.61609C1086.84 -4.25623 870.056 181.075 770.556 69.0748C629.454 -36.8839 768.349 423.387 620.056 383.575C139.556 254.575 486.157 129.337 28.5556 208.879C-84.2464 228.486 181.056 296.878 338.056 525.878C555.056 903.878 818.056 438.878 889.556 597.378C1115.06 286.836 1066.38 692.644 1162.95 726.575Z");
+    animation: move 70s linear infinite;
+    offset-anchor: auto;
+    offset-anchor: right top;
+    offset-anchor: left bottom;
+    offset-anchor: 20% 80%;
+    background-color: #fff;
+    box-shadow:
+        0 0 60px 15px #fff,
+        0 0 40px 10px rgb(255, 136, 0),
+        0 0 60px 10px rgb(200, 255, 0);
+}
+.graphic3 {
+    width: 10px;
+    height: 10px;
+    offset-path: path("M1442.07 855.372C1678.87 938.572 956.571 442.872 1251.57 539.372C1463.57 555.872 1645.46 27.9816 1442.07 168.872C1285.57 277.282 1486.38 58.0195 1196.38 70.0195C1086.76 64.1472 928.572 539.372 770.483 137.478C629.381 31.5195 563.865 73.1845 415.572 33.3721C-64.9285 -95.6279 486.084 197.74 28.4824 277.282C-84.3196 296.889 180.982 365.282 337.982 594.282C554.982 972.282 770.483 831.372 889.483 665.782C1126.07 569.872 1345.5 821.441 1442.07 855.372Z");
+    animation: move 20s linear infinite;
+    background-color: #fff;
+    box-shadow:
+        0 0 60px 15px #fff,
+        0 0 40px 10px rgb(0, 4, 255),
+        0 0 60px 10px rgb(0, 217, 255);
+}
+.graphic4 {
+    width: 25px;
+    height: 25px;
+    offset-path: path("M222.662 61.4582C38.3454 231.822 408.5 481 113.5 384.5C-98.5002 368 19.2732 888.849 222.662 747.958C379.162 639.548 41 1048.5 331 1036.5C538 472.5 946.749 1508.15 1010.5 877C1023.53 747.958 1154.21 776.188 1302.5 816C1783 945 1591.23 1424.08 1713.84 976.09C1985.5 -16.5 1483.75 551.549 1326.75 322.548C1109.75 -55.4515 1163.5 337.91 1044.5 503.5C807.911 599.41 531.5 -224 222.662 61.4582Z");
+    animation: move 30s linear infinite;
+    background-color: #fff;
+    box-shadow:
+        0 0 60px 15px #fff,
+        0 0 40px 10px rgb(0, 99, 5),
+        0 0 60px 10px rgb(60, 255, 0);
+}
+.graphic5 {
+    offset-path: path("M1957.11 559.429C1662.1 492.262 1058.81 956.165 743.795 812.086C428.785 668.007 452.787 306.451 1376.84 306.45C1329.33 682.308 799.305 519.057 743.795 602.549C680.299 755.36 493.289 273.01 197.773 393.771C-202.777 557.455 57.2652 64.8952 537.791 154.683C686.092 182.394 978.575 117.055 1166.32 445.626C1339.33 748.4 452.287 298.762 557.792 17.565C-288.253 -74.6593 1328.83 251.717 1485.34 176.26C1688.74 78.196 2169.12 570.914 1957.11 559.429Z");
+    animation: move 20s linear infinite;
+    background-color: #fff;
+    box-shadow:
+        0 0 60px 15px #fff,
+        0 0 40px 10px #f0f,
+        0 0 60px 10px #0ff;
 }
 @keyframes move {
     100% {

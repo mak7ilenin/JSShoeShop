@@ -29,6 +29,10 @@ class LoginModule {
         .then(response => {
                     document.getElementById('info').innerHTML = response.info;
                     sessionStorage.setItem('user', JSON.stringify(response.user));
+                    if(sessionStorage.getItem('user') !== null) {
+                        const userBank = document.getElementById('user-bank');
+                        userBank.innerHTML = JSON.parse(sessionStorage.getItem('user')).money + "$";
+                    }
                     document.getElementById('content').innerHTML = "";
                     checkRole();
                 })
@@ -49,6 +53,8 @@ class LoginModule {
                 if(!response.auth) {
                     if(sessionStorage.getItem('user')) {
                         sessionStorage.removeItem('user');
+                        const userBank = document.getElementById('user-bank');
+                        userBank.innerHTML = '';
                     }
                     checkRole();
                     document.getElementById('info').innerHTML = 'До скорой встречи!';

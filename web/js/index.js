@@ -7,6 +7,11 @@ import {adminModule} from './AdminModule.js';
 import {myselfModule} from './MyselfModule.js';
 export {checkRole};
 
+if(sessionStorage.getItem('user') !== null) {
+    const userBank = document.getElementById('user-bank');
+    userBank.innerHTML = JSON.parse(sessionStorage.getItem('user')).money + "$";
+}
+
 const buyModel = document.getElementById('buy-model');
 const modelCont = document.getElementById('model-panel');
 const userCont = document.getElementById('user-panel');

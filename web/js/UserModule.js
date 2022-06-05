@@ -155,19 +155,24 @@ class UserModule {
         promiseEditUser.then(response => response.json())
         .then(response => {
             if(response.status) {
-                    const body = document.getElementsByTagName('body');
-                    body[0].style.transition = 'ease all 0.4s';
-                    body[0].style.transitionTimingFunction = 'cubic-bezier(.76,.08,.47,.79)';
-                    body[0].style.backgroundColor = 'rgb(0, 255, 0)'
-                    setTimeout(() => {
-                        body[0].style.transition = 'ease all 0.7s';
-                        body[0].style.backgroundColor = 'white'
-                    }, 230);
-                    document.getElementById('info').innerHTML = response.info;
-                }else {
-                    document.getElementById('info').innerHTML = response.info;
+                if(sessionStorage.getItem('user') !== null) {
+                    sessionStorage.setItem('user', JSON.parse(response.editedUser));
+                    const userBank = document.getElementById('user-bank');
+                    userBank.innerHTML = JSON.parse(sessionStorage.getItem('user')).money + "$";
                 }
-            })
+                const body = document.getElementsByTagName('body');
+                body[0].style.transition = 'ease all 0.4s';
+                body[0].style.transitionTimingFunction = 'cubic-bezier(.76,.08,.47,.79)';
+                body[0].style.backgroundColor = 'rgb(0, 255, 0)'
+                setTimeout(() => {
+                    body[0].style.transition = 'ease all 0.7s';
+                    body[0].style.backgroundColor = 'white'
+                }, 230);
+                document.getElementById('info').innerHTML = response.info;
+            }else {
+                document.getElementById('info').innerHTML = response.info;
+            }
+        })
             .catch(error => {
                 document.getElementById('info').innerHTML = error.info;
                 const body = document.getElementsByTagName('body');
