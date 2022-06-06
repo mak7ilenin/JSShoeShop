@@ -40,6 +40,7 @@ class AdminModule {
                 })
                 .catch(error => {
                     document.getElementById('info').innerHTML = "getUsers " + error.info;
+                    document.getElementById('info').style.opacity = '1';
                 });
     }
     changeRole() {
@@ -69,6 +70,7 @@ class AdminModule {
                         body[0].style.backgroundColor = 'white'
                     }, 230);
                     document.getElementById('info').innerHTML = response.info;
+                    document.getElementById('info').style.opacity = '1';
                 }
             })
             .catch(error => {
@@ -77,6 +79,7 @@ class AdminModule {
                 body[0].style.transitionTimingFunction = 'cubic-bezier(.76,.08,.47,.79)';
                 body[0].style.backgroundColor = 'red'
                 document.getElementById('info').innerHTML = "changeRole " + error.info;
+                document.getElementById('info').style.opacity = '1';
                 setTimeout(() => {
                     body[0].style.transition = 'ease all 0.7s';
                     body[0].style.backgroundColor = 'white'

@@ -23,6 +23,7 @@ class ViewModule {
     }
     showLoginForm() {
         document.getElementById('info').innerHTML = '';
+        document.getElementById('info').style.opacity = '0';
         const content = document.getElementById('content');
         content.innerHTML = 
             `<div class="login-container">
@@ -181,6 +182,7 @@ class ViewModule {
     }
     showCreateModel() {
         document.getElementById('info').innerHTML = '';
+        document.getElementById('info').style.opacity = '0';
         const content = document.getElementById('content');
         content.innerHTML = 
         `<div id="adding-shoe" class="shoe-add-container">
@@ -189,7 +191,7 @@ class ViewModule {
                     <img id="model-image" src="">
                 </div>
             </div>
-            <div class="shoe-info-side">
+            <div id="shoe-info" class="shoe-info-side">
                 <div class="top-content">
                     <span class="container-title">Добавление обуви</span>
                 </div>
@@ -227,18 +229,27 @@ class ViewModule {
             choosePicture[i].addEventListener('change', (e) => {
                 e.preventDefault();
                 uploadModule.getPicture();
+                try {
+                    uploadModule.insertListPictures();
+                } catch (error) {
+                }
             });
         }
         const modelImage = document.getElementById('model-image');
         viewModule.checkIfImageExists(modelImage.src, (exists) => {
             if(exists) {
-                // console.log('Image exists. ')
-                document.getElementById('adding-shoe').style.padding = '30px 55px 37px 15px';
+                console.log('Image exists. ')
+                document.getElementById('adding-shoe').style.padding = '10px 25px 17px 15px';
+                document.getElementById('img-side').style.width = '55%';
                 document.getElementById('img-side').style.display = 'flex';
+                document.getElementById('adding-shoe').style.marginTop = '120px';
+                document.getElementById('adding-shoe').style.width = '90%';
             }else {
-                // console.error('Image does not exists')
-                document.getElementById('adding-shoe').style.padding = '55px 95px 55px 55px';
+                console.error('Image does not exists')
+                document.getElementById('adding-shoe').style.padding = '25px 45px 25px 25px';
                 document.getElementById('img-side').style.display = 'none';
+                document.getElementById('adding-shoe').style.marginTop = '120px';
+                document.getElementById('adding-shoe').style.width = '55%';
             }
         });
         const addFile = document.getElementById('add-file');
@@ -270,6 +281,7 @@ class ViewModule {
     }
     showEditModel() {
         document.getElementById('info').innerHTML = '';
+        document.getElementById('info').style.opacity = '0';
         const content = document.getElementById('content');
         content.innerHTML = 
         `<div class="shoe-edit-container">
@@ -333,6 +345,7 @@ class ViewModule {
     }
     showEditUser() {
         document.getElementById('info').innerHTML = '';
+        document.getElementById('info').style.opacity = '0';
         const content = document.getElementById('content');
         content.innerHTML = 
         `<div class="user-edit-container">
@@ -396,6 +409,7 @@ class ViewModule {
     }
     showEditMyself() {
         document.getElementById('info').innerHTML = '';
+        document.getElementById('info').style.opacity = '0';
         const content = document.getElementById('content');
         content.innerHTML = 
         `<div class="myself-edit-container">
@@ -447,6 +461,7 @@ class ViewModule {
     }
     showPurchaseForm() {
         document.getElementById('info').innerHTML = '';
+        document.getElementById('info').style.opacity = '0';
         const content = document.getElementById('content');
         content.innerHTML = 
         `<div class="purchase-container">
@@ -471,6 +486,7 @@ class ViewModule {
     }
     showAdminPanel() {
         document.getElementById('info').innerHTML = '';
+        document.getElementById('info').style.opacity = '0';
         const content = document.getElementById('content');
         content.innerHTML = 
         `<div class="role-container">
@@ -500,6 +516,7 @@ class ViewModule {
     }
     showGain() {
         document.getElementById('info').innerHTML = '';
+        document.getElementById('info').style.opacity = '0';
         const content = document.getElementById('content');
         content.innerHTML = 
         `<div id="gainCont" class="gain-container">
@@ -589,27 +606,16 @@ class ViewModule {
 
     }
     showUploadImage() {
-        const body = document.getElementsByTagName('body');
-        body[0].style.backgroundColor = 'rgba(0, 0, 0, 0.582)'
+        document.getElementById('info').innerHTML = '';
+        document.getElementById('info').style.opacity = '0';
         const content = document.getElementById('content');
         content.innerHTML = 
-        `<div id="adding-shoe" class="shoe-add-container">
-            <div id="img-side" class="img-side">
-                <div class="img-card">
-                    <img id="model-image" src="">
-                </div>
-            </div>
+        `<div id="adding-shoe-upload" class="shoe-add-container">
             <div class="shoe-info-side">
-                <div class="top-content">
+                <div id="topContent" class="top-content">
                     <span class="container-title">Добавление обуви</span>
                 </div>
                 <div class="mid-content">
-                    <div class="pictures-select-container">
-                        <label for="list pictures">Список изображений:</label>
-                        <select name="listPictures" id="list-pictures">
-                        
-                        </select>
-                    </div>
                     <div class="wrap-input100 validate-input" data-validate="Enter name">
                         <input class="input100" type="text" id="model-name" name="modelName" placeholder="Model name">
                     </div>
@@ -649,7 +655,7 @@ class ViewModule {
                         <input type="file" id="inputTag" name="inputTag"> <br>
                     </label>
                     <div id="selected-file" class="selected-file">
-                        <input id="imagePathName" name="imagePathName" readonly />
+                        <input id="imagePathName" name="imagePathName" readonly/>
                     </div>
                     <div class="add-file-container">
                         <button type="submit" id="submit-file">Загрузить файл</button>
@@ -657,14 +663,23 @@ class ViewModule {
                 </div>
             </div>
         </form>`
-        const addingShoe = document.getElementById('adding-shoe');
+        const body = document.getElementsByTagName('body');
+        body[0].style.backgroundColor = 'rgba(0, 0, 0, 0.582)'
+        document.getElementById('adding-shoe-upload').style.padding = '25px 45px 25px 25px';
+        document.getElementById('adding-shoe-upload').style.pointerEvents = 'none';
+        document.getElementById('adding-shoe-upload').style.opacity = '0.6'
+        const topContent = document.getElementById('topContent');
+        topContent.style.paddingBottom = '50px';
+        topContent.style.paddingTop = '30px';
+
+        const addingShoe = document.getElementById('adding-shoe-upload');
         const addFile = document.getElementById('add-file');
         const addModel = document.getElementById('add-model');
         addingShoe.style.opacity = '0.5';
         addFile.style.cursor = 'not-allowed';
         addModel.style.cursor = 'not-allowed';
         // insert file name into input
-        const inputTag = document.getElementById("inputTag");
+        const inputTag = document.getElementById('inputTag');
         inputTag.addEventListener('change', (e) =>{
             let inputImage = document.querySelector("input[type=file]").files[0];
             const imagePathName = document.getElementById('imagePathName');
@@ -676,14 +691,6 @@ class ViewModule {
             uploadContent.style.marginTop = '95px';
             selectedFile.style.marginTop = '30px';
 
-            // to show image on screen
-            // image.src = URL.createObjectURL(e.target.files[0]);
-            // const file = document.getElementById('inputTag');
-            // if(file.files.length > 0) {
-            //     for (let i = 0; i <= file.files.length - 1; i++) {
-            //         const fileSize = file.files.item(i).size;
-            //     }
-            // }
         });
         const submitFile = document.getElementById('upload-form');
         submitFile.addEventListener('submit', (e) => {

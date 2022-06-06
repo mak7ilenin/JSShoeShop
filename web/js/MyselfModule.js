@@ -23,11 +23,13 @@ class MyselfModule {
                         document.getElementById('user-money').value = frMoney;
                         document.getElementById('user-username').value = response.user.username;
                     }else {
-                        document.getElementById('info').innerHTML = response.info;                 
+                        document.getElementById('info').innerHTML = response.info;
+                        document.getElementById('info').style.opacity = '1';
                     }
                 })
                 .catch(error => {
                     document.getElementById('info').innerHTML = "insertMyselfInfo " + error.info;
+                    document.getElementById('info').style.opacity = '1';
                 });
 
     }
@@ -72,16 +74,19 @@ class MyselfModule {
                     body[0].style.backgroundColor = 'white'
                 }, 230);
                 document.getElementById('info').innerHTML = response.info;
+                document.getElementById('info').style.opacity = '1';
             }else {
                 if(sessionStorage.getItem('user') !== null) {
                     const userBank = document.getElementById('user-bank');
                     userBank.innerHTML = JSON.parse(sessionStorage.getItem('user')).money + "$";
                 }
                 document.getElementById('info').innerHTML = response.info;
+                document.getElementById('info').style.opacity = '1';
             }
             })
         .catch(error => {
             document.getElementById('info').innerHTML = error.info;
+            document.getElementById('info').style.opacity = '1';
             const body = document.getElementsByTagName('body');
             body[0].style.transition = 'ease all 0.4s';
             body[0].style.transitionTimingFunction = 'cubic-bezier(.76,.08,.47,.79)';

@@ -28,6 +28,7 @@ class LoginModule {
         promise.then(response => response.json())
         .then(response => {
                     document.getElementById('info').innerHTML = response.info;
+                    document.getElementById('info').style.opacity = '1';
                     sessionStorage.setItem('user', JSON.stringify(response.user));
                     if(sessionStorage.getItem('user') !== null) {
                         const userBank = document.getElementById('user-bank');
@@ -38,6 +39,7 @@ class LoginModule {
                 })
                 .catch(error => {
                     document.getElementById('info').innerHTML = response.info;
+                    document.getElementById('info').style.opacity = '1';
                 });
     }
     logout() {
@@ -58,6 +60,7 @@ class LoginModule {
                     }
                     checkRole();
                     document.getElementById('info').innerHTML = 'До скорой встречи!';
+                    document.getElementById('info').style.opacity = '1';
                 }
             });
     }

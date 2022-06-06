@@ -58,6 +58,7 @@ btnLogout.addEventListener('click', (e) => {
     btnLogout.style.display = "none";
     btnLogin.style.display = "unset";
     info.innerHTML = "Вы вышли из аккаунта!";
+    info.style.opacity = '1';
     hideMenu();
     viewModule.showLoginForm();
 });

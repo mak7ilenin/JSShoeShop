@@ -35,10 +35,12 @@ class PurchaseModule {
                         option.text = "Список моделей пуст..."
                         option.value = '';
                         document.getElementById('info').innerHTML = response.info;
+                        document.getElementById('info').style.opacity = '1';
                     }
                 })
                 .catch(error => {
                     document.getElementById('info').innerHTML = "insertListModels" + " " + error.message;
+                    document.getElementById('info').style.opacity = '1';
                 });
     }
     buyModel() {
@@ -71,6 +73,7 @@ class PurchaseModule {
                         body[0].style.backgroundColor = 'white'
                     }, 230);
                     document.getElementById('info').innerHTML = response.info;
+                    document.getElementById('info').style.opacity = '1';
                     if(response.noMoney) {
                         const body = document.getElementsByTagName('body');
                         body[0].style.transition = 'ease all 0.4s';
@@ -81,6 +84,7 @@ class PurchaseModule {
                             body[0].style.backgroundColor = 'white'
                         }, 230);
                         document.getElementById('info').innerHTML = response.info;
+                        document.getElementById('info').style.opacity = '1';
                     }
                     if(response.empty) {
                         const body = document.getElementsByTagName('body');
@@ -92,6 +96,7 @@ class PurchaseModule {
                             body[0].style.backgroundColor = 'white'
                         }, 230);
                         document.getElementById('info').innerHTML = response.info;
+                        document.getElementById('info').style.opacity = '1';
                     }
                 }
             })

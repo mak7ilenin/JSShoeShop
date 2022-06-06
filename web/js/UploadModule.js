@@ -28,10 +28,12 @@ class UploadModule {
                         
                     }else {
                        document.getElementById('info').innerHTML = response.info;  
+                       document.getElementById('info').style.opacity = '1';
                     }
                 })
                 .catch(error=>{
                     document.getElementById('info').innerHTML = 'Ошибка сервера insertListPictures: ' + error;
+                    document.getElementById('info').style.opacity = '1';
                 });
     }
     getPicture() {
@@ -59,23 +61,30 @@ class UploadModule {
                 })
             .catch(error => {
                 document.getElementById('info').innerHTML = 'Ошибка сервера getPicture: ' + error;
+                document.getElementById('info').style.opacity = '1';
             })
             .then(response => {
                 try {
                     const modelImage = document.getElementById('model-image');
                     viewModule.checkIfImageExists(modelImage.src, (exists) => {
                         if(exists) {
-                            // console.log('Image exists. ')
-                            document.getElementById('adding-shoe').style.padding = '30px 55px 37px 15px';
+                            console.log('Image exists. ')
+                            document.getElementById('adding-shoe').style.padding = '10px 25px 17px 15px';
+                            document.getElementById('img-side').style.width = '55%';
                             document.getElementById('img-side').style.display = 'flex';
+                            document.getElementById('adding-shoe').style.marginTop = '120px';
+                            document.getElementById('adding-shoe').style.width = '90%';
                         }else {
-                            // console.error('Image does not exists')
-                            document.getElementById('adding-shoe').style.padding = '55px 95px 55px 55px';
+                            console.error('Image does not exists')
+                            document.getElementById('adding-shoe').style.padding = '25px 45px 25px 25px';
                             document.getElementById('img-side').style.display = 'none';
+                            document.getElementById('adding-shoe').style.marginTop = '120px';
+                            document.getElementById('adding-shoe').style.width = '55%';
                         }
                     });
                 } catch (error) {
-                    document.getElementById('info').innerHTML = 'P{ARASHSA} ' + error
+                    document.getElementById('info').innerHTML = 'getPicture ' + error
+                    document.getElementById('info').style.opacity = '1';
                 }
             });
     }
@@ -91,9 +100,14 @@ class UploadModule {
         promisePicture.then(response => response.json())
             .then(response => {
                 document.getElementById('info').innerHTML = response.info;
+                document.getElementById('info').style.opacity = '1';
             })
             .catch(error => {
                 document.getElementById('info').innerHTML = error.message;
+                document.getElementById('info').style.opacity = '1';
+            })
+            .then(response => {
+                uploadModule.insertListPictures();
             });
     }
 }
