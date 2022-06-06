@@ -372,7 +372,8 @@ input[type=checkbox] {
 
 .shoe-add-container {
     width: 60%;
-    margin: 180px auto;
+    margin: 0 auto;
+    margin: 100px;
     border: 1px solid lightgray;
     border-radius: 10px;
     overflow: hidden;

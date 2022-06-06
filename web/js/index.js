@@ -5,6 +5,7 @@ import {userModule} from './UserModule.js';
 import {purchaseModule} from './PurchaseModule.js';
 import {adminModule} from './AdminModule.js';
 import {myselfModule} from './MyselfModule.js';
+import {uploadModule} from './UploadModule.js';
 export {checkRole};
 
 if(sessionStorage.getItem('user') !== null) {
@@ -169,6 +170,7 @@ function checkRole() {
 createModel.addEventListener('click', (e) => {
     e.preventDefault();
     viewModule.showCreateModel();
+    uploadModule.insertListPictures();
 });
 createUser.addEventListener('click', (e) => {
     e.preventDefault();

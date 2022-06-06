@@ -19,6 +19,7 @@ import java.util.stream.Collectors;
 import javax.ejb.EJB;
 import javax.imageio.ImageIO;
 import javax.json.Json;
+import javax.json.JsonArrayBuilder;
 import javax.json.JsonObject;
 import javax.json.JsonObjectBuilder;
 import javax.json.JsonReader;
@@ -38,6 +39,8 @@ import session.PictureFacade;
  * @author makso
  */
 @WebServlet(name = "UploadServlet", urlPatterns = {
+    "/getListPictures",
+    "/getPicture",
     "/uploadPicture"
 })
 @MultipartConfig()
@@ -59,9 +62,32 @@ public class UploadServlet extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
         String path = request.getServletPath();
         JsonObjectBuilder job = Json.createObjectBuilder();
-//        JsonReader jsonReader = Json.createReader(request.getReader());
-//        JsonObject jsonObject = jsonReader.readObject();
+        JsonReader jsonReader = Json.createReader(request.getReader());
+        JsonObject jsonObject = jsonReader.readObject();
         switch (path) {
+            case "/getListPictures":
+                String[] picturesFileName = getPictureFileName();
+                JsonArrayBuilder jab = Json.createArrayBuilder();
+                for (int i = 0; i < picturesFileName.length; i++) {
+                    jab.add(picturesFileName[i]);
+                }
+                
+                job.add("pictures",jab.build());
+                job.add("status", true);
+                job.add("info", "Создан список изображений");
+                try (PrintWriter out = response.getWriter()) {
+                    out.println(job.build().toString());
+                }
+                break;
+            case "/getPicture":
+                Long pictureId = Long.parseLong(jsonObject.getString("id", ""));
+                Picture selectedPicture =  pictureFacade.find(pictureId);
+                job.add("status", true);
+                job.add("picturePath", selectedPicture.getPathToFile());
+                try (PrintWriter out = response.getWriter()) {
+                    out.println(job.build().toString());
+                }
+                break;
             case "/uploadPicture":
                 String imageName  = request.getParameter("inputTag");
                 System.out.println(imageName);

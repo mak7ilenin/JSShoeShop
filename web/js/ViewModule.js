@@ -194,6 +194,12 @@ class ViewModule {
                     <span class="container-title">Добавление обуви</span>
                 </div>
                 <div class="mid-content">
+                    <div class="pictures-select-container">
+                        <label for="list pictures">Список изображений:</label>
+                        <select name="listPictures" id="list-pictures">
+                        
+                        </select>
+                    </div>
                     <div class="wrap-input100 validate-input" data-validate="Enter name">
                         <input class="input100" type="text" id="model-name" name="modelName" placeholder="Model name">
                     </div>
@@ -216,6 +222,13 @@ class ViewModule {
                 </div>
             </div>
         </div>`;
+        const choosePicture = document.getElementsByTagName('select');
+        for (let i = 0; i < choosePicture.length; i++) {
+            choosePicture[i].addEventListener('change', (e) => {
+                e.preventDefault();
+                uploadModule.getPicture();
+            });
+        }
         const modelImage = document.getElementById('model-image');
         viewModule.checkIfImageExists(modelImage.src, (exists) => {
             if(exists) {
@@ -630,7 +643,7 @@ class ViewModule {
                         <input type="file" id="inputTag" name="inputTag"> <br>
                     </label>
                     <div id="selected-file" class="selected-file">
-                        <input id="imagePathName" name="imagePathName">
+                        <input id="imagePathName" name="imagePathName" readonly />
                     </div>
                     <div class="add-file-container">
                         <button type="submit" id="submit-file">Загрузить файл</button>

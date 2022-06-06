@@ -56,11 +56,6 @@ class UserModule {
                 });
     }
     getListUsers() {
-        // const authUserId = JSON.parse(sessionStorage.getItem('user')).id;
-        // const authUser = {
-        //     "id": authUserId
-        // }
-        // console.log(authUserId);
         let promiseListUsers = fetch('getListUsers', {
             method: 'GET',
             headers: {
