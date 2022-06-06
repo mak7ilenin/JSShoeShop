@@ -58,6 +58,7 @@ class PurchaseModule {
             .then(response => {
                 if(response.status) {
                     if(sessionStorage.getItem('user') !== null) {
+                        sessionStorage.setItem('user', JSON.stringify(response.user));
                         const userBank = document.getElementById('user-bank');
                         userBank.innerHTML = JSON.parse(sessionStorage.getItem('user')).money + "$";
                     }
