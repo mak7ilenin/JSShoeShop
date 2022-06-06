@@ -65,11 +65,11 @@ class UploadModule {
                     const modelImage = document.getElementById('model-image');
                     viewModule.checkIfImageExists(modelImage.src, (exists) => {
                         if(exists) {
-                            console.log('Image exists. ')
+                            // console.log('Image exists. ')
                             document.getElementById('adding-shoe').style.padding = '30px 55px 37px 15px';
                             document.getElementById('img-side').style.display = 'flex';
                         }else {
-                            console.error('Image does not exists')
+                            // console.error('Image does not exists')
                             document.getElementById('adding-shoe').style.padding = '55px 95px 55px 55px';
                             document.getElementById('img-side').style.display = 'none';
                         }

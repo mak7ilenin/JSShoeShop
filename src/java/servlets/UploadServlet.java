@@ -39,8 +39,8 @@ import session.PictureFacade;
 @MultipartConfig()
 public class UploadServlet extends HttpServlet {
     @EJB private PictureFacade pictureFacade;
-    private final String imagesFolder = "D:\\Shoeger\\ShoeShop";
-//    private final String imagesFolder = "WEB-INF\\Uploaded_Images";
+//    private final String imagesFolder = "D:\\Shoeger\\ShoeShop";
+    private final String imagesFolder = "C:\\Users\\makso\\Documents\\NetBeansProjects\\JSShoeShop\\web\\Images\\upload";
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -97,10 +97,11 @@ public class UploadServlet extends HttpServlet {
                 String picturePath = jsonObject.getString("id", "");
                 List<Picture> pictures = pictureFacade.findAll();
                 String dirPathToFile = imagesFolder + "\\" + picturePath;
+                String pathToFile = "Images\\upload\\" + picturePath;
+                System.out.println(pathToFile);
                 for(Picture picture : pictures) {
                     if(picture.getPathToFile().equals(dirPathToFile)) {
-                        String picPathToFile = dirPathToFile.replace("\\", "/");
-//                        String readyPathToFile = "file:///" + picPathToFile;
+                        String picPathToFile = pathToFile.replace("\\", "/");
                         System.out.println(picPathToFile);
                         job.add("status", true);
                         job.add("picturePath", picPathToFile);
