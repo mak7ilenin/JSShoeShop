@@ -1,23 +1,16 @@
 package servlets;
 
 import entity.Picture;
-import java.awt.image.BufferedImage;
-import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintWriter;
 import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
 import javax.ejb.EJB;
-import javax.imageio.ImageIO;
 import javax.json.Json;
 import javax.json.JsonArrayBuilder;
 import javax.json.JsonObject;
@@ -47,6 +40,7 @@ import session.PictureFacade;
 public class UploadServlet extends HttpServlet {
     @EJB private PictureFacade pictureFacade;
     private final String imagesFolder = "D:\\Shoeger\\ShoeShop";
+//    private final String imagesFolder = "WEB-INF\\Uploaded_Images";
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -62,9 +56,27 @@ public class UploadServlet extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
         String path = request.getServletPath();
         JsonObjectBuilder job = Json.createObjectBuilder();
-        JsonReader jsonReader = Json.createReader(request.getReader());
-        JsonObject jsonObject = jsonReader.readObject();
+//        JsonReader jsonReader = Json.createReader(request.getReader());
+//        JsonObject jsonObject = jsonReader.readObject();                         ЭТИ СТРОЧКИ - ЗЛО
         switch (path) {
+            case "/uploadPicture":
+                String imageName  = request.getParameter("inputTag");
+                Picture newPicture = new Picture();
+                try {
+                    newPicture.setPathToFile(getPathToPicture(request.getPart("inputTag")));
+                } catch (Exception e) {
+                    imageName = request.getParameter("inputTag");
+                    newPicture.setPathToFile(getPathToPicture(imageName));
+                }
+                pictureFacade.create(newPicture);
+                PictureJsonBuilder pjb = new PictureJsonBuilder();
+                job.add("status", true);
+                job.add("picture", pjb.getPictureJsonObject(newPicture));
+                job.add("info", "Изображение " + newPicture.getPathToFile() + " успешно загружено!");
+                try (PrintWriter out = response.getWriter()) {
+                    out.println(job.build().toString());
+                }
+                break;
             case "/getListPictures":
                 String[] picturesFileName = getPictureFileName();
                 JsonArrayBuilder jab = Json.createArrayBuilder();
@@ -72,39 +84,30 @@ public class UploadServlet extends HttpServlet {
                     jab.add(picturesFileName[i]);
                 }
                 
-                job.add("pictures",jab.build());
                 job.add("status", true);
                 job.add("info", "Создан список изображений");
+                job.add("pictures",jab.build());
                 try (PrintWriter out = response.getWriter()) {
                     out.println(job.build().toString());
                 }
                 break;
             case "/getPicture":
-                Long pictureId = Long.parseLong(jsonObject.getString("id", ""));
-                Picture selectedPicture =  pictureFacade.find(pictureId);
-                job.add("status", true);
-                job.add("picturePath", selectedPicture.getPathToFile());
-                try (PrintWriter out = response.getWriter()) {
-                    out.println(job.build().toString());
-                }
-                break;
-            case "/uploadPicture":
-                String imageName  = request.getParameter("inputTag");
-                System.out.println(imageName);
-                Picture picture = new Picture();
-                try {
-                    picture.setPathToFile(getPathToPicture(request.getPart("inputTag")));
-                } catch (Exception e) {
-                    imageName = request.getParameter("inputTag");
-                    picture.setPathToFile(getPathToPicture(imageName));
-                }
-                pictureFacade.create(picture);
-                PictureJsonBuilder pjb = new PictureJsonBuilder();
-                job.add("status", true);
-                job.add("picture", pjb.getPictureJsonObject(picture));
-                job.add("info", "Изображение " + picture.getPathToFile() + " успешно загружено!");
-                try (PrintWriter out = response.getWriter()) {
-                    out.println(job.build().toString());
+                JsonReader jsonReader = Json.createReader(request.getReader());
+                JsonObject jsonObject = jsonReader.readObject();
+                String picturePath = jsonObject.getString("id", "");
+                List<Picture> pictures = pictureFacade.findAll();
+                String dirPathToFile = imagesFolder + "\\" + picturePath;
+                for(Picture picture : pictures) {
+                    if(picture.getPathToFile().equals(dirPathToFile)) {
+                        String picPathToFile = dirPathToFile.replace("\\", "/");
+//                        String readyPathToFile = "file:///" + picPathToFile;
+                        System.out.println(picPathToFile);
+                        job.add("status", true);
+                        job.add("picturePath", picPathToFile);
+                        try (PrintWriter out = response.getWriter()) {
+                            out.println(job.build().toString());
+                        }
+                    }
                 }
                 break;
         }

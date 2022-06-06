@@ -1,3 +1,4 @@
+import {viewModule} from './ViewModule.js';
 class UploadModule {
     insertListPictures() {
         const promiseListPictures = fetch('getListPictures',{
@@ -5,15 +6,15 @@ class UploadModule {
             headers: {
                 'Content-Type': 'application/json;charset:utf8'
             },
-            // credentials: 'include',
+            credentials: 'include',
         });
         promiseListPictures.then(response => response.json())
                 .then(response => {
                     if(response.status){
-                        console.log("fdsjfhsdifhsi");
                         const select = document.getElementById('list-pictures');
+                        let option = null;
                         select.options.length = 0;
-                        let option = document.createElement('option');
+                        option = document.createElement('option');
                         option.text = "-Выберите изображение-";
                         option.value = '';
                         select.add(option);
@@ -50,18 +51,39 @@ class UploadModule {
             .then(response => {
                 if(response.status){
                     const modelImage = document.getElementById('model-image');
-                    modelImage.src = response.picturePath;
+                    console.log(response.picturePath)
+                    modelImage.setAttribute('src', response.picturePath);
                 }
-            })
+                    // viewModule.showCreateModel();
+                    // modelImage.setAttribute('src', response.picturePath);
+                })
             .catch(error => {
                 document.getElementById('info').innerHTML = 'Ошибка сервера getPicture: ' + error;
+            })
+            .then(response => {
+                try {
+                    const modelImage = document.getElementById('model-image');
+                    viewModule.checkIfImageExists(modelImage.src, (exists) => {
+                        if(exists) {
+                            console.log('Image exists. ')
+                            document.getElementById('adding-shoe').style.padding = '30px 55px 37px 15px';
+                            document.getElementById('img-side').style.display = 'flex';
+                        }else {
+                            console.error('Image does not exists')
+                            document.getElementById('adding-shoe').style.padding = '55px 95px 55px 55px';
+                            document.getElementById('img-side').style.display = 'none';
+                        }
+                    });
+                } catch (error) {
+                    document.getElementById('info').innerHTML = 'P{ARASHSA} ' + error
+                }
             });
     }
     uploadPicture() {
         const uploadForm = new FormData(document.getElementById('upload-form'));
         var input = document.querySelector('input[type="file"]')
         uploadForm.append('file', input.files[0])
-        // const uploadForm = new URLSearchParams(new FormData(document.getElementById('upload-form')));
+
         let promisePicture = fetch('uploadPicture', {
             method: 'POST',
             body: uploadForm

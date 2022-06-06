@@ -232,11 +232,11 @@ class ViewModule {
         const modelImage = document.getElementById('model-image');
         viewModule.checkIfImageExists(modelImage.src, (exists) => {
             if(exists) {
-                // console.log('Image exists. ')
+                console.log('Image exists. ')
                 document.getElementById('adding-shoe').style.padding = '30px 55px 37px 15px';
                 document.getElementById('img-side').style.display = 'flex';
             }else {
-                // console.error('Image does not exists')
+                console.error('Image does not exists')
                 document.getElementById('adding-shoe').style.padding = '55px 95px 55px 55px';
                 document.getElementById('img-side').style.display = 'none';
             }
@@ -604,6 +604,12 @@ class ViewModule {
                     <span class="container-title">Добавление обуви</span>
                 </div>
                 <div class="mid-content">
+                    <div class="pictures-select-container">
+                        <label for="list pictures">Список изображений:</label>
+                        <select name="listPictures" id="list-pictures">
+                        
+                        </select>
+                    </div>
                     <div class="wrap-input100 validate-input" data-validate="Enter name">
                         <input class="input100" type="text" id="model-name" name="modelName" placeholder="Model name">
                     </div>
@@ -651,18 +657,6 @@ class ViewModule {
                 </div>
             </div>
         </form>`
-        const modelImage = document.getElementById('model-image');
-        viewModule.checkIfImageExists(modelImage.src, (exists) => {
-            if(exists) {
-                // console.log('Image exists. ')
-                document.getElementById('adding-shoe').style.padding = '30px 55px 37px 15px';
-                document.getElementById('img-side').style.display = 'flex';
-            }else {
-                // console.error('Image does not exists')
-                document.getElementById('adding-shoe').style.padding = '55px 95px 55px 55px';
-                document.getElementById('img-side').style.display = 'none';
-            }
-        });
         const addingShoe = document.getElementById('adding-shoe');
         const addFile = document.getElementById('add-file');
         const addModel = document.getElementById('add-model');
@@ -691,7 +685,7 @@ class ViewModule {
             //     }
             // }
         });
-        const submitFile = document.getElementById("upload-form");
+        const submitFile = document.getElementById('upload-form');
         submitFile.addEventListener('submit', (e) => {
             e.preventDefault();
             body[0].style.backgroundColor = 'white'
