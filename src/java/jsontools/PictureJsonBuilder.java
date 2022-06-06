@@ -23,7 +23,6 @@ public class PictureJsonBuilder {
     public JsonObject getPictureJsonObject(Picture picture){
         JsonObjectBuilder job = Json.createObjectBuilder();
         job.add("id", picture.getId());
-        job.add("description", picture.getDescription());
         job.add("pathToFile", picture.getPathToFile());
         return job.build();
     }

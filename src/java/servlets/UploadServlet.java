@@ -12,7 +12,9 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 import javax.ejb.EJB;
 import javax.imageio.ImageIO;
@@ -28,7 +30,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
 import jsontools.PictureJsonBuilder;
-import org.imgscalr.Scalr;
+//import org.imgscalr.Scalr;
 import session.PictureFacade;
 
 /**
@@ -41,7 +43,7 @@ import session.PictureFacade;
 @MultipartConfig()
 public class UploadServlet extends HttpServlet {
     @EJB private PictureFacade pictureFacade;
-    private final String imagesFolder = "C:\\Shoeger\\ShoeShop\\";
+    private final String imagesFolder = "D:\\Shoeger\\ShoeShop";
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -57,34 +59,61 @@ public class UploadServlet extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
         String path = request.getServletPath();
         JsonObjectBuilder job = Json.createObjectBuilder();
-        JsonReader jsonReader = Json.createReader(request.getReader());
-        JsonObject jsonObject = jsonReader.readObject();
+//        JsonReader jsonReader = Json.createReader(request.getReader());
+//        JsonObject jsonObject = jsonReader.readObject();
         switch (path) {
             case "/uploadPicture":
-//                String pathToFile = imagesFolder + File.separatorChar + description;
-//                File tempFile = new File(imagesFolder+File.separatorChar+"tmp"+File.separatorChar + description);
-//                tempFile.mkdirs();
-//                try(InputStream fileContent = filePart.getInputStream()){
-//                   Files.copy(
-//                           fileContent,tempFile.toPath(), 
-//                           StandardCopyOption.REPLACE_EXISTING
-//                   );
-//                   writeToFile(resize(tempFile),pathToFile);
-//                   tempFile.delete();
-//                }
-//                Picture picture = new Picture();
-//                picture.setDescription(description);
-//                picture.setPathToFile(pathToFile);
-//                pictureFacade.create(picture);
-//                PictureJsonBuilder pjb = new PictureJsonBuilder();
-//                job.add("status", true);
-//                job.add("picture", pjb.getPictureJsonObject(picture));
-//                job.add("info", "Изображение " + picture.getDescription());
-//                try (PrintWriter out = response.getWriter()) {
-//                    out.println(job.build().toString());
-//                }
-//                break;
+                String imageName  = request.getParameter("inputTag");
+                System.out.println(imageName);
+                Picture picture = new Picture();
+                try {
+                    picture.setPathToFile(getPathToPicture(request.getPart("inputTag")));
+                } catch (Exception e) {
+                    imageName = request.getParameter("inputTag");
+                    picture.setPathToFile(getPathToPicture(imageName));
+                }
+                pictureFacade.create(picture);
+                PictureJsonBuilder pjb = new PictureJsonBuilder();
+                job.add("status", true);
+                job.add("picture", pjb.getPictureJsonObject(picture));
+                job.add("info", "Изображение " + picture.getPathToFile() + " успешно загружено!");
+                try (PrintWriter out = response.getWriter()) {
+                    out.println(job.build().toString());
+                }
+                break;
         }
+    }
+    private String getPathToPicture(Part part) throws IOException {
+        String pathToPicture = imagesFolder + File.separator + getFileName(part);
+        File file = new File(pathToPicture);
+        file.mkdirs();
+        try(InputStream fileContent = part.getInputStream()){
+            Files.copy(fileContent, file.toPath(), StandardCopyOption.REPLACE_EXISTING);
+        }
+        return pathToPicture;
+    }
+    private String getPathToPicture(String pictureFileName){
+        File uploadFolder = new File(imagesFolder);
+        File[] listOfFiles = uploadFolder.listFiles();
+        for (int i = 0; i < listOfFiles.length; i++) {
+            if(listOfFiles[i].isFile()){
+                if(pictureFileName.equals(listOfFiles[i].getName())){
+                    return listOfFiles[i].getPath();
+                }
+            }
+        }
+        return "";
+    }
+    private String[] getPictureFileName(){
+        Set<String> setPathToPicture = new HashSet<>();
+        File uploadFolder = new File(imagesFolder);
+        File[] listOfFiles = uploadFolder.listFiles();
+        for (int i = 0; i < listOfFiles.length; i++) {
+            if(listOfFiles[i].isFile()){
+                setPathToPicture.add(listOfFiles[i].getName());
+            }
+        }
+        return setPathToPicture.toArray(new String[setPathToPicture.size()]);
     }
     private String getFileName(Part part){
         final String partHeader = part.getHeader("content-disposition");
@@ -97,27 +126,6 @@ public class UploadServlet extends HttpServlet {
             }
         }
         return null;
-    }
-    public void writeToFile(byte[] data, String fileName) throws IOException{
-        try (FileOutputStream out = new FileOutputStream(fileName)) {
-            out.write(data);
-        }
-    }
-    public byte[] resize(File icon) {
-        try {
-           BufferedImage originalImage = ImageIO.read(icon);
-           originalImage = Scalr.resize(originalImage, Scalr.Method.QUALITY, Scalr.Mode.FIT_TO_WIDTH,400);
-            //To save with original ratio uncomment next line and comment the above.
-            //originalImage= Scalr.resize(originalImage, 153, 128);
-            ByteArrayOutputStream baos = new ByteArrayOutputStream();
-            ImageIO.write(originalImage, "jpg", baos);
-            baos.flush();
-            byte[] imageInByte = baos.toByteArray();
-            baos.close();
-            return imageInByte;
-        } catch (Exception e) {
-            return null;
-        }
     }
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**

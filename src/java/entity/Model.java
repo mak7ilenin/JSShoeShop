@@ -25,13 +25,14 @@ public class Model implements Serializable{
     private int amount;
     private double price;
     private String modelFirm;
-//    @OneToOne(cascade = CascadeType.DETACH)
-//    private Picture picture;
+    @OneToOne(cascade = CascadeType.DETACH)
+    private Picture picture;
 
     @Override
     public String toString() {
-        return "Model{" + "id=" + id + ", modelName=" + modelName + ", modelSize=" + modelSize + ", amount=" + amount + ", price=" + price + ", modelFirm=" + modelFirm + '}';
+        return "Model{" + "id=" + id + ", modelName=" + modelName + ", modelSize=" + modelSize + ", amount=" + amount + ", price=" + price + ", modelFirm=" + modelFirm + ", picture=" + picture + '}';
     }
+
 
     @Override
     public int hashCode() {
@@ -42,7 +43,7 @@ public class Model implements Serializable{
         hash = 41 * hash + this.amount;
         hash = 41 * hash + (int) (Double.doubleToLongBits(this.price) ^ (Double.doubleToLongBits(this.price) >>> 32));
         hash = 41 * hash + Objects.hashCode(this.modelFirm);
-//        hash = 41 * hash + Objects.hashCode(this.picture);
+        hash = 41 * hash + Objects.hashCode(this.picture);
         return hash;
     }
 
@@ -76,19 +77,19 @@ public class Model implements Serializable{
         if (!Objects.equals(this.id, other.id)) {
             return false;
         }
-//        if (!Objects.equals(this.picture, other.picture)) {
-//            return false;
-//        }
+        if (!Objects.equals(this.picture, other.picture)) {
+            return false;
+        }
         return true;
     }
 
-//    public Picture getPicture() {
-//        return picture;
-//    }
-//
-//    public void setPicture(Picture picture) {
-//        this.picture = picture;
-//    }
+    public Picture getPicture() {
+        return picture;
+    }
+
+    public void setPicture(Picture picture) {
+        this.picture = picture;
+    }
 
     public Long getId() {
         return id;

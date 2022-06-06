@@ -19,7 +19,6 @@ public class Picture implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String description;
     private String pathToFile;
 
     public Picture() {
@@ -33,14 +32,6 @@ public class Picture implements Serializable {
         this.id = id;
     }
 
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
     public String getPathToFile() {
         return pathToFile;
     }
@@ -51,14 +42,13 @@ public class Picture implements Serializable {
 
     @Override
     public String toString() {
-        return "Picture{" + "id=" + id + ", description=" + description + ", pathToFile=" + pathToFile + '}';
+        return "Picture{" + "id=" + id + ", pathToFile=" + pathToFile + '}';
     }
 
     @Override
     public int hashCode() {
         int hash = 3;
         hash = 67 * hash + Objects.hashCode(this.id);
-        hash = 67 * hash + Objects.hashCode(this.description);
         hash = 67 * hash + Objects.hashCode(this.pathToFile);
         return hash;
     }
@@ -75,9 +65,6 @@ public class Picture implements Serializable {
             return false;
         }
         final Picture other = (Picture) obj;
-        if (!Objects.equals(this.description, other.description)) {
-            return false;
-        }
         if (!Objects.equals(this.pathToFile, other.pathToFile)) {
             return false;
         }
@@ -85,7 +72,5 @@ public class Picture implements Serializable {
             return false;
         }
         return true;
-    }
-
-    
+    }  
 }

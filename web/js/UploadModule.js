@@ -1,13 +1,17 @@
 class UploadModule {
     uploadPicture() {
-        const uploadForm = new FormData(document.getElementById('uploadForm'));
-        const promisePicture = fetch('uploadPicture', {
+        const uploadForm = new FormData(document.getElementById('upload-form'));
+        var input = document.querySelector('input[type="file"]')
+        uploadForm.append('file', input.files[0])
+        // const uploadForm = new URLSearchParams(new FormData(document.getElementById('upload-form')));
+        let promisePicture = fetch('uploadPicture', {
             method: 'POST',
-            credentials: 'include',
             body: uploadForm
         });
-        console.log(uploadForm);
         promisePicture.then(response => response.json())
+            .then(response => {
+                document.getElementById('info').innerHTML = response.info;
+            })
             .catch(error => {
                 document.getElementById('info').innerHTML = error.message;
             });

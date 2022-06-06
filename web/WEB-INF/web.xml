@@ -7,12 +7,4 @@
             30
         </session-timeout>
     </session-config>
-    <servlet>
-        <servlet-name>UploadServlet</servlet-name>
-        <servlet-class>servlets.UploadServlet</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>UploadServlet</servlet-name>
-        <url-pattern>/uploadPicture</url-pattern>
-    </servlet-mapping>
 </web-app>

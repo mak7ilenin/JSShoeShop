@@ -614,29 +614,30 @@ class ViewModule {
             </div>
         </div>
         
-        <div id="upload-content">
-            <div class="top-content">
-                <div class="img-container">
-                    <img src="Images/upload.png" alt="upload">
+        <form id="upload-form">
+            <div id="upload-content">
+                <div class="top-content">
+                    <div class="img-container">
+                        <img src="Images/upload.png" alt="upload">
+                    </div>
+                    <div class="after-img">
+                        <p>Загрузка изображений</p>
+                    </div>
                 </div>
-                <div class="after-img">
-                    <p>Загрузка изображений</p>
+                <div class="mid-content">
+                    <label for="forImg">Выберите файл</label>
+                    <label name="forImg" class="download-img">
+                        <input type="file" id="inputTag" name="inputTag"> <br>
+                    </label>
+                    <div id="selected-file" class="selected-file">
+                        <input id="imagePathName" name="imagePathName">
+                    </div>
+                    <div class="add-file-container">
+                        <button type="submit" id="submit-file">Загрузить файл</button>
+                    </div>
                 </div>
             </div>
-            <div class="mid-content">
-                <label for="forImg">Выберите файл</label>
-                <label name="forImg" class="download-img">
-                    <input type="file" id="inputTag" name="image" accept="image/*" id="image"> <br>
-                </label>
-                <div id="selected-file" class="selected-file">
-                    <input type="text" id="description" placeholder="Назовите файл">
-                    <input id="imagePathName" name="imagePathName" readonly>
-                </div>
-                <div class="add-file-container">
-                    <button type="submit" id="submit-file">Загрузить файл</button>
-                </div>
-            </div>
-        </div>`
+        </form>`
         const modelImage = document.getElementById('model-image');
         viewModule.checkIfImageExists(modelImage.src, (exists) => {
             if(exists) {
@@ -660,11 +661,9 @@ class ViewModule {
         inputTag.addEventListener('change', (e) =>{
             let inputImage = document.querySelector("input[type=file]").files[0];
             const imagePathName = document.getElementById('imagePathName');
-            const imageName = document.getElementById('description');
             const uploadContent = document.getElementById('upload-content');
             const selectedFile = document.getElementById('selected-file');
             imagePathName.style.display = 'unset';
-            imageName.style.display = 'unset';
             imagePathName.value = inputImage.name;
             uploadContent.style.height = '660px';
             uploadContent.style.marginTop = '95px';
@@ -679,11 +678,11 @@ class ViewModule {
             //     }
             // }
         });
-        const submitFile = document.getElementById("submit-file");
-        submitFile.addEventListener('click', (e) => {
+        const submitFile = document.getElementById("upload-form");
+        submitFile.addEventListener('submit', (e) => {
             e.preventDefault();
             body[0].style.backgroundColor = 'white'
-            // uploadModule.uploadPicture();
+            uploadModule.uploadPicture();
             viewModule.showCreateModel();
         });
     }
