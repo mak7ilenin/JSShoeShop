@@ -1,6 +1,7 @@
 package servlets;
 
 import entity.Model;
+import entity.Picture;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.math.BigDecimal;
@@ -18,6 +19,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import jsontools.ModelJsonBuilder;
 import session.ModelFacade;
+import session.PictureFacade;
 
 /**
  *
@@ -31,6 +33,8 @@ import session.ModelFacade;
 })
 public class ModelServlet extends HttpServlet {
     @EJB private ModelFacade modelFacade;
+    @EJB private PictureFacade pictureFacade;
+    private final String imagesFolder = "C:\\Users\\makso\\Documents\\NetBeansProjects\\JSShoeShop\\web\\Images\\upload";
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -42,6 +46,7 @@ public class ModelServlet extends HttpServlet {
             case "/createModel":
                 JsonReader jsonReader = Json.createReader(request.getReader());
                 JsonObject jsonObject = jsonReader.readObject();
+                String pictureName = jsonObject.getString("modelPicture", "");
                 String modelName = jsonObject.getString("modelName", "");
                 String modelFirm = jsonObject.getString("modelFirm", "");
                 String modelSize = jsonObject.getString("modelSize", "");
@@ -50,12 +55,48 @@ public class ModelServlet extends HttpServlet {
                 double decimalPrice = bd.doubleValue();
                 int amount = Integer.parseInt(jsonObject.getString("modelAmount", ""));
                 
+                if("".equals(modelName) 
+                        || "".equals(modelFirm) 
+                        || "".equals(modelSize)
+                        || "".equals(decimalPrice)
+                        || "".equals(amount)) {
+                    job.add("info", "Заполните все поля");
+                    try(PrintWriter out = response.getWriter()) {
+                        out.println(job.build().toString());
+                    }
+                    break;
+                }
+                if(amount < 1) {
+                    job.add("info", "Введите колчество больше нуля!");
+                    try(PrintWriter out = response.getWriter()) {
+                        out.println(job.build().toString());
+                    }
+                    break;
+                }
+                if(decimalPrice == 0.0) {
+                    job.add("info", "Введите сумму больше нуля!");
+                    try(PrintWriter out = response.getWriter()) {
+                        out.println(job.build().toString());
+                    }
+                    break;
+                }
+                if("".equals(pictureName)) {
+                    job.add("info", "Выберите изображение!");
+                    try(PrintWriter out = response.getWriter()) {
+                        out.println(job.build().toString());
+                    }
+                    break;
+                }
+                
                 Model newModel = new Model();
                 newModel.setModelName(modelName);
                 newModel.setModelFirm(modelFirm);
                 newModel.setModelSize(modelSize);
                 newModel.setPrice(decimalPrice);
                 newModel.setAmount(amount);
+                String pictureDir = imagesFolder + "\\" + pictureName;
+                Picture picture = pictureFacade.findByPath(pictureDir);
+                newModel.setPicture(picture);
                 modelFacade.create(newModel);
                 job.add("info", "Модель " + modelName + " успешно добавлена!")
                         .add("status", true);

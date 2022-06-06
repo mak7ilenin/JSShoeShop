@@ -24,4 +24,13 @@ public class PictureFacade extends AbstractFacade<Picture> {
         super(Picture.class);
     }
     
+    public Picture findByPath(String pathToFile) {
+        try {
+            return (Picture) em.createQuery("SELECT p FROM Picture p WHERE p.pathToFile=:pathToFile")
+                    .setParameter("pathToFile", pathToFile)
+                    .getSingleResult();
+        } catch (Exception e) {
+            return null;
+        }
+    }
 }

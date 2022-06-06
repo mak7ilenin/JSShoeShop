@@ -23,7 +23,7 @@ class PurchaseModule {
                             option.text = response.options[i].modelName + ' // ' 
                             + response.options[i].modelFirm + ' // ' 
                             + frPrice + '$ // ' 
-                            + response.options[i].modelAmount;
+                            + response.options[i].modelAmount + " пар(а)";
                             option.value = response.options[i].id;
                             modelSelect.add(option);
                         }

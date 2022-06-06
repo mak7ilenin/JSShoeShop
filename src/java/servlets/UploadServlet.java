@@ -72,7 +72,7 @@ public class UploadServlet extends HttpServlet {
                 PictureJsonBuilder pjb = new PictureJsonBuilder();
                 job.add("status", true);
                 job.add("picture", pjb.getPictureJsonObject(newPicture));
-                job.add("info", "Изображение " + newPicture.getPathToFile() + " успешно загружено!");
+                job.add("info", "Изображение успешно загружено!");
                 try (PrintWriter out = response.getWriter()) {
                     out.println(job.build().toString());
                 }

@@ -1,5 +1,6 @@
 class ShoeModule {
     createModel() {
+        const picSelect = document.getElementById('list-pictures').value;
         const modelName = document.getElementById('model-name').value;
         const modelFirm = document.getElementById('model-firm').value;
         const modelSize = document.getElementById('model-size').value;
@@ -7,6 +8,7 @@ class ShoeModule {
         const modelAmount = document.getElementById('model-amount').value;
 
         const newModel = {
+            "modelPicture": picSelect,
             "modelName": modelName,
             "modelFirm": modelFirm,
             "modelSize": modelSize,
@@ -26,7 +28,6 @@ class ShoeModule {
             .then(response => {
                 document.getElementById('info').innerHTML = response.info;
                 document.getElementById('info').style.opacity = '1';
-                // sessionStorage.setItem('newModel', JSON.stringify(newModel));
                 const body = document.getElementsByTagName('body');
                     body[0].style.transition = 'ease all 0.4s';
                     body[0].style.transitionTimingFunction = 'cubic-bezier(.76,.08,.47,.79)';

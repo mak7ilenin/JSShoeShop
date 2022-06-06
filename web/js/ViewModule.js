@@ -229,10 +229,6 @@ class ViewModule {
             choosePicture[i].addEventListener('change', (e) => {
                 e.preventDefault();
                 uploadModule.getPicture();
-                try {
-                    uploadModule.insertListPictures();
-                } catch (error) {
-                }
             });
         }
         const modelImage = document.getElementById('model-image');
@@ -643,7 +639,7 @@ class ViewModule {
             <div id="upload-content">
                 <div class="top-content">
                     <div class="img-container">
-                        <img src="Images/upload.png" alt="upload">
+                        <img src="Images/upload.png" id="backBtn" alt="upload">
                     </div>
                     <div class="after-img">
                         <p>Загрузка изображений</p>
@@ -665,6 +661,12 @@ class ViewModule {
         </form>`
         const body = document.getElementsByTagName('body');
         body[0].style.backgroundColor = 'rgba(0, 0, 0, 0.582)'
+        const backBtn = document.getElementById('backBtn');
+        backBtn.addEventListener('click', (e) => {
+            viewModule.showCreateModel();
+            uploadModule.insertListPictures();
+            body[0].style.backgroundColor = 'white'
+        });
         document.getElementById('adding-shoe-upload').style.padding = '25px 45px 25px 25px';
         document.getElementById('adding-shoe-upload').style.pointerEvents = 'none';
         document.getElementById('adding-shoe-upload').style.opacity = '0.6'
