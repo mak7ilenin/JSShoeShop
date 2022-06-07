@@ -32,7 +32,7 @@ class UserModule {
                     const body = document.getElementsByTagName('body');
                     body[0].style.transition = 'ease all 0.4s';
                     body[0].style.transitionTimingFunction = 'cubic-bezier(.76,.08,.47,.79)';
-                    body[0].style.backgroundColor = 'rgb(0, 255, 0)'
+                    body[0].style.backgroundColor = 'rgb(0, 255, 0)';
                     setTimeout(() => {
                         body[0].style.transition = 'ease all 0.7s';
                         body[0].style.backgroundColor = 'white'

@@ -43,8 +43,8 @@ import session.PictureFacade;
 public class UploadServlet extends HttpServlet {
     @EJB private PictureFacade pictureFacade;
     @EJB private ModelFacade modelFacade;
-//    private final String imagesFolder = "D:\\Shoeger\\ShoeShop";
-    private final String imagesFolder = "C:\\Users\\makso\\Documents\\NetBeansProjects\\JSShoeShop\\web\\Images\\upload";
+    private final String imagesFolder = "C:\\Users\\makso\\Documents\\NetBeansProjects\\JSShoeShop\\web\\Images\\upload"; // MY PATH TO FILE AT HOME
+    private final String imagesFolderSchool = "C:\\Users\\pupil\\Documents\\NetBeansProjects\\JSShoeShop\\web\\Images\\upload"; // MY PATH TO FILE AT SCHOOL
     private final String uploadFolder = "Images\\upload\\";
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -101,7 +101,7 @@ public class UploadServlet extends HttpServlet {
                 JsonObject jsonObject = jsonReader.readObject();
                 String picturePath = jsonObject.getString("id", "");
                 List<Picture> pictures = pictureFacade.findAll();
-                String dirPathToFile = imagesFolder + "\\" + picturePath;
+                String dirPathToFile = imagesFolderSchool + "\\" + picturePath;
                 String pathToFile = uploadFolder + picturePath;
                 System.out.println(pathToFile);
                 for(Picture picture : pictures) {
@@ -122,7 +122,7 @@ public class UploadServlet extends HttpServlet {
                 Long modelId = Long.parseLong(jsonObject.getString("id", ""));
                 Model model = modelFacade.find(modelId);
                 String pictureName = model.getPicture().getPathToFile();
-                String fileName = pictureName.replace(imagesFolder + "\\", "");
+                String fileName = pictureName.replace(imagesFolderSchool + "\\", "");
 //                System.out.println(fileName);
                 String normalPicPath = uploadFolder + fileName;
                 job.add("status", true);

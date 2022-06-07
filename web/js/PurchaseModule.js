@@ -5,7 +5,7 @@ class PurchaseModule {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json;charset:utf8'
-            },
+            }
         });
         promiseListModels.then(response => response.json())
                 .then(response => {

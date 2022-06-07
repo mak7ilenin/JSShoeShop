@@ -19,7 +19,8 @@ class ViewModule {
             };
             img.onerror = () => {
                 callback(false);
-            }}
+            }
+        }
     }
     showLoginForm() {
         document.getElementById('info').innerHTML = '';
