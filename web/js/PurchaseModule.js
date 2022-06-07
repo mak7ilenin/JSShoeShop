@@ -1,3 +1,4 @@
+import {viewModule} from './ViewModule.js';
 class PurchaseModule {
     getModels() {
         let promiseListModels = fetch('getListModels', {
@@ -23,7 +24,7 @@ class PurchaseModule {
                             option.text = response.options[i].modelName + ' // ' 
                             + response.options[i].modelFirm + ' // ' 
                             + frPrice + '$ // ' 
-                            + response.options[i].modelAmount + " пар(а)";
+                            + response.options[i].modelAmount + ' пар(а)';
                             option.value = response.options[i].id;
                             modelSelect.add(option);
                         }
@@ -34,13 +35,52 @@ class PurchaseModule {
                         option = document.createElement('option');
                         option.text = "Список моделей пуст..."
                         option.value = '';
-                        document.getElementById('info').innerHTML = response.info;
-                        document.getElementById('info').style.opacity = '1';
+                        modelSelect.add(option);
                     }
                 })
                 .catch(error => {
-                    document.getElementById('info').innerHTML = "insertListModels" + " " + error.message;
+                    document.getElementById('info').innerHTML = "getModels" + " " + error.message;
                     document.getElementById('info').style.opacity = '1';
+                });
+    }
+    insertPurchasePicture() {
+        const modelId = document.getElementById('purchase-list-models').value;
+        const model = {
+            "id": modelId
+        }
+        let promiseGetPicture = fetch('getModelPicture', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json;charset:utf8'
+            },
+            credentials: 'include',
+            body: JSON.stringify(model)
+        });
+        promiseGetPicture.then(response => response.json())
+                .then(response => {
+                    if(response.status) {
+                        document.getElementById('modelImage').setAttribute('src', response.pictureSource);
+                    }
+                })
+                .then(response => {
+                    const modelImage = document.getElementById('modelImage');
+                    viewModule.checkIfImageExists(modelImage.src, (exists) => {
+                        if(exists) {
+                            // console.log('Image exists. ')
+                            document.getElementById('purchContainer').style.height = '670px';
+                            document.getElementById('purchContainer').style.marginTop = '135px';
+                            document.getElementById('modelImage-container').style.display = 'unset';
+                        }else {
+                            // console.error('Image does not exists')
+                            document.getElementById('purchContainer').style.height = '270px';
+                            document.getElementById('purchContainer').style.marginTop = '250px';
+                            document.getElementById('modelImage-container').style.display = 'none';
+                        }
+                    });
+                })
+                .catch(error => {
+                    document.getElementById('info').innerHTML = error.message;     
+                    document.getElementById('info').style.opacity = '1';  
                 });
     }
     buyModel() {

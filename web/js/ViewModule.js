@@ -335,7 +335,9 @@ class ViewModule {
         for (let i = 0; i < chooseModel.length; i++) {
             chooseModel[i].addEventListener('change', (e) => {
                 e.preventDefault();
-                shoeModule.insertModelInfo();
+                if(chooseModel[i].value !== '') {
+                    shoeModule.insertModelInfo();
+                }
             });
         }
     }
@@ -399,7 +401,9 @@ class ViewModule {
         for (let i = 0; i < chooseUser.length; i++) {
             chooseUser[i].addEventListener('change', (e) => {
                 e.preventDefault();
-                userModule.insertUserInfo();
+                if(chooseUser[i].value !== '') {
+                    userModule.insertUserInfo();
+                }
             });
         }
     }
@@ -460,7 +464,7 @@ class ViewModule {
         document.getElementById('info').style.opacity = '0';
         const content = document.getElementById('content');
         content.innerHTML = 
-        `<div class="purchase-container">
+        `<div id="purchContainer" class="purchase-container">
             <div class="top-content">
                 <span class="purchase-title">Покупка обуви</span>
             </div>
@@ -469,11 +473,20 @@ class ViewModule {
                 <select name="list models" id="purchase-list-models">
 
                 </select>
+                <div id="modelImage-container" class="buy-image">
+                    <img id="modelImage" src="">
+                </div>
                 <div class="container-login100-form-btn">
                     <button class="login100-form-btn" type="submit" id="submit-purchase">Купить</button>
                 </div>
             </div>
         </div>`;
+        const purchaseModel = document.getElementById('purchase-list-models');
+        purchaseModel.addEventListener('change', (e) => {
+            if(purchaseModel.value !== '') {
+                purchaseModule.insertPurchasePicture();   
+            }
+        });
         const purchase = document.getElementById('submit-purchase');
         purchase.addEventListener('click', (e) => {
             purchaseModule.buyModel();

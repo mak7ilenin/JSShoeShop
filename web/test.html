@@ -41,66 +41,23 @@
     </header>
     <p id="info" class="text-info">&nbsp;</p>
     <main id="content">
-        <div id="adding-shoe" class="shoe-add-container" style="opacity: 0.2">
-            <div class="img-side">
-                <div class="img-card">
-                    <!-- <img src="file:///D:\Shoeger\ShoeShop\Снимок экрана 2022-02-19 144128.png"> -->
-                    <img src="WEB-INF/Uploaded_Images/hey.png">
-                </div>
+        <div class="purchase-container">
+            <div class="top-content">
+                <span class="purchase-title">Покупка обуви</span>
             </div>
-            <div class="shoe-info-side">
-                <div class="top-content">
-                    <span class="container-title">Добавление обуви</span>
+            <div class="mid-content">
+                <label for="list models">Список моделей:</label>
+                <select name="list models" id="purchase-list-models">
+
+                </select>
+                <div class="buy-image">
+                    <img id="modelImage" src="Images/upload/Снимок экрана 2022-01-19 202652.png">
                 </div>
-                <div class="mid-content">
-                    <div class="wrap-input100 validate-input" data-validate="Enter name">
-                        <input class="input100" type="text" id="model-name" name="modelName" placeholder="Model name">
-                    </div>
-                    <div class="wrap-input100 validate-input" data-validate="Enter firm">
-                        <input class="input100" type="text" id="model-firm" name="modelFirm" placeholder="Model firm">
-                    </div>
-                    <div class="wrap-input100 validate-input" data-validate="Enter size">
-                        <input class="input100" type="number" maxlength="2" id="model-size" name="modelSize" placeholder="Model size">
-                    </div>
-                    <div class="wrap-input100 validate-input" data-validate="Enter price">
-                        <input class="input100" type="number" pattern="[^,\x22]" id="model-price" name="price" placeholder="Price">
-                    </div>
-                    <div class="wrap-input100 validate-input" data-validate="Enter amount">
-                        <input class="input100" type="number" id="model-amount" min="1" max="50" name="amount" placeholder="Amount">
-                    </div>
-                    <div class="container-login100-form-btn">
-                        <button class="file-form-btn" id="add-file">Добавить файл</button>
-                        <button class="login100-form-btn" id="add-model">Добавить</button>
-                    </div>
+                <div class="container-login100-form-btn">
+                    <button class="login100-form-btn" type="submit" id="submit-purchase">Купить</button>
                 </div>
             </div>
         </div>
-
-        <!-- <form id="uploadForm" method="POST"> -->
-            <div id="upload-content">
-                <div class="top-content">
-                    <div class="img-container">
-                        <img src="Images/upload.png" alt="upload">
-                    </div>
-                    <div class="after-img">
-                        <p>Загрузка изображений</p>
-                    </div>
-                </div>
-                <div class="mid-content">
-                    <label for="forImg">Выберите файл</label>
-                    <label name="forImg" class="download-img">
-                        <input type="file" id="inputTag" name="img" accept="image/*"> <br>
-                    </label>
-                    <div id="selected-file" class="selected-file">
-                        <input type="text" id="description" placeholder="Назовите файл">
-                        <input id="imagePathName" name="imagePathName" readonly>
-                    </div>
-                    <div class="add-file-container">
-                        <button type="submit" id="submit-file">Загрузить файл</button>
-                    </div>
-                </div>
-            </div>
-        <!-- </form> -->
     </main>
     <footer>Dzjubenko 2022</footer>
     <!-- <script type="module" src="js/index.js"></script> -->

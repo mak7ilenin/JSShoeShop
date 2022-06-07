@@ -67,7 +67,9 @@ class ShoeModule {
                         modelSelect.add(option);
                         for (let i = 0; i < response.options.length; i++) {
                             option = document.createElement('option');
-                            option.text = response.options[i].modelName + ' // ' + response.options[i].modelFirm + ' // ' + response.options[i].modelPrice + '$';
+                            option.text = response.options[i].modelName + ' // ' 
+                            + response.options[i].modelFirm + ' // ' 
+                            + response.options[i].modelPrice + '$';
                             option.value = response.options[i].id;
                             modelSelect.add(option);
                         }
@@ -78,12 +80,11 @@ class ShoeModule {
                         option = document.createElement('option');
                         option.text = "Список моделей пуст..."
                         option.value = '';
-                        document.getElementById('info').innerHTML = response.info;
-                        document.getElementById('info').style.opacity = '1';
+                        modelSelect.add(option);
                     }
                 })
                 .catch(error => {
-                    document.getElementById('info').innerHTML = "insertListModels" + error.info;
+                    document.getElementById('info').innerHTML = "getListModels" + error.info;
                     document.getElementById('info').style.opacity = '1';
                 });
     }

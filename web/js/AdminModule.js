@@ -18,7 +18,9 @@ class AdminModule {
                         userSelect.add(option);
                         for (let i = 0; i < response.options.length; i++) {
                             option = document.createElement('option');
-                            option.text = response.options[i].firstname + ' // ' + response.options[i].lastname + ' // ' + response.options[i].role;
+                            option.text = response.options[i].firstname + ' // ' 
+                            + response.options[i].lastname + ' // ' 
+                            + response.options[i].role;
                             option.value = response.options[i].id;
                             userSelect.add(option);
                         }

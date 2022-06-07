@@ -1,5 +1,6 @@
 package servlets;
 
+import entity.Model;
 import entity.Picture;
 import java.io.File;
 import java.io.IOException;
@@ -24,6 +25,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
 import jsontools.PictureJsonBuilder;
+import session.ModelFacade;
 //import org.imgscalr.Scalr;
 import session.PictureFacade;
 
@@ -34,13 +36,16 @@ import session.PictureFacade;
 @WebServlet(name = "UploadServlet", urlPatterns = {
     "/getListPictures",
     "/getPicture",
-    "/uploadPicture"
+    "/uploadPicture",
+    "/getModelPicture"
 })
 @MultipartConfig()
 public class UploadServlet extends HttpServlet {
     @EJB private PictureFacade pictureFacade;
+    @EJB private ModelFacade modelFacade;
 //    private final String imagesFolder = "D:\\Shoeger\\ShoeShop";
     private final String imagesFolder = "C:\\Users\\makso\\Documents\\NetBeansProjects\\JSShoeShop\\web\\Images\\upload";
+    private final String uploadFolder = "Images\\upload\\";
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -97,7 +102,7 @@ public class UploadServlet extends HttpServlet {
                 String picturePath = jsonObject.getString("id", "");
                 List<Picture> pictures = pictureFacade.findAll();
                 String dirPathToFile = imagesFolder + "\\" + picturePath;
-                String pathToFile = "Images\\upload\\" + picturePath;
+                String pathToFile = uploadFolder + picturePath;
                 System.out.println(pathToFile);
                 for(Picture picture : pictures) {
                     if(picture.getPathToFile().equals(dirPathToFile)) {
@@ -109,6 +114,21 @@ public class UploadServlet extends HttpServlet {
                             out.println(job.build().toString());
                         }
                     }
+                }
+                break;
+            case "/getModelPicture":
+                jsonReader = Json.createReader(request.getReader());
+                jsonObject = jsonReader.readObject();
+                Long modelId = Long.parseLong(jsonObject.getString("id", ""));
+                Model model = modelFacade.find(modelId);
+                String pictureName = model.getPicture().getPathToFile();
+                String fileName = pictureName.replace(imagesFolder + "\\", "");
+//                System.out.println(fileName);
+                String normalPicPath = uploadFolder + fileName;
+                job.add("status", true);
+                job.add("pictureSource", normalPicPath);
+                try (PrintWriter out = response.getWriter()) {
+                    out.println(job.build().toString());
                 }
                 break;
         }

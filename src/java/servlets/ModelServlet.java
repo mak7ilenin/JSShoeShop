@@ -80,7 +80,7 @@ public class ModelServlet extends HttpServlet {
                     }
                     break;
                 }
-                if("".equals(pictureName)) {
+                if(pictureName.isEmpty()) {
                     job.add("info", "Выберите изображение!");
                     try(PrintWriter out = response.getWriter()) {
                         out.println(job.build().toString());

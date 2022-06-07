@@ -99,8 +99,7 @@ class UserModule {
                         option = document.createElement('option');
                         option.text = "Список пользователей пуст..."
                         option.value = '';
-                        document.getElementById('info').innerHTML = response.info;
-                        document.getElementById('info').style.opacity = '1';
+                        userSelect.add(option);
                     }
                 })
                 .catch(error => {

@@ -112,7 +112,7 @@ public class UserServlet extends HttpServlet {
 //                        users.remove(user);
 //                    }
 //                }
-                users.remove(0);
+                users.remove(0);          //admin is always first
                 UserJsonBuilder ujb = new UserJsonBuilder();
                 if(!users.isEmpty()) {
                     job.add("status", true)
