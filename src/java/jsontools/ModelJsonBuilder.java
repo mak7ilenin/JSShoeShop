@@ -29,6 +29,7 @@ public class ModelJsonBuilder {
         job.add("modelPrice", model.getPrice());
         job.add("modelAmount", model.getAmount());
         job.add("modelPicture", model.getPicture().getId());
+        job.add("modelPicturePath", model.getPicture().getPathToFile());
         return job.build();
     }
 }

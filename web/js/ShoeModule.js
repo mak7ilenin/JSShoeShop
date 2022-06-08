@@ -104,6 +104,19 @@ class ShoeModule {
         promiseGetModel.then(response => response.json())
                 .then(response => {
                     if(response.status) {
+                        let pictureSelect = document.getElementById('list-pictures');
+                        pictureSelect.options.length = 0;
+                        let option = null;
+                        option = document.createElement('option');
+                        option.text = response.model.modelPicturePath;
+                        option.value = response.model.modelPicturePath;
+                        pictureSelect.add(option);
+                        for(let i=0; i < response.pictures.length; i++){
+                            option = document.createElement('option');
+                            option.text = response.pictures[i];
+                            option.value = response.pictures[i];
+                            select.add(option);
+                        }
                         document.getElementById('model-name').value = response.model.modelName;
                         document.getElementById('model-firm').value = response.model.modelFirm;
                         document.getElementById('model-size').value = response.model.modelSize;

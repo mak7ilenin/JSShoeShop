@@ -546,7 +546,7 @@ button {
 .shoe-edit-container {
     width: 50%;
     margin: 0 auto;
-    margin-top: 150px;
+    margin-top: 105px;
     padding: 15px 55px 37px 55px;
     border: 1px solid lightgray;
     border-radius: 10px;
@@ -560,7 +560,7 @@ button {
 .model-edit-title {
     font-family: 'Poppins', sans-serif;
     font-size: 48px;
-    margin-bottom: 25px;
+    margin-bottom: 15px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -577,7 +577,7 @@ button {
     width: 100%;
     padding: 10px;
     margin: 10px auto;
-    margin-bottom: 25px;
+    margin-bottom: 1px;
     font-family: 'Poppins', sans-serif;
     font-size: 22px;
     font-weight: bold;
@@ -592,6 +592,9 @@ button {
     font-size: 17px;
     text-align: center;
     background-color: rgb(231, 190, 240);
+}
+.shoe-edit-container .mid-content #list-pictures {
+    margin-bottom: 20px;
 }
 
 

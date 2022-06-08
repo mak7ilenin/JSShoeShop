@@ -2,13 +2,20 @@ package servlets;
 
 import entity.Model;
 import entity.Picture;
+import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.PrintWriter;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.nio.file.Files;
+import java.nio.file.StandardCopyOption;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import javax.ejb.EJB;
 import javax.json.Json;
+import javax.json.JsonArrayBuilder;
 import javax.json.JsonObject;
 import javax.json.JsonObjectBuilder;
 import javax.json.JsonReader;
@@ -17,6 +24,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Part;
 import jsontools.ModelJsonBuilder;
 import session.ModelFacade;
 import session.PictureFacade;
@@ -34,7 +42,9 @@ import session.PictureFacade;
 public class ModelServlet extends HttpServlet {
     @EJB private ModelFacade modelFacade;
     @EJB private PictureFacade pictureFacade;
-    private final String imagesFolder = "C:\\Users\\makso\\Documents\\NetBeansProjects\\JSShoeShop\\web\\Images\\upload";
+    private final String imagesFolder = "C:\\Users\\makso\\Documents\\NetBeansProjects\\JSShoeShop\\web\\Images\\upload"; // MY PATH TO FILE AT HOME
+    private final String imagesFolderSchool = "C:\\Users\\pupil\\Documents\\NetBeansProjects\\JSShoeShop\\web\\Images\\upload"; // MY PATH TO FILE AT SCHOOL
+    private final String uploadedFolder = "Images\\upload\\";
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -120,10 +130,25 @@ public class ModelServlet extends HttpServlet {
                 jsonObject = jsonReader.readObject();
                 String modelId = jsonObject.getString("id", "");
                 Model editingModel = modelFacade.find(Long.parseLong(modelId));
+                String modelPicture = editingModel.getPicture().getPathToFile();
+                modelPicture = modelPicture.replace(imagesFolder, "");
+                
+                String[] picturesFileName = getPictureFileName();
+                JsonArrayBuilder jab = Json.createArrayBuilder();
+                for (int i = 0; i < picturesFileName.length; i++) {
+//                    try {
+                    jab.add(picturesFileName[i].replace(imagesFolder, ""));
+//                    } catch (Exception e) {
+//                        jab.add(picturesFileName[i]);
+//                    }
+                }
+                
                 mjb = new ModelJsonBuilder();
                 job.add("status", true)
                     .add("info", "Вы редактируете: " + editingModel.getModelFirm() + " " + editingModel.getModelName())
-                    .add("model", mjb.getModelJsonObject(editingModel));
+                    .add("model", mjb.getModelJsonObject(editingModel))
+                    .add("modelPicturePath", modelPicture)
+                    .add("pictures",jab.build());
                 try(PrintWriter out = response.getWriter()) {
                     out.println(job.build().toString());
                 }
@@ -157,6 +182,50 @@ public class ModelServlet extends HttpServlet {
                 }
                 break;
         }
+    }
+    private String getPathToPicture(Part part) throws IOException {
+        String pathToPicture = imagesFolder + File.separator + getFileName(part);
+        File file = new File(pathToPicture);
+        file.mkdirs();
+        try(InputStream fileContent = part.getInputStream()){
+            Files.copy(fileContent, file.toPath(), StandardCopyOption.REPLACE_EXISTING);
+        }
+        return pathToPicture;
+    }
+    private String getPathToPicture(String pictureFileName){
+        File uploadFolder = new File(imagesFolder);
+        File[] listOfFiles = uploadFolder.listFiles();
+        for (int i = 0; i < listOfFiles.length; i++) {
+            if(listOfFiles[i].isFile()){
+                if(pictureFileName.equals(listOfFiles[i].getName())){
+                    return listOfFiles[i].getPath();
+                }
+            }
+        }
+        return "";
+    }
+    private String[] getPictureFileName(){
+        Set<String> setPathToPicture = new HashSet<>();
+        File uploadFolder = new File(imagesFolder);
+        File[] listOfFiles = uploadFolder.listFiles();
+        for (int i = 0; i < listOfFiles.length; i++) {
+            if(listOfFiles[i].isFile()){
+                setPathToPicture.add(listOfFiles[i].getName());
+            }
+        }
+        return setPathToPicture.toArray(new String[setPathToPicture.size()]);
+    }
+    private String getFileName(Part part){
+        final String partHeader = part.getHeader("content-disposition");
+        for (String content : part.getHeader("content-disposition").split(";")){
+            if(content.trim().startsWith("filename")){
+                return content
+                        .substring(content.indexOf('=')+1)
+                        .trim()
+                        .replace("\"",""); 
+            }
+        }
+        return null;
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

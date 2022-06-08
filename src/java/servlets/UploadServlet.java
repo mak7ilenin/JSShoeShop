@@ -45,7 +45,7 @@ public class UploadServlet extends HttpServlet {
     @EJB private ModelFacade modelFacade;
     private final String imagesFolder = "C:\\Users\\makso\\Documents\\NetBeansProjects\\JSShoeShop\\web\\Images\\upload"; // MY PATH TO FILE AT HOME
     private final String imagesFolderSchool = "C:\\Users\\pupil\\Documents\\NetBeansProjects\\JSShoeShop\\web\\Images\\upload"; // MY PATH TO FILE AT SCHOOL
-    private final String uploadFolder = "Images\\upload\\";
+    private final String uploadedFolder = "Images\\upload\\";
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -101,8 +101,8 @@ public class UploadServlet extends HttpServlet {
                 JsonObject jsonObject = jsonReader.readObject();
                 String picturePath = jsonObject.getString("id", "");
                 List<Picture> pictures = pictureFacade.findAll();
-                String dirPathToFile = imagesFolderSchool + "\\" + picturePath;
-                String pathToFile = uploadFolder + picturePath;
+                String dirPathToFile = imagesFolder + "\\" + picturePath;
+                String pathToFile = uploadedFolder + picturePath;
                 System.out.println(pathToFile);
                 for(Picture picture : pictures) {
                     if(picture.getPathToFile().equals(dirPathToFile)) {
@@ -122,9 +122,9 @@ public class UploadServlet extends HttpServlet {
                 Long modelId = Long.parseLong(jsonObject.getString("id", ""));
                 Model model = modelFacade.find(modelId);
                 String pictureName = model.getPicture().getPathToFile();
-                String fileName = pictureName.replace(imagesFolderSchool + "\\", "");
+                String fileName = pictureName.replace(imagesFolder + "\\", "");
 //                System.out.println(fileName);
-                String normalPicPath = uploadFolder + fileName;
+                String normalPicPath = uploadedFolder + fileName;
                 job.add("status", true);
                 job.add("pictureSource", normalPicPath);
                 try (PrintWriter out = response.getWriter()) {

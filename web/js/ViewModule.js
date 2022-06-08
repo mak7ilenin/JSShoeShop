@@ -290,6 +290,9 @@ class ViewModule {
                 <select name="list models" id="list-models">
 
                 </select>
+                <select name="listPictures" id="list-pictures">
+                
+                </select>
                 <div class="wrap-input100 validate-input" data-validate="Enter name">
                     <input class="input100" type="text" id="model-name" name="modelName" placeholder="Model name">
                 </div>
