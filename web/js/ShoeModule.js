@@ -108,8 +108,8 @@ class ShoeModule {
                         pictureSelect.options.length = 0;
                         let option = null;
                         option = document.createElement('option');
-                        option.text = response.model.modelPicturePath;
-                        option.value = response.model.modelPicturePath;
+                        option.text = response.modelPicturePath;
+                        option.value = response.modelPicturePath;
                         pictureSelect.add(option);
                         for(let i=0; i < response.pictures.length; i++){
                             option = document.createElement('option');

@@ -131,16 +131,15 @@ public class ModelServlet extends HttpServlet {
                 String modelId = jsonObject.getString("id", "");
                 Model editingModel = modelFacade.find(Long.parseLong(modelId));
                 String modelPicture = editingModel.getPicture().getPathToFile();
-                modelPicture = modelPicture.replace(imagesFolder, "");
+                modelPicture = modelPicture.replace(imagesFolder + "\\", "");
+                System.out.println(modelPicture);
                 
                 String[] picturesFileName = getPictureFileName();
                 JsonArrayBuilder jab = Json.createArrayBuilder();
                 for (int i = 0; i < picturesFileName.length; i++) {
-//                    try {
-                    jab.add(picturesFileName[i].replace(imagesFolder, ""));
-//                    } catch (Exception e) {
-//                        jab.add(picturesFileName[i]);
-//                    }
+                    picturesFileName[i].replace(imagesFolder, "");
+                    System.out.println(picturesFileName[i]);
+                    jab.add(picturesFileName[i]);
                 }
                 
                 mjb = new ModelJsonBuilder();
