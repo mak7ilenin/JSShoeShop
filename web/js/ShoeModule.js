@@ -115,7 +115,7 @@ class ShoeModule {
                             option = document.createElement('option');
                             option.text = response.pictures[i];
                             option.value = response.pictures[i];
-                            select.add(option);
+                            pictureSelect.add(option);
                         }
                         document.getElementById('model-name').value = response.model.modelName;
                         document.getElementById('model-firm').value = response.model.modelFirm;
