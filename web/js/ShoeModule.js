@@ -135,6 +135,7 @@ class ShoeModule {
     }
     editModel() {
         const modelId = document.getElementById('list-models').value;
+        const modelPicture = document.getElementById('list-pictures').value;
         const modelName = document.getElementById('model-name').value;
         const modelFirm = document.getElementById('model-firm').value;
         const modelSize = document.getElementById('model-size').value;
@@ -142,6 +143,7 @@ class ShoeModule {
         const modelAmount = document.getElementById('model-amount').value;
         const editModel = {
             "id": modelId,
+            "picturePath": modelPicture,
             "modelName": modelName,
             "modelFirm": modelFirm,
             "modelSize": modelSize,

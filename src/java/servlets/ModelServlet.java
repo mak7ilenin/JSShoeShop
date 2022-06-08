@@ -133,7 +133,7 @@ public class ModelServlet extends HttpServlet {
                 String modelPicture = editingModel.getPicture().getPathToFile();
                 modelPicture = modelPicture.replace(imagesFolder + "\\", "");
                 System.out.println(modelPicture);
-                
+
                 String[] picturesFileName = getPictureFileName();
                 JsonArrayBuilder jab = Json.createArrayBuilder();
                 for (int i = 0; i < picturesFileName.length; i++) {
@@ -156,6 +156,9 @@ public class ModelServlet extends HttpServlet {
                 jsonReader = Json.createReader(request.getReader());
                 jsonObject = jsonReader.readObject();
                 modelId = jsonObject.getString("id", "");
+                modelPicture = jsonObject.getString("picturePath", "");
+                String modelPicturePath = imagesFolder + "\\" + modelPicture;
+                Picture pictureObj = pictureFacade.findByPath(modelPicturePath);
                 modelName = jsonObject.getString("modelName", "");
                 modelFirm = jsonObject.getString("modelFirm", "");
                 modelSize = jsonObject.getString("modelSize", "");
@@ -170,6 +173,7 @@ public class ModelServlet extends HttpServlet {
                 editModel.setModelSize(modelSize);
                 editModel.setPrice(decimalPrice);
                 editModel.setAmount(modelAmount);
+                editModel.setPicture(pictureObj);
                 modelFacade.edit(editModel);
                 
                 mjb = new ModelJsonBuilder();

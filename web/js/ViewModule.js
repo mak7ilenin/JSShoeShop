@@ -335,15 +335,13 @@ class ViewModule {
                 });
             });
         }
-        const chooseModel = document.getElementsByTagName('select');
-        for (let i = 0; i < chooseModel.length; i++) {
-            chooseModel[i].addEventListener('change', (e) => {
-                e.preventDefault();
-                if(chooseModel[i].value !== '') {
-                    shoeModule.insertModelInfo();
-                }
-            });
-        }
+        const chooseModel = document.getElementById('list-models');
+        chooseModel.addEventListener('change', (e) => {
+            e.preventDefault();
+            if(chooseModel.value !== '') {
+                shoeModule.insertModelInfo();
+            }
+        });
     }
     showEditUser() {
         document.getElementById('info').innerHTML = '';
