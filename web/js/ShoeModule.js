@@ -28,6 +28,7 @@ class ShoeModule {
             .then(response => {
                 document.getElementById('info').innerHTML = response.info;
                 document.getElementById('info').style.opacity = '1';
+                document.getElementById('info').style.display = 'flex';
                 const body = document.getElementsByTagName('body');
                     body[0].style.transition = 'ease all 0.4s';
                     body[0].style.transitionTimingFunction = 'cubic-bezier(.76,.08,.47,.79)';
@@ -86,6 +87,7 @@ class ShoeModule {
                 .catch(error => {
                     document.getElementById('info').innerHTML = "getListModels" + error.info;
                     document.getElementById('info').style.opacity = '1';
+                    document.getElementById('info').style.display = 'flex';
                 });
     }
     insertModelInfo() {
@@ -124,12 +126,14 @@ class ShoeModule {
                         document.getElementById('model-amount').value = response.model.modelAmount;
                     }else {
                         document.getElementById('info').innerHTML = response.info;     
-                        document.getElementById('info').style.opacity = '1';            
+                        document.getElementById('info').style.opacity = '1';
+                        document.getElementById('info').style.display = 'flex';
                     }
                 })
                 .catch(error => {
                     document.getElementById('info').innerHTML = "insertModelInfo " + error.info;
                     document.getElementById('info').style.opacity = '1';
+                    document.getElementById('info').style.display = 'flex';
                 });
 
     }
@@ -172,14 +176,17 @@ class ShoeModule {
                     }, 230);
                     document.getElementById('info').innerHTML = response.info;
                     document.getElementById('info').style.opacity = '1';
+                    document.getElementById('info').style.display = 'flex';
                 }else {
                     document.getElementById('info').innerHTML = response.info;
                     document.getElementById('info').style.opacity = '1';
+                    document.getElementById('info').style.display = 'flex';
                 }
             })
             .catch(error => {
                 document.getElementById('info').innerHTML = error.info;
                 document.getElementById('info').style.opacity = '1';
+                document.getElementById('info').style.display = 'flex';
                 const body = document.getElementsByTagName('body');
                 body[0].style.transition = 'ease all 0.4s';
                 body[0].style.transitionTimingFunction = 'cubic-bezier(.76,.08,.47,.79)';

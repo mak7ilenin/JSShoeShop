@@ -29,11 +29,13 @@ class UploadModule {
                     }else {
                        document.getElementById('info').innerHTML = response.info;  
                        document.getElementById('info').style.opacity = '1';
+                       document.getElementById('info').style.display = 'flex';
                     }
                 })
                 .catch(error=>{
                     document.getElementById('info').innerHTML = 'Ошибка сервера insertListPictures: ' + error;
                     document.getElementById('info').style.opacity = '1';
+                    document.getElementById('info').style.display = 'flex';
                 });
     }
     getPicture() {
@@ -62,6 +64,7 @@ class UploadModule {
             .catch(error => {
                 document.getElementById('info').innerHTML = 'Ошибка сервера getPicture: ' + error;
                 document.getElementById('info').style.opacity = '1';
+                document.getElementById('info').style.display = 'flex';
             })
             .then(response => {
                 try {
@@ -85,6 +88,7 @@ class UploadModule {
                 } catch (error) {
                     document.getElementById('info').innerHTML = 'getPicture ' + error
                     document.getElementById('info').style.opacity = '1';
+                    document.getElementById('info').style.display = 'flex';
                 }
             });
     }
@@ -101,10 +105,12 @@ class UploadModule {
             .then(response => {
                 document.getElementById('info').innerHTML = response.info;
                 document.getElementById('info').style.opacity = '1';
+                document.getElementById('info').style.display = 'flex';
             })
             .catch(error => {
                 document.getElementById('info').innerHTML = error.message;
                 document.getElementById('info').style.opacity = '1';
+                document.getElementById('info').style.display = 'flex';
             })
             .then(response => {
                 uploadModule.insertListPictures();

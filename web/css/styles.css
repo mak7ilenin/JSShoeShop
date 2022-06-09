@@ -11,7 +11,7 @@ header {
     box-shadow: 0px 7px 10px 0 rgba(0, 0, 0, 0.253);
     display: flex;
     position: fixed;
-    z-index: 99999;
+    z-index: 9;
     top: 0;
     left: 0;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
@@ -89,7 +89,6 @@ header ul li {
     margin-left: 25px;
     overflow: auto;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-    z-index: 99999;
     transform: translateY(-80%);
     transition: all 0.2s;
 }
@@ -99,6 +98,7 @@ header ul li {
     text-decoration: none;
     display: block;
     font-size: 16px;
+    z-index: 99999;
 }
 .dropdown a:hover {
     background-color: #ddd;
@@ -126,28 +126,29 @@ header ul li {
     display: none;
 }
 #info {
-    width: 1000px;
+    width: 100%;
     height: 45px;
-    /* background-color: rgba(255, 255, 255, 0.63); */
+    background-color: rgba(233, 233, 233, 0.808);
     display: flex;
     justify-content: center;
     align-items: center;
     position: absolute;
-    top: 120px;
-    left: 0;
-    margin: 0 auto;
+    top: 87px;
     opacity: 0;
-    z-index: 9999;
+    z-index: 99;
+}
+.text-info {
     text-align: center;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     font-weight: bold;
     font-size: 22px;
+    color: black;
 }
 #content {
     width: 85%;
     margin: 0 auto;
     position: relative;
-    z-index: 9999;
+    z-index: 10;
 }
 main {
     overflow: hidden;
@@ -159,7 +160,7 @@ footer {
     position: fixed;
     left: 0;
     bottom: 0;
-    z-index: 999999;
+    z-index: 9;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -388,7 +389,7 @@ input[type=checkbox] {
     border-radius: 10px;
     overflow: hidden;
     display: flex;
-    z-index: 99;
+    z-index: 999;
     padding: 25px 45px 25px 25px;
     background: #9152f8;
     background: -webkit-linear-gradient(top, #7579ff, #b224ef);
@@ -418,7 +419,7 @@ input[type=checkbox] {
     height: 100%;
     /* max-width: 475px;
     max-height: 500px; */
-    /* object-fit: cover; */
+    object-fit: cover;
 }
 .shoe-info-side {
     width: 100%;
@@ -537,6 +538,10 @@ button {
     outline: none;
     border: none;
     background: transparent;
+}
+
+#shoe-info .mid-content #list-pictures {
+    margin-bottom: 20px;
 }
 
 
@@ -691,13 +696,15 @@ button {
 .purchase-container .mid-content .buy-image img {
     width: 100%;
     height: 100%;
+    object-fit: cover;
 }
 #purchase-list-models {
-    margin-bottom: 7px;
+    margin-bottom: 15px;
 }
 .purchase-container .mid-content .container-login100-form-btn {
     width: 100%;
     margin: 20px;
+    margin-top: 35px;
 }
 #submit-purchase {
     width: 60%
@@ -709,7 +716,7 @@ button {
 
 .role-container {
     width: 50%;
-    height: 360px;
+    height: 340px;
     margin: 0 auto;
     margin-top: 235px;
     padding: 15px 55px 37px 55px;
@@ -736,8 +743,8 @@ button {
 }
 #list-roles {
     margin: 30px auto;
+    margin-bottom: 35px;
 }
-
 
 
 /* gain */
@@ -890,7 +897,7 @@ button {
     right: 620px;
     overflow: hidden;
     border: 1px solid rgba(128, 128, 128, 0.466);
-    z-index: 99999;
+    z-index: 9999;
     /* background: #9152f8;
     background: -webkit-linear-gradient(top, #ff73f31f, #94c4e454);
     background: -o-linear-gradient(top, #ff73f31f, #94c4e454);

@@ -41,6 +41,7 @@ class PurchaseModule {
                 .catch(error => {
                     document.getElementById('info').innerHTML = "getModels" + " " + error.message;
                     document.getElementById('info').style.opacity = '1';
+                    document.getElementById('info').style.display = 'flex';
                 });
     }
     insertPurchasePicture() {
@@ -81,6 +82,7 @@ class PurchaseModule {
                 .catch(error => {
                     document.getElementById('info').innerHTML = error.message;     
                     document.getElementById('info').style.opacity = '1';  
+                    document.getElementById('info').style.display = 'flex';
                 });
     }
     buyModel() {
@@ -114,6 +116,7 @@ class PurchaseModule {
                     }, 230);
                     document.getElementById('info').innerHTML = response.info;
                     document.getElementById('info').style.opacity = '1';
+                    document.getElementById('info').style.display = 'flex';
                     if(response.noMoney) {
                         const body = document.getElementsByTagName('body');
                         body[0].style.transition = 'ease all 0.4s';
@@ -125,6 +128,7 @@ class PurchaseModule {
                         }, 230);
                         document.getElementById('info').innerHTML = response.info;
                         document.getElementById('info').style.opacity = '1';
+                        document.getElementById('info').style.display = 'flex';
                     }
                     if(response.empty) {
                         const body = document.getElementsByTagName('body');
@@ -137,6 +141,7 @@ class PurchaseModule {
                         }, 230);
                         document.getElementById('info').innerHTML = response.info;
                         document.getElementById('info').style.opacity = '1';
+                        document.getElementById('info').style.display = 'flex';
                     }
                 }
             })

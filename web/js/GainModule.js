@@ -25,6 +25,7 @@ class GainModule {
             .catch(error => {
                 document.getElementById('info').innerHTML = error.message;
                 document.getElementById('info').style.opacity = '1';
+                document.getElementById('info').style.display = 'flex';
             });
     }
     showGainForSeptember() {

@@ -27,6 +27,7 @@ class UserModule {
                     if(response.money === 0) {
                         document.getElementById('info').innerHTML = "Введите сумму больше нуля!";
                         document.getElementById('info').style.opacity = '1';
+                        document.getElementById('info').style.display = 'flex';
                         return;
                     }
                     const body = document.getElementsByTagName('body');
@@ -39,6 +40,7 @@ class UserModule {
                     }, 230);
                     document.getElementById('info').innerHTML = response.info;
                     document.getElementById('info').style.opacity = '1';
+                    document.getElementById('info').style.display = 'flex';
                     sessionStorage.setItem('newUser', JSON.stringify(response.newUser));
                 })
                 .catch(error => {
@@ -53,10 +55,12 @@ class UserModule {
                     if(firstName === "" || lastName === "" || username === "" || password === "" || phone === "" || money === "") {
                         document.getElementById('info').innerHTML = "Заполните все поля!";
                         document.getElementById('info').style.opacity = '1';
+                        document.getElementById('info').style.display = 'flex';
                         return;
                     }
                     document.getElementById('info').innerHTML = error.info;
                     document.getElementById('info').style.opacity = '1';
+                    document.getElementById('info').style.display = 'flex';
                 });
     }
     getListUsers() {
@@ -105,6 +109,7 @@ class UserModule {
                 .catch(error => {
                     document.getElementById('info').innerHTML = "getListUsers" + error.info;
                     document.getElementById('info').style.opacity = '1';
+                    document.getElementById('info').style.display = 'flex';
                 });
     }
     insertUserInfo() {
@@ -132,12 +137,14 @@ class UserModule {
                         document.getElementById('user-username').value = response.user.username;
                     }else {
                         document.getElementById('info').innerHTML = response.info;        
-                        document.getElementById('info').style.opacity = '1';         
+                        document.getElementById('info').style.opacity = '1';
+                        document.getElementById('info').style.display = 'flex';     
                     }
                 })
                 .catch(error => {
                     document.getElementById('info').innerHTML = "insertUserInfo " + error.info;
                     document.getElementById('info').style.opacity = '1';
+                    document.getElementById('info').style.display = 'flex';
                 });
 
     }
@@ -183,14 +190,17 @@ class UserModule {
                 }, 230);
                 document.getElementById('info').innerHTML = response.info;
                 document.getElementById('info').style.opacity = '1';
+                document.getElementById('info').style.display = 'flex';
             }else {
                 document.getElementById('info').innerHTML = response.info;
                 document.getElementById('info').style.opacity = '1';
+                document.getElementById('info').style.display = 'flex';
             }
         })
             .catch(error => {
                 document.getElementById('info').innerHTML = error.info;
                 document.getElementById('info').style.opacity = '1';
+                document.getElementById('info').style.display = 'flex';
                 const body = document.getElementsByTagName('body');
                 body[0].style.transition = 'ease all 0.4s';
                 body[0].style.transitionTimingFunction = 'cubic-bezier(.76,.08,.47,.79)';

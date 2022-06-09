@@ -8,6 +8,9 @@
     <title>Shoeger</title>
 </head>
 <body>
+    <div class="text-info">
+        <p id="info">&nbsp;</p>
+    </div>
     <header>
         <div class="logo-container">
             <a href="#"><img src="Images/shoeger.png" alt="logo"></a>
@@ -44,7 +47,9 @@
             </li>
         </ul>  
     </header>
-    <p id="info" class="text-info">&nbsp;</p>
+    <!-- <div class="text-info">
+        <p id="info">&nbsp;</p>
+    </div> -->
     <main>
         <div class="graphic1 graphic"></div>
         <div class="graphic2 graphic"></div>
@@ -59,10 +64,12 @@
     <script type="module" src="js/index.js"></script>
     <script name="dropdown">
         function myDrop1() {
+            document.getElementById('info').style.display = 'none';
             document.getElementById("myDropdown1").classList.add('show');
             document.getElementById("myDropdown2").classList.remove('show');
         }
         function myDrop2() {
+            document.getElementById('info').style.display = 'none';
             document.getElementById("myDropdown2").classList.add('show');
             document.getElementById("myDropdown1").classList.remove('show');
         }

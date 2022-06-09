@@ -29,6 +29,7 @@ class LoginModule {
         .then(response => {
                     document.getElementById('info').innerHTML = response.info;
                     document.getElementById('info').style.opacity = '1';
+                    document.getElementById('info').style.display = 'flex';
                     sessionStorage.setItem('user', JSON.stringify(response.user));
                     if(sessionStorage.getItem('user') !== null) {
                         const userBank = document.getElementById('user-bank');
@@ -40,6 +41,7 @@ class LoginModule {
                 .catch(error => {
                     document.getElementById('info').innerHTML = response.info;
                     document.getElementById('info').style.opacity = '1';
+                    document.getElementById('info').style.display = 'flex';
                 });
     }
     logout() {
@@ -61,6 +63,7 @@ class LoginModule {
                     checkRole();
                     document.getElementById('info').innerHTML = 'До скорой встречи!';
                     document.getElementById('info').style.opacity = '1';
+                    document.getElementById('info').style.display = 'flex';
                 }
             });
     }
