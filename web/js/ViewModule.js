@@ -61,6 +61,7 @@ class ViewModule {
     };
     showRegistrationForm() {
         document.getElementById('info').innerHTML = '';
+        document.getElementById('info').style.opacity = '0';
         const content = document.getElementById('content');
         content.innerHTML = 
             `<div class="registration-container">
@@ -122,6 +123,7 @@ class ViewModule {
     }
     showCreateUser() {
         document.getElementById('info').innerHTML = '';
+        document.getElementById('info').style.opacity = '0';
         const content = document.getElementById('content');
         content.innerHTML = 
             `<div class="registration-container">
