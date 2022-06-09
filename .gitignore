@@ -3,5 +3,6 @@
 /nbproject
 /test
 src/conf/
+web/Images/upload
 build.xml
 /.vscode
