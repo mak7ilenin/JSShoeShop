@@ -43,8 +43,9 @@ import session.PictureFacade;
 public class UploadServlet extends HttpServlet {
     @EJB private PictureFacade pictureFacade;
     @EJB private ModelFacade modelFacade;
-    private final String imagesFolder = "C:\\Users\\makso\\Documents\\NetBeansProjects\\JSShoeShop\\web\\Images\\upload"; // MY PATH TO FILE AT HOME
-    private final String imagesFolderSchool = "C:\\Users\\pupil\\Documents\\NetBeansProjects\\JSShoeShop\\web\\Images\\upload"; // MY PATH TO FILE AT SCHOOL
+    private final String imagesFolder = this.getClass().getResource("").toString().replace("file:/", "").replace("build/web/WEB-INF/classes/servlets/", "\\web\\Images\\upload").replace("/", "\\");
+//    private final String imagesFolder = "C:\\Users\\makso\\Documents\\NetBeansProjects\\JSShoeShop\\web\\Images\\upload"; // MY PATH TO FILE AT HOME
+//    private final String imagesFolderSchool = "C:\\Users\\pupil\\Documents\\NetBeansProjects\\JSShoeShop\\web\\Images\\upload"; // MY PATH TO FILE AT SCHOOL
     private final String uploadedFolder = "Images\\upload\\";
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>

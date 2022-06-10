@@ -104,7 +104,7 @@ public class ModelServlet extends HttpServlet {
                 newModel.setModelSize(modelSize);
                 newModel.setPrice(decimalPrice);
                 newModel.setAmount(amount);
-                String pictureDir = imagesFolder + "\\" + pictureName;
+                String pictureDir = imagesFolderSchool + "\\" + pictureName;
                 Picture picture = pictureFacade.findByPath(pictureDir);
                 newModel.setPicture(picture);
                 modelFacade.create(newModel);
@@ -131,13 +131,13 @@ public class ModelServlet extends HttpServlet {
                 String modelId = jsonObject.getString("id", "");
                 Model editingModel = modelFacade.find(Long.parseLong(modelId));
                 String modelPicture = editingModel.getPicture().getPathToFile();
-                modelPicture = modelPicture.replace(imagesFolder + "\\", "");
+                modelPicture = modelPicture.replace(imagesFolderSchool + "\\", "");
                 System.out.println(modelPicture);
 
                 String[] picturesFileName = getPictureFileName();
                 JsonArrayBuilder jab = Json.createArrayBuilder();
                 for (int i = 0; i < picturesFileName.length; i++) {
-                    picturesFileName[i].replace(imagesFolder, "");
+                    picturesFileName[i].replace(imagesFolderSchool, "");
                     System.out.println(picturesFileName[i]);
                     jab.add(picturesFileName[i]);
                 }
@@ -157,7 +157,7 @@ public class ModelServlet extends HttpServlet {
                 jsonObject = jsonReader.readObject();
                 modelId = jsonObject.getString("id", "");
                 modelPicture = jsonObject.getString("picturePath", "");
-                String modelPicturePath = imagesFolder + "\\" + modelPicture;
+                String modelPicturePath = imagesFolderSchool + "\\" + modelPicture;
                 Picture pictureObj = pictureFacade.findByPath(modelPicturePath);
                 modelName = jsonObject.getString("modelName", "");
                 modelFirm = jsonObject.getString("modelFirm", "");
@@ -187,7 +187,7 @@ public class ModelServlet extends HttpServlet {
         }
     }
     private String getPathToPicture(Part part) throws IOException {
-        String pathToPicture = imagesFolder + File.separator + getFileName(part);
+        String pathToPicture = imagesFolderSchool + File.separator + getFileName(part);
         File file = new File(pathToPicture);
         file.mkdirs();
         try(InputStream fileContent = part.getInputStream()){
@@ -196,7 +196,7 @@ public class ModelServlet extends HttpServlet {
         return pathToPicture;
     }
     private String getPathToPicture(String pictureFileName){
-        File uploadFolder = new File(imagesFolder);
+        File uploadFolder = new File(imagesFolderSchool);
         File[] listOfFiles = uploadFolder.listFiles();
         for (int i = 0; i < listOfFiles.length; i++) {
             if(listOfFiles[i].isFile()){
@@ -209,7 +209,7 @@ public class ModelServlet extends HttpServlet {
     }
     private String[] getPictureFileName(){
         Set<String> setPathToPicture = new HashSet<>();
-        File uploadFolder = new File(imagesFolder);
+        File uploadFolder = new File(imagesFolderSchool);
         File[] listOfFiles = uploadFolder.listFiles();
         for (int i = 0; i < listOfFiles.length; i++) {
             if(listOfFiles[i].isFile()){

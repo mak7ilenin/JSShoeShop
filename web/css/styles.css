@@ -551,7 +551,7 @@ button {
 .shoe-edit-container {
     width: 50%;
     margin: 0 auto;
-    margin-top: 115px;
+    margin-top: 140px;
     padding: 15px 55px 37px 55px;
     border: 1px solid lightgray;
     border-radius: 10px;
@@ -608,7 +608,7 @@ button {
 .user-edit-container {
     width: 50%;
     margin: 0 auto;
-    margin-top: 145px;
+    margin-top: 175px;
     padding: 15px 55px 37px 55px;
     border: 1px solid lightgray;
     border-radius: 10px;
