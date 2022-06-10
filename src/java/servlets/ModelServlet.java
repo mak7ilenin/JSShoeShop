@@ -42,8 +42,9 @@ import session.PictureFacade;
 public class ModelServlet extends HttpServlet {
     @EJB private ModelFacade modelFacade;
     @EJB private PictureFacade pictureFacade;
-    private final String imagesFolder = "C:\\Users\\makso\\Documents\\NetBeansProjects\\JSShoeShop\\web\\Images\\upload"; // MY PATH TO FILE AT HOME
-    private final String imagesFolderSchool = "C:\\Users\\pupil\\Documents\\NetBeansProjects\\JSShoeShop\\web\\Images\\upload"; // MY PATH TO FILE AT SCHOOL
+    private final String imagesFolder = this.getClass().getResource("").toString().replace("file:/", "").replace("build/web/WEB-INF/classes/servlets/", "web\\Images\\upload").replace("/", "\\");
+//    private final String imagesFolder = "C:\\Users\\makso\\Documents\\NetBeansProjects\\JSShoeShop\\web\\Images\\upload"; // MY PATH TO FILE AT HOME
+//    private final String imagesFolderSchool = "C:\\Users\\pupil\\Documents\\NetBeansProjects\\JSShoeShop\\web\\Images\\upload"; // MY PATH TO FILE AT SCHOOL
     private final String uploadedFolder = "Images\\upload\\";
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
